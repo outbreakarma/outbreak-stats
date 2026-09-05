@@ -1,0 +1,111 @@
+{
+  "source": {
+    "name": "ArmaHQ",
+    "url": "https://www.armahq.com",
+    "serversPage": "https://www.armahq.com/servers",
+    "modPage": "https://www.armahq.com/mods/{modId}",
+    "creditLine": "Data collected from ArmaHQ (armahq.com), the Arma Reforger live server browser and statistics site. ArmaHqStats is not affiliated with ArmaHQ or Bohemia Interactive."
+  },
+  "userAgent": "ArmaHqStats/1.0 (hourly Arma Reforger mod statistics; +https://github.com/favstats/armahq-stats)",
+  "requestTimeoutSeconds": 90,
+  "retries": 3,
+  "keywords": [
+    "zombie"
+  ],
+  "keywordLabel": "Zombie mods",
+  "historyRowsOnPage": 336,
+  "tracked": [
+    {
+      "modId": "F1D4B9B5245B36ED",
+      "label": "Project Outbreak Zombies",
+      "addon": "ProjectOutbreak",
+      "channel": "production",
+      "flagship": true
+    },
+    {
+      "modId": "40B5686CC205703A",
+      "label": "AI Rearm",
+      "addon": "AIRearm",
+      "channel": "production"
+    },
+    {
+      "modId": "0A07B0E7A0F1C7ED",
+      "label": "Project Outbreak (test)",
+      "addon": "ProjectOutbreak",
+      "channel": "test"
+    },
+    {
+      "modId": "B9CD52E48F6A3701",
+      "label": "Creature Melee AI (test)",
+      "addon": "CreatureMeleeAI",
+      "channel": "test"
+    },
+    {
+      "modId": "5E652604B0AE4AD3",
+      "label": "Outbreak Infection (test)",
+      "addon": "ProjectOutbreakInfection",
+      "channel": "test"
+    },
+    {
+      "modId": "7E5D310931454092",
+      "label": "Outbreak Structures (test)",
+      "addon": "ProjectOutbreakStructures",
+      "channel": "test"
+    },
+    {
+      "modId": "AD0FA338D66F49BE",
+      "label": "Outbreak Survival Gear (test)",
+      "addon": "ProjectOutbreakSurvivalGear",
+      "channel": "test"
+    },
+    {
+      "modId": "4FD4A1BD550793F4",
+      "label": "Creature Melee AI",
+      "addon": "CreatureMeleeAI",
+      "channel": "production",
+      "note": "ledger says reserved-not-published; ArmaHQ sees it on servers, so it is published"
+    },
+    {
+      "modId": "7B763100BAFA1F9A",
+      "label": "Outbreak Infection",
+      "addon": "ProjectOutbreakInfection",
+      "channel": "production",
+      "note": "ledger says reserved-not-published; ArmaHQ sees it on servers, so it is published"
+    },
+    {
+      "modId": "6209E38AB237098E",
+      "label": "Outbreak Structures",
+      "addon": "ProjectOutbreakStructures",
+      "channel": "production",
+      "note": "ledger says reserved-not-published; ArmaHQ sees it on servers, so it is published"
+    },
+    {
+      "modId": "6B9BD0DA529C0D1E",
+      "label": "Outbreak Survival Gear",
+      "addon": "ProjectOutbreakSurvivalGear",
+      "channel": "production",
+      "note": "ledger says reserved-not-published; ArmaHQ sees it on servers, so it is published"
+    },
+    {
+      "modId": "F900AAFD92444135",
+      "label": "Outbreak Appearances",
+      "addon": "ProjectOutbreakAppearances",
+      "channel": "production",
+      "reserved": true
+    },
+    {
+      "modId": "46A8FC8FB9DD4D8D",
+      "label": "Outbreak Recovery",
+      "addon": "ProjectOutbreakRecovery",
+      "channel": "production",
+      "reserved": true
+    }
+  ],
+  "site": {
+    "title": "Outbreak Server Watch",
+    "subtitle": "Where Project Outbreak and every other zombie mod are running on Arma Reforger servers, refreshed hourly.",
+    "topServersPerMod": 12,
+    "rankingRows": 60,
+    "chartSeries": 8
+  }
+}
