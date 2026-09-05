@@ -40,6 +40,19 @@ def build(config_path: Path, data_dir: Path, out_path: Path, artifact_out: Path 
         return 1
     latest = json.loads(latest_path.read_text(encoding="utf-8"))
     history = load_history(data_dir / "history.jsonl", int(cfg.get("historyRowsOnPage", 336)))
+    # Labels and flags come from the CURRENT config, so an edit takes effect at the next build
+    # without waiting for a scrape; the snapshot keeps the numbers.
+    meta_keys = ("label", "addon", "channel", "flagship", "reserved", "note")
+    config_items = {item["modId"]: item for item in cfg.get("tracked", [])}
+    for mod_id, entry in list(latest.get("tracked", {}).items()):
+        item = config_items.get(mod_id)
+        if item is None:
+            continue
+        for key in meta_keys:
+            if key in item:
+                entry[key] = item[key]
+            else:
+                entry.pop(key, None)
     site = cfg["site"]
     payload = {"latest": latest, "history": history, "config": {"source": cfg["source"], "site": site}}
     data_json = json.dumps(payload, ensure_ascii=False).replace("</", "<\\/")
