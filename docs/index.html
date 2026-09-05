@@ -106,10 +106,10 @@ footer .stencil{font-family:var(--display);font-size:22px;letter-spacing:.12em;c
   <div class="hazard-bar"></div>
   <header class="mast">
     <div class="brand">
-      <div class="eyebrow"><span class="sym">&#9763;</span> Quarantine zone · server surveillance · hourly</div>
+      <div class="eyebrow"><span class="sym">&#9763;</span> Arma Reforger · server statistics · updated hourly</div>
       <h1>Outbreak Server <span>Watch</span></h1>
       <p>Where Project Outbreak and every other zombie mod are running on Arma Reforger servers, refreshed hourly.</p>
-      <a class="credit-chip" href="https://www.armahq.com" target="_blank" rel="noopener"><span class="dot"></span>Intel source: ArmaHQ, Arma Reforger live server browser</a>
+      <a class="credit-chip" href="https://www.armahq.com" target="_blank" rel="noopener"><span class="dot"></span>Data: ArmaHQ, the Arma Reforger live server browser</a>
     </div>
     <div class="stamp" id="stamp"></div>
   </header>
@@ -136,14 +136,14 @@ footer .stencil{font-family:var(--display);font-size:22px;letter-spacing:.12em;c
   </section>
 
   <section>
-    <h2>Rivals over time</h2>
+    <h2>Zombie mods over time</h2>
     <p class="sub" id="chart-sub"></p>
     <div class="panel chartbox"><div class="legend" id="legend"></div><div class="chartwrap tall"><canvas id="chart"></canvas></div></div>
   </section>
 
   <section>
-    <h2>Your mods</h2>
-    <p class="sub">Every Workshop item this project tracks. Sparklines show servers running the mod over the stored history; reserved ids are not published yet and stay at zero until they are.</p>
+    <h2>Project Outbreak add-ons</h2>
+    <p class="sub">The Project Outbreak add-ons and related Workshop items. Sparklines show servers running each one over the stored history; unpublished items stay at zero until they are released.</p>
     <div class="cards" id="cards"></div>
   </section>
 
@@ -156,7 +156,7 @@ footer .stencil{font-family:var(--display);font-size:22px;letter-spacing:.12em;c
   </section>
 
   <footer>
-    <div class="stencil">Intel credit</div>
+    <div class="stencil">Data credit</div>
     <p><strong>Credit.</strong> Data collected from ArmaHQ (armahq.com), the Arma Reforger live server browser and statistics site. ArmaHqStats is not affiliated with ArmaHQ or Bohemia Interactive. Visit <a href="https://www.armahq.com" target="_blank" rel="noopener">https://www.armahq.com</a> for the live browser this page is built on.</p>
     <p><strong>Method.</strong> Once an hour the collector reads the public server list page, counts every server that lists a mod, sums the players on those servers, and records the versions in use. It never calls the site's API, and it makes one request per run. Player counts are the players on servers running the mod, not subscribers.</p>
     <p id="foot-stamp"></p>
@@ -251,7 +251,7 @@ footer .stencil{font-family:var(--display);font-size:22px;letter-spacing:.12em;c
 
   // --- ranking table
   document.getElementById('kw-title').textContent = kw.label+' on servers right now';
-  document.getElementById('kw-sub').textContent = kw.modCount+' mods whose name contains “'+kw.terms.join('” or “')+'” are loaded on '+fmt(kw.serversTotal)+' server slots with '+fmt(kw.playersTotal)+' players between them. Ranked by servers, then players. Your mods are highlighted.';
+  document.getElementById('kw-sub').textContent = kw.modCount+' mods whose name contains “'+kw.terms.join('” or “')+'” are loaded on '+fmt(kw.serversTotal)+' server slots with '+fmt(kw.playersTotal)+' players between them. Ranked by servers, then players. Project Outbreak add-ons are highlighted.';
   const maxS = Math.max(1,...kw.mods.map(m=>m.servers));
   const rows = kw.mods.slice(0, C.site.rankingRows||60);
   document.querySelector('#ranking tbody').innerHTML = rows.length ? rows.map(m=>{
@@ -278,7 +278,7 @@ footer .stencil{font-family:var(--display);font-size:22px;letter-spacing:.12em;c
   // --- cards
   document.getElementById('cards').innerHTML = tracked.slice().sort((a,b)=>(b.servers-a.servers)||(a.label||'').localeCompare(b.label||'')).map(t=>{
     const s = trackedSeries(t.modId,'s'); const d = delta(s);
-    const tag = t.reserved ? '<span class="tag res">reserved, unpublished</span>' : '<span class="tag">'+esc(t.channel||'')+'</span>';
+    const tag = t.reserved ? '<span class="tag res">unpublished</span>' : '<span class="tag">'+esc(t.channel||'')+'</span>';
     return '<div class="panel card'+(t.flagship?' flagship':'')+'"><div class="name"><span>'+esc(t.label||t.name)+'</span>'+tag+'</div><div class="id">'+esc(t.modId)+(t.seen&&t.name&&t.name!==t.label?' · listed as “'+esc(t.name)+'”':'')+'</div>'+
       '<div class="nums"><div><b>'+fmt(t.servers)+'</b><span>servers</span></div><div><b>'+fmt(t.players)+'</b><span>players</span></div><div><b>'+(t.keywordRank?'#'+t.keywordRank:'–')+'</b><span>'+esc(kw.label.toLowerCase())+' rank</span></div></div>'+
       spark(s, t.flagship?HAZ:RAD)+
