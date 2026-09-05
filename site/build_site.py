@@ -57,8 +57,11 @@ def build(config_path: Path, data_dir: Path, out_path: Path, artifact_out: Path 
     payload = {"latest": latest, "history": history, "config": {"source": cfg["source"], "site": site}}
     data_json = json.dumps(payload, ensure_ascii=False).replace("</", "<\\/")
     template = TEMPLATE_PATH.read_text(encoding="utf-8")
+    words = site["title"].split()
+    title_html = html.escape(" ".join(words[:-1])) + (" <span>" + html.escape(words[-1]) + "</span>" if len(words) > 1 else html.escape(site["title"]))
     fragment = (
-        template.replace("__TITLE__", html.escape(site["title"]))
+        template.replace("__TITLE_HTML__", title_html)
+        .replace("__TITLE__", html.escape(site["title"]))
         .replace("__SUBTITLE_ATTR__", html.escape(site["subtitle"], quote=True))
         .replace("__SUBTITLE__", html.escape(site["subtitle"]))
         .replace("__SOURCE_URL__", html.escape(cfg["source"]["url"], quote=True))

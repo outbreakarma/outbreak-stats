@@ -1,99 +1,136 @@
 <title>__TITLE__</title>
 <meta name="description" content="__SUBTITLE_ATTR__">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=Share+Tech+Mono&display=swap">
 <style>
 :root{
-  --ground:#eef0ea; --panel:#ffffff; --panel-2:#f6f7f3; --ink:#14201f; --muted:#5c6a66; --line:#d6dbd5;
-  --accent:#b8770e; --accent-ink:#5a3a03; --accent-soft:#f6e7c6; --field:#0f8f83; --field-soft:#d6efec;
-  --alert:#b8432c; --good:#2f7d4f; --grid:#e3e6df; --shadow:0 1px 2px rgba(20,32,31,.08),0 8px 24px rgba(20,32,31,.06);
-  --mono:'JetBrains Mono',ui-monospace,Consolas,monospace; --display:'Barlow Condensed','Arial Narrow',sans-serif; --body:'Source Sans 3','Segoe UI',system-ui,sans-serif;
-  color-scheme:light dark;
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --ground:#0f1416; --panel:#161d21; --panel-2:#1c2428; --ink:#e6e9e4; --muted:#8b9590; --line:#27333a;
-    --accent:#f5b53f; --accent-ink:#ffe2a6; --accent-soft:#3a2c10; --field:#4fd1c5; --field-soft:#153532;
-    --alert:#e5654a; --good:#5fc48a; --grid:#22303a; --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
-  }
-}
-:root[data-theme="dark"]{
-  --ground:#0f1416; --panel:#161d21; --panel-2:#1c2428; --ink:#e6e9e4; --muted:#8b9590; --line:#27333a;
-  --accent:#f5b53f; --accent-ink:#ffe2a6; --accent-soft:#3a2c10; --field:#4fd1c5; --field-soft:#153532;
-  --alert:#e5654a; --good:#5fc48a; --grid:#22303a; --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+  --ground:#080b09; --ground-2:#0d120e; --panel:#111812; --panel-2:#161f18; --ink:#dbe4d3; --muted:#84957c; --line:#233126; --line-2:#2f4233;
+  --hazard:#f2c200; --hazard-ink:#ffe680; --hazard-soft:#2b2405; --radar:#6fd38d; --radar-soft:#10281a; --alert:#e2432f; --alert-soft:#2a0f0c;
+  --grid:#1a2a1e; --shadow:0 1px 0 rgba(255,255,255,.03) inset,0 10px 30px rgba(0,0,0,.5);
+  --mono:'Share Tech Mono',ui-monospace,Consolas,monospace; --display:'Bebas Neue','Arial Narrow',Impact,sans-serif; --body:'Barlow','Segoe UI',system-ui,sans-serif;
+  color-scheme:dark;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
-a{color:var(--field)}
-.wrap{max-width:1180px;margin:0 auto;padding:28px 22px 60px}
-header.mast{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 28px;border-bottom:2px solid var(--ink);padding-bottom:16px}
-.brand h1{font-family:var(--display);font-weight:700;font-size:clamp(34px,5vw,56px);line-height:.95;margin:0;letter-spacing:.01em;text-transform:uppercase;text-wrap:balance}
-.brand p{margin:8px 0 0;color:var(--muted);max-width:62ch}
-.stamp{font-family:var(--mono);font-size:12.5px;color:var(--muted);text-align:right;line-height:1.7}
-.stamp b{color:var(--ink);font-weight:600}
-.credit-chip{display:inline-flex;align-items:center;gap:8px;margin-top:6px;padding:6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--panel);font-size:13px;color:var(--ink);text-decoration:none}
-.credit-chip .dot{width:8px;height:8px;border-radius:50%;background:var(--field)}
-section{margin-top:36px}
-h2{font-family:var(--display);font-weight:600;font-size:26px;letter-spacing:.02em;text-transform:uppercase;margin:0 0 4px}
-.sub{color:var(--muted);margin:0 0 16px;max-width:70ch}
-.hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:22px}
-.stat{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow)}
-.stat .k{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.stat .v{font-family:var(--display);font-weight:700;font-size:44px;line-height:1;margin-top:6px;font-variant-numeric:tabular-nums}
-.stat .d{font-family:var(--mono);font-size:12.5px;margin-top:8px;color:var(--muted)}
-.up{color:var(--good)} .down{color:var(--alert)}
-.flag{border-color:var(--accent);background:linear-gradient(180deg,var(--accent-soft),var(--panel) 70%)}
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px 12px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:8px}
-.card.flagship{border-color:var(--accent)}
-.card .name{font-weight:600;font-size:17px;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
-.card .id{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+html{background:var(--ground)}
+body{margin:0;color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 1px, transparent 1px 3px),
+    linear-gradient(rgba(111,211,141,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(111,211,141,.045) 1px, transparent 1px),
+    radial-gradient(1200px 600px at 20% -10%, #14261a 0%, transparent 60%),
+    var(--ground);
+  background-size:auto, 48px 48px, 48px 48px, auto, auto;}
+a{color:var(--radar)}
+.wrap{max-width:1220px;margin:0 auto;padding:26px 22px 70px}
+.hazard-bar{height:10px;background:repeating-linear-gradient(135deg,var(--hazard) 0 22px,#111 22px 44px);opacity:.85;border-radius:2px}
+header.mast{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px 28px;padding:22px 0 16px;border-bottom:1px solid var(--line-2)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--hazard);display:flex;gap:12px;align-items:center}
+.eyebrow .sym{font-size:20px;line-height:1}
+.brand h1{font-family:var(--display);font-weight:400;font-size:clamp(46px,7vw,92px);line-height:.9;margin:6px 0 0;letter-spacing:.03em;color:#eef3e8;text-shadow:0 0 24px rgba(111,211,141,.18)}
+.brand h1 span{color:var(--hazard)}
+.brand p{margin:10px 0 0;color:var(--muted);max-width:64ch}
+.credit-chip{display:inline-flex;align-items:center;gap:8px;margin-top:10px;padding:6px 12px;border:1px solid var(--line-2);border-radius:3px;background:var(--panel);font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--ink);text-decoration:none;text-transform:uppercase}
+.credit-chip .dot{width:8px;height:8px;border-radius:50%;background:var(--radar);box-shadow:0 0 10px var(--radar)}
+.stamp{font-family:var(--mono);font-size:12.5px;color:var(--muted);text-align:right;line-height:1.8;letter-spacing:.03em}
+.stamp b{color:var(--radar);font-weight:400}
+.stamp .live{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--radar);margin-right:6px;box-shadow:0 0 10px var(--radar);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+section{margin-top:40px}
+h2{font-family:var(--display);font-weight:400;font-size:34px;letter-spacing:.05em;margin:0 0 4px;color:#eef3e8;display:flex;align-items:center;gap:12px}
+h2::before{content:"";width:10px;height:22px;background:var(--hazard);clip-path:polygon(0 0,100% 0,100% 75%,50% 100%,0 75%)}
+.sub{color:var(--muted);margin:0 0 16px;max-width:72ch}
+.panel{position:relative;background:linear-gradient(180deg,var(--panel-2),var(--panel));border:1px solid var(--line-2);border-radius:4px;box-shadow:var(--shadow)}
+.panel::before,.panel::after{content:"";position:absolute;width:14px;height:14px;border:2px solid var(--hazard);opacity:.7}
+.panel::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+.panel::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+.timeline{padding:18px 18px 12px;margin-top:22px}
+.timeline .head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;align-items:baseline;margin-bottom:8px}
+.timeline .head .t{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--hazard)}
+.timeline .head .n{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.timeline canvas{width:100%;height:300px}
+.hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:14px}
+.stat{padding:14px 16px;border-radius:4px;background:var(--panel);border:1px solid var(--line)}
+.stat .k{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.stat .v{font-family:var(--display);font-size:54px;line-height:1;margin-top:6px;color:#f3f7ee;font-variant-numeric:tabular-nums}
+.stat .d{font-family:var(--mono);font-size:12px;margin-top:8px;color:var(--muted)}
+.up{color:var(--radar)} .down{color:var(--alert)}
+.flag{border-color:var(--hazard);background:linear-gradient(180deg,var(--hazard-soft),var(--panel) 75%)}
+.flag .v{color:var(--hazard-ink)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.card{padding:14px 16px 12px;display:flex;flex-direction:column;gap:8px}
+.card.flagship{border-color:var(--hazard)}
+.card .name{font-weight:600;font-size:17px;display:flex;justify-content:space-between;gap:8px;align-items:baseline;color:#eef3e8}
+.card .id{font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.04em}
 .card .nums{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;font-variant-numeric:tabular-nums}
-.card .nums div{background:var(--panel-2);border-radius:6px;padding:6px 8px}
-.card .nums b{display:block;font-family:var(--display);font-size:26px;font-weight:700;line-height:1}
-.card .nums span{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.card .nums div{background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:3px;padding:6px 8px}
+.card .nums b{display:block;font-family:var(--display);font-size:30px;font-weight:400;line-height:1;color:#f3f7ee}
+.card .nums span{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .card svg{width:100%;height:46px;display:block}
 .card .foot{font-size:12.5px;color:var(--muted);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
-.chip{display:inline-block;font-family:var(--mono);font-size:11.5px;padding:1px 7px;border-radius:999px;background:var(--panel-2);border:1px solid var(--line);margin:0 4px 4px 0;white-space:nowrap}
-.chip.acc{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-ink)}
-.tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.chip{display:inline-block;font-family:var(--mono);font-size:11.5px;padding:1px 7px;border-radius:2px;background:rgba(0,0,0,.35);border:1px solid var(--line-2);margin:0 4px 4px 0;white-space:nowrap;color:var(--ink)}
+.chip.acc{background:var(--hazard-soft);border-color:var(--hazard);color:var(--hazard-ink)}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .tag.res{color:var(--alert)}
-.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel);box-shadow:var(--shadow)}
-table{border-collapse:collapse;width:100%;min-width:760px;font-variant-numeric:tabular-nums}
-th,td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
-th{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--panel-2);position:sticky;top:0}
-td.num,th.num{text-align:right;font-family:var(--mono);font-size:13.5px}
-tr.mine td{background:var(--accent-soft)}
-tr.mine td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
-td .bar{height:8px;border-radius:4px;background:var(--field);min-width:2px;display:inline-block;vertical-align:middle}
-tr.mine td .bar{background:var(--accent)}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:800px;font-variant-numeric:tabular-nums}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:400;background:rgba(0,0,0,.35);position:sticky;top:0}
+td.num,th.num{text-align:right;font-family:var(--mono);font-size:14px}
+tr.mine td{background:var(--hazard-soft)}
+tr.mine td:first-child{box-shadow:inset 4px 0 0 var(--hazard)}
+td .bar{height:8px;border-radius:1px;background:var(--radar);min-width:2px;display:inline-block;vertical-align:middle;box-shadow:0 0 8px rgba(111,211,141,.35)}
+tr.mine td .bar{background:var(--hazard);box-shadow:0 0 8px rgba(242,194,0,.35)}
 td .share{font-family:var(--mono);font-size:12px;color:var(--muted);margin-left:8px}
-.rank{font-family:var(--display);font-weight:700;font-size:20px;color:var(--muted);width:44px}
-tr.mine .rank{color:var(--accent-ink)}
-.chartbox{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;box-shadow:var(--shadow)}
+.rank{font-family:var(--display);font-size:24px;color:var(--muted);width:48px}
+tr.mine .rank{color:var(--hazard)}
+.chartbox{padding:16px}
 .chartbox canvas{width:100%;height:340px}
-.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;margin-bottom:8px}
-.legend i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:6px;border-radius:2px}
-footer{margin-top:48px;border-top:1px solid var(--line);padding-top:18px;color:var(--muted);font-size:14px}
-footer p{margin:6px 0;max-width:80ch}
-.empty{padding:22px;color:var(--muted);text-align:center}
-@media (max-width:640px){.stat .v{font-size:36px}.card .nums b{font-size:22px}}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;margin-bottom:8px;color:var(--ink)}
+.legend i{display:inline-block;width:16px;height:3px;vertical-align:middle;margin-right:6px}
+footer{margin-top:52px;border-top:1px solid var(--line-2);padding-top:18px;color:var(--muted);font-size:14px}
+footer p{margin:6px 0;max-width:84ch}
+footer .stencil{font-family:var(--display);font-size:22px;letter-spacing:.12em;color:var(--alert);opacity:.8;border:2px solid var(--alert);display:inline-block;padding:2px 12px;transform:rotate(-2deg);margin-bottom:10px}
+.empty{padding:22px;color:var(--muted);text-align:center;font-family:var(--mono);font-size:13px}
+@media (max-width:640px){.stat .v{font-size:40px}.card .nums b{font-size:24px}.brand h1{font-size:44px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 <div class="wrap">
+  <div class="hazard-bar"></div>
   <header class="mast">
     <div class="brand">
-      <h1>__TITLE__</h1>
+      <div class="eyebrow"><span class="sym">&#9763;</span> Quarantine zone · server surveillance · hourly</div>
+      <h1>__TITLE_HTML__</h1>
       <p>__SUBTITLE__</p>
-      <a class="credit-chip" href="__SOURCE_URL__" target="_blank" rel="noopener"><span class="dot"></span>Data: __SOURCE_NAME__, the Arma Reforger live server browser</a>
+      <a class="credit-chip" href="__SOURCE_URL__" target="_blank" rel="noopener"><span class="dot"></span>Intel source: __SOURCE_NAME__, Arma Reforger live server browser</a>
     </div>
     <div class="stamp" id="stamp"></div>
   </header>
 
-  <section id="flagship-section">
+  <section id="timeline-section" style="margin-top:22px">
+    <div class="panel timeline">
+      <div class="head"><span class="t" id="tl-title">Timeline</span><span class="n" id="tl-note"></span></div>
+      <canvas id="timeline"></canvas>
+    </div>
+  </section>
+
+  <section id="flagship-section" style="margin-top:26px">
     <h2 id="flagship-title"></h2>
     <p class="sub" id="flagship-sub"></p>
     <div class="hero" id="hero"></div>
+  </section>
+
+  <section>
+    <h2 id="kw-title"></h2>
+    <p class="sub" id="kw-sub"></p>
+    <div class="panel tablewrap"><table id="ranking"><thead><tr>
+      <th class="rank">#</th><th>Mod</th><th class="num">Servers</th><th class="num">Players</th><th class="num">Players / server</th><th>Share of __KW_LABEL_LC__ servers</th><th>Versions in use</th><th class="num">Global rank</th>
+    </tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <section>
+    <h2>Rivals over time</h2>
+    <p class="sub" id="chart-sub"></p>
+    <div class="panel chartbox"><div class="legend" id="legend"></div><canvas id="chart"></canvas></div>
   </section>
 
   <section>
@@ -102,29 +139,16 @@ footer p{margin:6px 0;max-width:80ch}
     <div class="cards" id="cards"></div>
   </section>
 
-  <section>
-    <h2 id="kw-title"></h2>
-    <p class="sub" id="kw-sub"></p>
-    <div class="tablewrap"><table id="ranking"><thead><tr>
-      <th class="rank">#</th><th>Mod</th><th class="num">Servers</th><th class="num">Players</th><th class="num">Players / server</th><th>Share of __KW_LABEL_LC__ servers</th><th>Versions in use</th><th class="num">Global rank</th>
-    </tr></thead><tbody></tbody></table></div>
-  </section>
-
-  <section>
-    <h2>Servers over time</h2>
-    <p class="sub" id="chart-sub"></p>
-    <div class="chartbox"><div class="legend" id="legend"></div><canvas id="chart"></canvas></div>
-  </section>
-
   <section id="servers-section">
     <h2 id="servers-title"></h2>
     <p class="sub" id="servers-sub"></p>
-    <div class="tablewrap"><table id="servers"><thead><tr>
+    <div class="panel tablewrap"><table id="servers"><thead><tr>
       <th class="rank">#</th><th>Server</th><th>Scenario</th><th>Region</th><th class="num">Players</th><th class="num">Slots</th><th>Mod version</th><th>Game</th><th class="num">Mods loaded</th>
     </tr></thead><tbody></tbody></table></div>
   </section>
 
   <footer>
+    <div class="stencil">Intel credit</div>
     <p><strong>Credit.</strong> __CREDIT_LINE__ Visit <a href="__SOURCE_URL__" target="_blank" rel="noopener">__SOURCE_URL__</a> for the live browser this page is built on.</p>
     <p><strong>Method.</strong> Once an hour the collector reads the public server list page, counts every server that lists a mod, sums the players on those servers, and records the versions in use. It never calls the site's API, and it makes one request per run. Player counts are the players on servers running the mod, not subscribers.</p>
     <p id="foot-stamp"></p>
@@ -140,16 +164,20 @@ footer p{margin:6px 0;max-width:80ch}
   const pct = (a,b) => b ? Math.round(100*a/b)+'%' : '–';
   const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const css = getComputedStyle(document.documentElement);
+  const HAZ = css.getPropertyValue('--hazard').trim(), RAD = css.getPropertyValue('--radar').trim(), MUT = css.getPropertyValue('--muted').trim(), GRID = css.getPropertyValue('--grid').trim();
   const when = new Date(L.generatedUtc);
   const ageMin = Math.max(0, Math.round((Date.now()-when.getTime())/60000));
   const ageTxt = ageMin < 60 ? ageMin+' min ago' : (ageMin/60).toFixed(1)+' h ago';
-  document.getElementById('stamp').innerHTML = 'Snapshot <b>'+esc(when.toISOString().replace('T',' ').slice(0,16))+' UTC</b> · '+ageTxt+'<br>'+fmt(L.totals.servers)+' servers online · '+fmt(L.totals.players)+' players · '+fmt(L.totals.uniqueMods)+' mods in use<br>'+H.length+' hourly snapshots stored';
+  document.getElementById('stamp').innerHTML = '<span class="live"></span>Snapshot <b>'+esc(when.toISOString().replace('T',' ').slice(0,16))+' UTC</b> · '+ageTxt+'<br>'+fmt(L.totals.servers)+' servers online · '+fmt(L.totals.players)+' players · '+fmt(L.totals.uniqueMods)+' mods in use<br>'+H.length+' hourly snapshots stored';
   document.getElementById('foot-stamp').textContent = 'Generated '+when.toISOString()+' from the snapshot of that hour. Mod ids are Arma Reforger Workshop ids.';
 
   // --- history helpers
-  const trackedSeries = id => H.map(r => (r.tracked && r.tracked[id]) ? r.tracked[id].s : null);
+  const trackedSeries = (id, key) => H.map(r => (r.tracked && r.tracked[id]) ? r.tracked[id][key||'s'] : null);
   const kwSeries = id => H.map(r => (r.keyword && r.keyword[id]) ? r.keyword[id].s : 0);
-  function delta(series){ // compare last vs the row about 24h earlier (or the first row)
+  const labels = H.map(r=>r.t);
+  const tickCb = (v,i)=>{const d=new Date(labels[i]); return H.length>48 ? d.toISOString().slice(5,10) : d.toISOString().slice(11,16);};
+  const tipTitle = items=>new Date(items[0].label).toUTCString().slice(0,22)+' UTC';
+  function delta(series){
     const valid = series.map((v,i)=>[v,i]).filter(x=>x[0]!=null);
     if (valid.length < 2) return null;
     const last = valid[valid.length-1][0];
@@ -162,7 +190,7 @@ footer p{margin:6px 0;max-width:80ch}
   const dTxt = d => d==null ? 'no history yet' : ((d.diff>0?'<span class="up">▲ +':d.diff<0?'<span class="down">▼ ':'<span>± ')+fmt(d.diff)+'</span> vs '+d.hours+' h ago');
   function spark(series, color){
     const vals = series.map(v=>v==null?0:v); const n=vals.length;
-    if(n<2) return '<svg viewBox="0 0 100 40"><text x="2" y="24" font-size="9" fill="'+css.getPropertyValue('--muted')+'">history builds hourly</text></svg>';
+    if(n<2) return '<svg viewBox="0 0 100 40"><text x="2" y="24" font-size="9" fill="'+MUT+'">history builds hourly</text></svg>';
     const max = Math.max(1,...vals), min = 0;
     const pts = vals.map((v,i)=>[ (i/(n-1))*100, 38 - ((v-min)/(max-min||1))*34 ]);
     const path = pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ');
@@ -171,15 +199,35 @@ footer p{margin:6px 0;max-width:80ch}
   }
   const versionsChips = (versions, mine) => Object.entries(versions||{}).slice(0,5).map(([v,c])=>'<span class="chip'+(mine?' acc':'')+'">'+esc(v)+' <span style="opacity:.7">×'+c+'</span></span>').join('');
 
-  // --- flagship hero
   const tracked = Object.values(L.tracked||{});
   const flag = tracked.find(t=>t.flagship) || tracked[0];
   const kw = L.keyword;
+  const mine = new Set(tracked.map(t=>t.modId));
+
+  // --- timeline at the top: the flagship's servers and players across the whole history
+  if (flag){
+    document.getElementById('tl-title').textContent = (flag.label||flag.name)+' · servers and players, hourly';
+    document.getElementById('tl-note').textContent = H.length ? (H.length+' snapshots · '+new Date(H[0].t).toISOString().slice(0,16).replace('T',' ')+' to '+when.toISOString().slice(0,16).replace('T',' ')+' UTC') : 'first snapshot';
+    if (window.Chart && H.length >= 2){
+      new Chart(document.getElementById('timeline'), {type:'line', data:{labels, datasets:[
+        {label:'servers running it', data:trackedSeries(flag.modId,'s'), borderColor:HAZ, backgroundColor:'rgba(242,194,0,.12)', fill:true, borderWidth:2.5, pointRadius:H.length>48?0:3, tension:.25, yAxisID:'y'},
+        {label:'players on those servers', data:trackedSeries(flag.modId,'p'), borderColor:RAD, borderWidth:1.8, borderDash:[6,4], pointRadius:H.length>48?0:2.5, tension:.25, yAxisID:'y2'}
+      ]}, options:{responsive:true, maintainAspectRatio:false, animation:false, interaction:{mode:'index',intersect:false},
+        plugins:{legend:{labels:{color:MUT, boxWidth:14, font:{family:'Share Tech Mono'}}}, tooltip:{callbacks:{title:tipTitle}}},
+        scales:{x:{ticks:{color:MUT, maxTicksLimit:10, callback:tickCb, font:{family:'Share Tech Mono'}}, grid:{color:GRID}},
+                y:{beginAtZero:true, position:'left', ticks:{color:HAZ, font:{family:'Share Tech Mono'}}, grid:{color:GRID}, title:{display:true,text:'servers',color:HAZ}},
+                y2:{beginAtZero:true, position:'right', ticks:{color:RAD, font:{family:'Share Tech Mono'}}, grid:{drawOnChartArea:false}, title:{display:true,text:'players',color:RAD}}}}});
+    } else {
+      document.getElementById('timeline').outerHTML = '<div class="empty">Timeline draws from the second hourly snapshot onward. Current: '+fmt(flag.servers)+' servers, '+fmt(flag.players)+' players.</div>';
+    }
+  }
+
+  // --- flagship hero
   if (flag){
     document.getElementById('flagship-title').textContent = flag.label || flag.name || flag.modId;
     document.getElementById('flagship-sub').textContent = flag.seen ? ('Rank '+flag.keywordRank+' of '+kw.modCount+' '+kw.label.toLowerCase()+' by servers right now, rank '+fmt(flag.globalRank)+' of all '+fmt(L.totals.uniqueMods)+' mods in use.') : 'Not seen on any server in this snapshot.';
-    const ds = delta(trackedSeries(flag.modId));
-    const pl = delta(H.map(r=>(r.tracked&&r.tracked[flag.modId])?r.tracked[flag.modId].p:null));
+    const ds = delta(trackedSeries(flag.modId,'s'));
+    const pl = delta(trackedSeries(flag.modId,'p'));
     const cap = flag.capacity ? Math.round(100*flag.players/flag.capacity) : 0;
     const share = flag.shareOfKeywordServers!=null ? Math.round(flag.shareOfKeywordServers*100)+'%' : '–';
     const cells = [
@@ -193,20 +241,7 @@ footer p{margin:6px 0;max-width:80ch}
     document.getElementById('hero').innerHTML = cells.map(c=>'<div class="stat'+(c[3]?' flag':'')+'"><div class="k">'+esc(c[0])+'</div><div class="v">'+c[1]+'</div><div class="d">'+c[2]+'</div></div>').join('');
   }
 
-  // --- cards
-  const accent = css.getPropertyValue('--accent').trim(), field = css.getPropertyValue('--field').trim();
-  document.getElementById('cards').innerHTML = tracked.sort((a,b)=>(b.servers-a.servers)||(a.label||'').localeCompare(b.label||'')).map(t=>{
-    const s = trackedSeries(t.modId); const d = delta(s);
-    const tag = t.reserved ? '<span class="tag res">reserved, unpublished</span>' : '<span class="tag">'+esc(t.channel||'')+'</span>';
-    return '<div class="card'+(t.flagship?' flagship':'')+'"><div class="name"><span>'+esc(t.label||t.name)+'</span>'+tag+'</div><div class="id">'+esc(t.modId)+(t.seen&&t.name&&t.name!==t.label?' · listed as “'+esc(t.name)+'”':'')+'</div>'+
-      '<div class="nums"><div><b>'+fmt(t.servers)+'</b><span>servers</span></div><div><b>'+fmt(t.players)+'</b><span>players</span></div><div><b>'+(t.keywordRank?'#'+t.keywordRank:'–')+'</b><span>'+esc(kw.label.toLowerCase())+' rank</span></div></div>'+
-      spark(s, t.flagship?accent:field)+
-      '<div class="foot"><span>'+dTxt(d)+'</span><span>'+(t.seen?versionsChips(t.versions,t.flagship):'not on any server')+'</span></div>'+
-      '<div class="foot"><a href="'+esc(C.source.modPage.replace('{modId}',t.modId))+'" target="_blank" rel="noopener">servers on '+esc(C.source.name)+'</a><a href="https://reforger.armaplatform.com/workshop/'+esc(t.modId)+'" target="_blank" rel="noopener">Workshop</a></div></div>';
-  }).join('');
-
   // --- ranking table
-  const mine = new Set(tracked.map(t=>t.modId));
   document.getElementById('kw-title').textContent = kw.label+' on servers right now';
   document.getElementById('kw-sub').textContent = kw.modCount+' mods whose name contains “'+kw.terms.join('” or “')+'” are loaded on '+fmt(kw.serversTotal)+' server slots with '+fmt(kw.playersTotal)+' players between them. Ranked by servers, then players. Your mods are highlighted.';
   const maxS = Math.max(1,...kw.mods.map(m=>m.servers));
@@ -220,19 +255,28 @@ footer p{margin:6px 0;max-width:80ch}
       '<td>'+versionsChips(m.versions,isMine)+'</td><td class="num">'+fmt(m.globalRank)+'</td></tr>';
   }).join('') : '<tr><td colspan="8" class="empty">No mods matched in this snapshot.</td></tr>';
 
-  // --- chart
+  // --- rivals chart
   const top = kw.mods.slice(0, C.site.chartSeries||8);
-  const palette = [accent, field, '#c96b3b', '#7a8cff', '#9ccc65', '#d46ab0', '#4fb3d9', '#b0a054'];
-  document.getElementById('chart-sub').textContent = 'Servers running each of the top '+top.length+' '+kw.label.toLowerCase()+', one point per hourly snapshot ('+H.length+' stored). The line grows as the collector runs.';
-  const labels = H.map(r=>r.t);
-  const datasets = top.map((m,i)=>({label:m.name, data:kwSeries(m.modId), borderColor: mine.has(m.modId)?accent:palette[(i+1)%palette.length], borderWidth: mine.has(m.modId)?3:1.6, pointRadius: H.length>48?0:2.5, tension:.25, fill:false}));
+  const palette = [HAZ, RAD, '#e07a3b', '#8fa2ff', '#c9d64f', '#d46ab0', '#4fb3d9', '#b0a054'];
+  document.getElementById('chart-sub').textContent = 'Servers running each of the top '+top.length+' '+kw.label.toLowerCase()+', one point per hourly snapshot ('+H.length+' stored).';
+  const datasets = top.map((m,i)=>({label:m.name, data:kwSeries(m.modId), borderColor: mine.has(m.modId)?HAZ:palette[(i+1)%palette.length], borderWidth: mine.has(m.modId)?3:1.6, pointRadius: H.length>48?0:2.5, tension:.25, fill:false}));
   document.getElementById('legend').innerHTML = datasets.map(d=>'<span><i style="background:'+d.borderColor+'"></i>'+esc(d.label)+'</span>').join('');
-  if (window.Chart && H.length){
-    const ink = css.getPropertyValue('--muted').trim(), grid = css.getPropertyValue('--grid').trim();
-    new Chart(document.getElementById('chart'), {type:'line', data:{labels, datasets}, options:{responsive:true, maintainAspectRatio:false, animation:false, interaction:{mode:'index',intersect:false}, plugins:{legend:{display:false}, tooltip:{callbacks:{title:items=>new Date(items[0].label).toUTCString().slice(0,22)+' UTC'}}}, scales:{x:{ticks:{color:ink, maxTicksLimit:8, callback:(v,i)=>{const d=new Date(labels[i]); return H.length>48 ? d.toISOString().slice(5,10) : d.toISOString().slice(11,16);}}, grid:{color:grid}}, y:{beginAtZero:true, ticks:{color:ink}, grid:{color:grid}, title:{display:true,text:'servers',color:ink}}}}});
+  if (window.Chart && H.length >= 2){
+    new Chart(document.getElementById('chart'), {type:'line', data:{labels, datasets}, options:{responsive:true, maintainAspectRatio:false, animation:false, interaction:{mode:'index',intersect:false}, plugins:{legend:{display:false}, tooltip:{callbacks:{title:tipTitle}}}, scales:{x:{ticks:{color:MUT, maxTicksLimit:8, callback:tickCb, font:{family:'Share Tech Mono'}}, grid:{color:GRID}}, y:{beginAtZero:true, ticks:{color:MUT, font:{family:'Share Tech Mono'}}, grid:{color:GRID}, title:{display:true,text:'servers',color:MUT}}}}});
   } else {
     document.getElementById('chart').outerHTML = '<div class="empty">The chart appears once two or more hourly snapshots exist.</div>';
   }
+
+  // --- cards
+  document.getElementById('cards').innerHTML = tracked.slice().sort((a,b)=>(b.servers-a.servers)||(a.label||'').localeCompare(b.label||'')).map(t=>{
+    const s = trackedSeries(t.modId,'s'); const d = delta(s);
+    const tag = t.reserved ? '<span class="tag res">reserved, unpublished</span>' : '<span class="tag">'+esc(t.channel||'')+'</span>';
+    return '<div class="panel card'+(t.flagship?' flagship':'')+'"><div class="name"><span>'+esc(t.label||t.name)+'</span>'+tag+'</div><div class="id">'+esc(t.modId)+(t.seen&&t.name&&t.name!==t.label?' · listed as “'+esc(t.name)+'”':'')+'</div>'+
+      '<div class="nums"><div><b>'+fmt(t.servers)+'</b><span>servers</span></div><div><b>'+fmt(t.players)+'</b><span>players</span></div><div><b>'+(t.keywordRank?'#'+t.keywordRank:'–')+'</b><span>'+esc(kw.label.toLowerCase())+' rank</span></div></div>'+
+      spark(s, t.flagship?HAZ:RAD)+
+      '<div class="foot"><span>'+dTxt(d)+'</span><span>'+(t.seen?versionsChips(t.versions,t.flagship):'not on any server')+'</span></div>'+
+      '<div class="foot"><a href="'+esc(C.source.modPage.replace('{modId}',t.modId))+'" target="_blank" rel="noopener">servers on '+esc(C.source.name)+'</a><a href="https://reforger.armaplatform.com/workshop/'+esc(t.modId)+'" target="_blank" rel="noopener">Workshop</a></div></div>';
+  }).join('');
 
   // --- servers running the flagship
   if (flag && flag.seen){
