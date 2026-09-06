@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import html
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -30,6 +31,105 @@ def load_history(path: Path, limit: int) -> list[dict]:
                 except json.JSONDecodeError:
                     continue
     return rows[-limit:]
+
+
+def assert_inline_scripts_parse(html: str) -> None:
+    """Refuse to publish a page whose inline JavaScript cannot parse.
+
+    The whole page is rendered by one inline script from embedded JSON, so a single syntax error empties
+    every table and chart while the HTML still looks fine: right size, data present, no missing file. The
+    scraper keeps succeeding, the workflow keeps going green, and Pages keeps deploying a dead page.
+
+    That is exactly what happened. An apostrophe in "the server's page" closed a single-quoted string early
+    (template.html:290), and the site served no data for a day across ~24 successful hourly runs, because
+    nothing between the scraper and the deploy ever asked whether the page WORKS.
+
+    This is a string-literal scanner, not a JS parser: it walks quotes, template literals, comments and
+    REGEX LITERALS well enough to catch an unterminated literal, which is the failure this build can actually
+    introduce - the data is JSON-encoded, so the only hand-written JS is the template's own.
+
+    Regex literals have to be understood or the scanner is worse than nothing: `/[&<>"]/g` in the template's
+    own esc() contains a double quote, and a scanner that reads it as a string start reports a false failure
+    on a healthy build. A guard that cries wolf gets switched off, and then the real one ships.
+    """
+    scripts = re.findall(r"<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>", html, re.S)
+    for index, body in enumerate(scripts):
+        if body.lstrip().startswith("{"):
+            continue  # the embedded JSON payload, validated by json.dumps having produced it
+        line = 1
+        i = 0
+        n = len(body)
+        # A '/' is division when the previous meaningful character could end a value, and starts a regex
+        # otherwise. This is the standard heuristic and it is sufficient here.
+        prev_significant = ""
+        while i < n:
+            ch = body[i]
+            if ch == "\n":
+                line += 1
+                i += 1
+            elif ch in " \t\r":
+                i += 1
+            elif ch == "/" and i + 1 < n and body[i + 1] == "/":
+                while i < n and body[i] != "\n":
+                    i += 1
+            elif ch == "/" and i + 1 < n and body[i + 1] == "*":
+                end = body.find("*/", i + 2)
+                if end < 0:
+                    raise SystemExit(f"inline script {index}: unterminated block comment at line {line}")
+                line += body.count("\n", i, end)
+                i = end + 2
+            elif ch == "/" and not (prev_significant.isalnum() or prev_significant in ")]}_$"):
+                start_line = line
+                i += 1
+                closed = False
+                in_class = False
+                while i < n:
+                    c = body[i]
+                    if c == "\\":
+                        i += 2
+                        continue
+                    if c == "[":
+                        in_class = True
+                    elif c == "]":
+                        in_class = False
+                    elif c == "/" and not in_class:
+                        i += 1
+                        closed = True
+                        break
+                    elif c == "\n":
+                        break
+                    i += 1
+                if not closed:
+                    raise SystemExit(f"inline script {index}: unterminated regex literal at line {start_line}")
+                prev_significant = "/"
+                continue
+            elif ch in "\"'`":
+                quote = ch
+                start_line = line
+                i += 1
+                while i < n:
+                    c = body[i]
+                    if c == "\\":
+                        i += 2
+                        continue
+                    if c == quote:
+                        i += 1
+                        prev_significant = quote
+                        break
+                    if c == "\n":
+                        line += 1
+                        if quote != "`":
+                            raise SystemExit(
+                                f"inline script {index}: unterminated {quote}-quoted string starting at line "
+                                f"{start_line}. An unescaped {quote} inside the text is the usual cause - the "
+                                f"whole script fails to parse and the page renders empty."
+                            )
+                    i += 1
+                else:
+                    raise SystemExit(f"inline script {index}: unterminated {quote}-quoted string at line {start_line}")
+            else:
+                prev_significant = ch
+                i += 1
 
 
 def build(config_path: Path, data_dir: Path, out_path: Path, artifact_out: Path | None = None) -> int:
@@ -80,6 +180,7 @@ def build(config_path: Path, data_dir: Path, out_path: Path, artifact_out: Path 
         "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
         + head_part + marker + "</head>\n<body>\n" + body_part + "\n</body>\n</html>\n"
     )
+    assert_inline_scripts_parse(full)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(full, encoding="utf-8")
     (out_path.parent / ".nojekyll").touch()

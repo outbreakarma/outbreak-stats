@@ -287,7 +287,7 @@ footer .stencil{font-family:var(--display);font-size:22px;letter-spacing:.12em;c
   // --- servers running the flagship
   if (flag && flag.seen){
     document.getElementById('servers-title').textContent = 'Servers running '+(flag.label||flag.name);
-    document.getElementById('servers-sub').textContent = 'The '+Math.min(flag.topServers.length, flag.servers)+' busiest of its '+fmt(flag.servers)+' servers in this snapshot, by players online. Each name opens the server's page on '+C.source.name+'.';
+    document.getElementById('servers-sub').textContent = 'The '+Math.min(flag.topServers.length, flag.servers)+' busiest of its '+fmt(flag.servers)+' servers in this snapshot, by players online. Each name opens that server\'s page on '+C.source.name+'.';
     document.querySelector('#servers tbody').innerHTML = flag.topServers.map((s,i)=>'<tr class="srv"><td class="rank">'+(i+1)+'</td><td><a href="'+esc((C.source.serverPage||'').replace('{id}',s.id||''))+'" target="_blank" rel="noopener">'+esc(s.name)+'</a>'+(s.password?' <span class="chip">locked</span>':'')+(s.official?' <span class="chip">official</span>':'')+'</td><td>'+esc(s.scenario)+'</td><td>'+esc(s.region)+'</td><td class="num">'+fmt(s.players)+'</td><td class="num">'+fmt(s.limit)+'</td><td><span class="chip acc">'+esc(s.version)+'</span></td><td class="id" style="font-family:var(--mono);font-size:12px">'+esc(s.gameVersion)+'</td><td class="num">'+fmt(s.modCount)+'</td></tr>').join('');
   } else {
     document.getElementById('servers-section').innerHTML = '<div class="empty">No server list: the flagship mod was not seen in this snapshot.</div>';
