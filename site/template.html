@@ -205,6 +205,55 @@ footer .stencil{font-family:var(--display);font-size:22px;letter-spacing:.12em;c
   }
   const versionsChips = (versions, mine) => Object.entries(versions||{}).slice(0,5).map(([v,c])=>'<span class="chip'+(mine?' acc':'')+'">'+esc(v)+' <span style="opacity:.7">×'+c+'</span></span>').join('');
 
+  // --- gap shading: mark stretches of history that were reconstructed from a
+  // secondary source after an outage, or that are still genuinely missing, so the
+  // charts never imply smooth continuous collection across a period that was down.
+  function idxRanges(idxList){
+    const out = [];
+    for (const i of idxList){
+      if (out.length && out[out.length-1][1] === i-1) out[out.length-1][1] = i;
+      else out.push([i,i]);
+    }
+    return out;
+  }
+  const backfillRanges = idxRanges(H.map((r,i)=>r.backfilled?i:null).filter(i=>i!=null));
+  const missingRanges = (() => {
+    const idx = [];
+    for (let i=1;i<H.length;i++){
+      if (H[i].backfilled || H[i-1].backfilled) continue;
+      const hrs = (new Date(H[i].t) - new Date(H[i-1].t)) / 3600000;
+      if (hrs > 2.5) idx.push(i);
+    }
+    return idx;
+  })();
+  function gapBandPlugin(){
+    const n = labels.length;
+    return {
+      id: 'gapBands',
+      beforeDraw(chart){
+        if (n < 2) return;
+        const area = chart.chartArea;
+        if (!area) return;
+        const w = area.right - area.left;
+        const xOf = i => area.left + (Math.min(n-1,Math.max(0,i))/(n-1))*w;
+        const ctx = chart.ctx;
+        ctx.save();
+        ctx.fillStyle = 'rgba(111,211,141,.10)';
+        for (const [a,b] of backfillRanges){
+          const x0 = xOf(a-0.5), x1 = xOf(b+0.5);
+          ctx.fillRect(x0, area.top, Math.max(1,x1-x0), area.bottom-area.top);
+        }
+        ctx.fillStyle = 'rgba(226,67,47,.55)';
+        for (const i of missingRanges){
+          const x0 = xOf(i-0.5);
+          ctx.fillRect(x0-1.5, area.top, 3, area.bottom-area.top);
+        }
+        ctx.restore();
+      }
+    };
+  }
+  const gapNote = backfillRanges.length ? ' Shaded: reconstructed from ReforgerMods.net\'s own history after an outage in this project\'s collector.' : (missingRanges.length ? ' Red marker: a gap with no data from either source.' : '');
+
   const tracked = Object.values(L.tracked||{});
   const flag = tracked.find(t=>t.flagship) || tracked[0];
   const kw = L.keyword;
@@ -213,9 +262,9 @@ footer .stencil{font-family:var(--display);font-size:22px;letter-spacing:.12em;c
   // --- timeline at the top: the flagship's servers and players across the whole history
   if (flag){
     document.getElementById('tl-title').textContent = (flag.label||flag.name)+' · servers and players, hourly';
-    document.getElementById('tl-note').textContent = H.length ? (H.length+' snapshots · '+new Date(H[0].t).toISOString().slice(0,16).replace('T',' ')+' to '+when.toISOString().slice(0,16).replace('T',' ')+' UTC') : 'first snapshot';
+    document.getElementById('tl-note').textContent = (H.length ? (H.length+' snapshots · '+new Date(H[0].t).toISOString().slice(0,16).replace('T',' ')+' to '+when.toISOString().slice(0,16).replace('T',' ')+' UTC') : 'first snapshot') + gapNote;
     if (window.Chart && H.length >= 2){
-      new Chart(document.getElementById('timeline'), {type:'line', data:{labels, datasets:[
+      new Chart(document.getElementById('timeline'), {type:'line', plugins:[gapBandPlugin()], data:{labels, datasets:[
         {label:'servers running it', data:trackedSeries(flag.modId,'s'), borderColor:HAZ, backgroundColor:'rgba(242,194,0,.12)', fill:true, borderWidth:2.5, pointRadius:H.length>48?0:3, tension:.25, yAxisID:'y'},
         {label:'players on those servers', data:trackedSeries(flag.modId,'p'), borderColor:RAD, borderWidth:1.8, borderDash:[6,4], pointRadius:H.length>48?0:2.5, tension:.25, yAxisID:'y2'}
       ]}, options:{responsive:true, maintainAspectRatio:false, animation:false, interaction:{mode:'index',intersect:false},
@@ -264,11 +313,11 @@ footer .stencil{font-family:var(--display);font-size:22px;letter-spacing:.12em;c
   // --- rivals chart
   const top = kw.mods.slice(0, C.site.chartSeries||8);
   const palette = [HAZ, RAD, '#e07a3b', '#8fa2ff', '#c9d64f', '#d46ab0', '#4fb3d9', '#b0a054'];
-  document.getElementById('chart-sub').textContent = 'Servers running each of the top '+top.length+' '+kw.label.toLowerCase()+', one point per hourly snapshot ('+H.length+' stored).';
+  document.getElementById('chart-sub').textContent = 'Servers running each of the top '+top.length+' '+kw.label.toLowerCase()+', one point per hourly snapshot ('+H.length+' stored).'+gapNote;
   const datasets = top.map((m,i)=>({label:m.name, data:kwSeries(m.modId), borderColor: mine.has(m.modId)?HAZ:palette[(i+1)%palette.length], borderWidth: mine.has(m.modId)?3:1.6, pointRadius: H.length>48?0:2.5, tension:.25, fill:false}));
   document.getElementById('legend').innerHTML = datasets.map(d=>'<span><i style="background:'+d.borderColor+'"></i>'+esc(d.label)+'</span>').join('');
   if (window.Chart && H.length >= 2){
-    new Chart(document.getElementById('chart'), {type:'line', data:{labels, datasets}, options:{responsive:true, maintainAspectRatio:false, animation:false, interaction:{mode:'index',intersect:false}, plugins:{legend:{display:false}, tooltip:{callbacks:{title:tipTitle}}}, scales:{x:{ticks:{color:MUT, maxTicksLimit:8, callback:tickCb, font:{family:'Share Tech Mono'}}, grid:{color:GRID}}, y:{beginAtZero:true, ticks:{color:MUT, font:{family:'Share Tech Mono'}}, grid:{color:GRID}, title:{display:true,text:'servers',color:MUT}}}}});
+    new Chart(document.getElementById('chart'), {type:'line', plugins:[gapBandPlugin()], data:{labels, datasets}, options:{responsive:true, maintainAspectRatio:false, animation:false, interaction:{mode:'index',intersect:false}, plugins:{legend:{display:false}, tooltip:{callbacks:{title:tipTitle}}}, scales:{x:{ticks:{color:MUT, maxTicksLimit:8, callback:tickCb, font:{family:'Share Tech Mono'}}, grid:{color:GRID}}, y:{beginAtZero:true, ticks:{color:MUT, font:{family:'Share Tech Mono'}}, grid:{color:GRID}, title:{display:true,text:'servers',color:MUT}}}}});
   } else {
     document.getElementById('chart').outerHTML = '<div class="empty">The chart appears once two or more hourly snapshots exist.</div>';
   }

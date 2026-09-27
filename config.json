@@ -36,36 +36,6 @@
       "channel": "production"
     },
     {
-      "modId": "0A07B0E7A0F1C7ED",
-      "label": "Project Outbreak (test)",
-      "addon": "ProjectOutbreak",
-      "channel": "test"
-    },
-    {
-      "modId": "B9CD52E48F6A3701",
-      "label": "Creature Melee AI (test)",
-      "addon": "CreatureMeleeAI",
-      "channel": "test"
-    },
-    {
-      "modId": "5E652604B0AE4AD3",
-      "label": "Outbreak Infection (test)",
-      "addon": "ProjectOutbreakInfection",
-      "channel": "test"
-    },
-    {
-      "modId": "7E5D310931454092",
-      "label": "Outbreak Structures (test)",
-      "addon": "ProjectOutbreakStructures",
-      "channel": "test"
-    },
-    {
-      "modId": "AD0FA338D66F49BE",
-      "label": "Outbreak Survival Gear (test)",
-      "addon": "ProjectOutbreakSurvivalGear",
-      "channel": "test"
-    },
-    {
       "modId": "4FD4A1BD550793F4",
       "label": "Creature Melee AI",
       "addon": "CreatureMeleeAI",
@@ -94,18 +64,17 @@
       "note": "ledger says reserved-not-published; ArmaHQ sees it on servers, so it is published"
     },
     {
-      "modId": "F900AAFD92444135",
-      "label": "Outbreak Appearances",
-      "addon": "ProjectOutbreakAppearances",
+      "modId": "384E32C2A832444E",
+      "label": "Outbreak Variety",
+      "addon": "ProjectOutbreakVariety",
       "channel": "production",
-      "reserved": true
+      "note": "repo draft ledger says not published; ArmaHQ and ReforgerMods both see it live, so it is published"
     },
     {
-      "modId": "46A8FC8FB9DD4D8D",
-      "label": "Outbreak Recovery",
-      "addon": "ProjectOutbreakRecovery",
-      "channel": "production",
-      "reserved": true
+      "modId": "297640FBAC0C46C3",
+      "label": "Outbreak Special",
+      "addon": "ProjectOutbreakSpecialZombiesAndCreatures",
+      "channel": "production"
     }
   ],
   "site": {
