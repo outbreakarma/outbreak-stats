@@ -1,40 +1,52 @@
 # ArmaHqStats
 
 Hourly statistics on where Project Outbreak and every other Arma Reforger mod with
-"zombie" in its name are running, collected from **[ArmaHQ](https://www.armahq.com)**,
-the Arma Reforger live server browser and statistics site, and rendered as a static page
-for GitHub Pages.
+"zombie" in its name are running, rendered as a static page for GitHub Pages.
 
-**Credit.** All data comes from ArmaHQ (https://www.armahq.com). This project is not
-affiliated with ArmaHQ or Bohemia Interactive. The generated page credits ArmaHQ in its
-header and footer; keep that credit if you fork this.
+**Credit.** Server counts, player exposure and mod rankings come from the
+[ReforgerMods.net](https://reforgermods.net) public API, an independent, community-run
+Arma Reforger stats service. Per-mod version and server-list detail for the tracked
+Project Outbreak add-ons comes from [ArmaHQ](https://www.armahq.com). This project is
+not affiliated with ReforgerMods.net, ArmaHQ, or Bohemia Interactive. The generated page
+credits both in its header and footer; keep that credit if you fork this.
 
 ## What it measures
 
-ArmaHQ renders its live server list server-side, with every online server's full mod
-list. One request per hour to that public page gives, for every mod:
+ReforgerMods.net's public API (`api.reforgermods.net/v2`) reports, for every mod
+currently deployed on any tracked server: how many servers run it and how many players
+are on those servers. Paginating its `/v2/analytics/mods` endpoint once an hour gives a
+complete, accurate picture across the whole fleet - no server-by-server enumeration
+needed, and no risk of only seeing part of the population.
 
-- servers running it, and how many of those have players,
-- players online on those servers (not subscribers), and slot capacity,
-- the versions, regions and platforms in use,
-- the busiest servers running it.
+(An earlier version of this project scraped ArmaHQ's `/servers` page instead. ArmaHQ
+redesigned that page to server-render only the first 50 of roughly 5,100 servers, so a
+full aggregate could no longer be computed from it. ReforgerMods.net has no such limit
+for mod-level aggregates, and its terms explicitly invite this kind of API use in place
+of scraping.)
 
-From that the collector derives your tracked mods' numbers, a ranking of every mod whose
-name contains the configured keywords (default `zombie`), and a global rank among all
-mods in use. Nothing under the site's `/api/` path is requested (its robots.txt disallows
-that for automated clients), and no page is fetched more than once per run.
+From that crawl the collector derives your tracked mods' numbers, a ranking of every mod
+whose name contains the configured keywords (default `zombie`), and a global rank among
+all mods in use. It then reads ArmaHQ's `/mods/{id}` page - once per tracked mod, a small
+fixed set - for the concrete server list behind those numbers: which specific servers are
+running it, which versions are in use, and (for the flagship mod) total slot capacity and
+the busiest servers table. ReforgerMods.net has no bulk equivalent of that server-list
+detail at the free tier, only single-server lookups, which don't scale to the whole fleet.
+
+Both sources are used within their published rate limits and page-fetch norms; nothing
+under either site's private `/api/` path is requested outside of ReforgerMods.net's own
+documented, publicly-invited API.
 
 ## Layout
 
 | path | purpose |
 |---|---|
 | `config.json` | tracked mod ids, keywords, request settings, page titles |
-| `scraper/armahq_scrape.py` | fetch, parse, aggregate; writes `data/` |
+| `scraper/reforgermods_scrape.py` | fetch, parse, aggregate; writes `data/` |
 | `site/build_site.py` | renders `docs/index.html` from `data/` |
 | `run.py` | one scheduled run: scrape then build, log under `logs/` |
 | `data/latest.json` | the current snapshot (tracked mods, keyword ranking, global top 50) |
 | `data/history.jsonl` | one compact row per run (tracked and keyword mods), append-only |
-| `data/mods-all-latest.json.gz` | every mod seen in the current snapshot |
+| `data/mods-all-latest.json.gz` | every currently-deployed mod in the current snapshot |
 | `docs/` | the GitHub Pages site (`index.html`, `latest.json`, `.nojekyll`) |
 
 Standard library only; Python 3.9 or newer.
@@ -43,7 +55,7 @@ Standard library only; Python 3.9 or newer.
 
 ```
 python run.py            # scrape + build, exit code non-zero on failure
-python scraper/armahq_scrape.py --offline-html saved.html   # parse a saved page instead of fetching
+python scraper/reforgermods_scrape.py
 python site/build_site.py
 ```
 
@@ -69,9 +81,13 @@ workflow is running, or the two will interleave snapshots.
 
 ## Configuration
 
+- `source.apiBase`: the ReforgerMods.net API base URL used for rankings and totals.
+- `armahq`: ArmaHQ's site, used only for the tracked mods' per-server detail.
 - `tracked`: Workshop ids with a label, add-on and channel; `flagship: true` marks the
   mod the hero section and the server table follow; `reserved: true` marks ids that are
   reserved on the Workshop but not published (they stay at zero).
 - `keywords`: case-insensitive substrings matched against mod names for the ranking.
-- `userAgent`: identifies the collector to the site; put your repository URL in it.
+- `userAgent`: identifies the collector to both sites; put your repository URL in it.
+- `requestGapSeconds`: pause between paginated ReforgerMods.net requests and between
+  per-mod ArmaHQ requests, to stay comfortably inside published rate limits.
 - `historyRowsOnPage`: how many hourly rows the page embeds (336 = two weeks).

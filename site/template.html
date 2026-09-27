@@ -107,7 +107,7 @@ footer .stencil{font-family:var(--display);font-size:22px;letter-spacing:.12em;c
       <div class="eyebrow"><span class="sym">&#9763;</span> Arma Reforger · server statistics · updated hourly</div>
       <h1>__TITLE_HTML__</h1>
       <p>__SUBTITLE__</p>
-      <a class="credit-chip" href="__SOURCE_URL__" target="_blank" rel="noopener"><span class="dot"></span>Data: __SOURCE_NAME__, the Arma Reforger live server browser</a><a class="sitelink" href="__MAIN_SITE__">Project Outbreak site &rarr;</a>
+      <a class="credit-chip" href="__SOURCE_URL__" target="_blank" rel="noopener"><span class="dot"></span>Data: __SOURCE_NAME__, Arma Reforger server &amp; mod statistics</a><a class="sitelink" href="__MAIN_SITE__">Project Outbreak site &rarr;</a>
     </div>
     <div class="stamp" id="stamp"></div>
   </header>
@@ -155,8 +155,8 @@ footer .stencil{font-family:var(--display);font-size:22px;letter-spacing:.12em;c
 
   <footer>
     <div class="stencil">Data credit</div>
-    <p><strong>Credit.</strong> __CREDIT_LINE__ Visit <a href="__SOURCE_URL__" target="_blank" rel="noopener">__SOURCE_URL__</a> for the live browser this page is built on.</p>
-    <p><strong>Method.</strong> Once an hour the collector reads the public server list page, counts every server that lists a mod, sums the players on those servers, and records the versions in use. It never calls the site's API, and it makes one request per run. Player counts are the players on servers running the mod, not subscribers.</p>
+    <p><strong>Credit.</strong> __CREDIT_LINE__ Visit <a href="__SOURCE_URL__" target="_blank" rel="noopener">__SOURCE_URL__</a> or <a href="https://www.armahq.com" target="_blank" rel="noopener">armahq.com</a> for the live browsers this page is built on.</p>
+    <p><strong>Method.</strong> Once an hour the collector paginates ReforgerMods.net's public API to get every currently-deployed mod's server count and player exposure, from which it ranks the tracked add-ons, every mod matching the configured keywords, and a global top 50. It then reads ArmaHQ's page for each tracked add-on to get the specific servers, versions and slot capacity behind those numbers. Both stay within each site's published rate limits and page-fetch norms. Player counts are the players on servers running the mod, not subscribers.</p>
     <p id="foot-stamp"></p>
   </footer>
 </div>
@@ -287,8 +287,8 @@ footer .stencil{font-family:var(--display);font-size:22px;letter-spacing:.12em;c
   // --- servers running the flagship
   if (flag && flag.seen){
     document.getElementById('servers-title').textContent = 'Servers running '+(flag.label||flag.name);
-    document.getElementById('servers-sub').textContent = 'The '+Math.min(flag.topServers.length, flag.servers)+' busiest of its '+fmt(flag.servers)+' servers in this snapshot, by players online. Each name opens that server\'s page on '+C.source.name+'.';
-    document.querySelector('#servers tbody').innerHTML = flag.topServers.map((s,i)=>'<tr class="srv"><td class="rank">'+(i+1)+'</td><td><a href="'+esc((C.source.serverPage||'').replace('{id}',s.id||''))+'" target="_blank" rel="noopener">'+esc(s.name)+'</a>'+(s.password?' <span class="chip">locked</span>':'')+(s.official?' <span class="chip">official</span>':'')+'</td><td>'+esc(s.scenario)+'</td><td>'+esc(s.region)+'</td><td class="num">'+fmt(s.players)+'</td><td class="num">'+fmt(s.limit)+'</td><td><span class="chip acc">'+esc(s.version)+'</span></td><td class="id" style="font-family:var(--mono);font-size:12px">'+esc(s.gameVersion)+'</td><td class="num">'+fmt(s.modCount)+'</td></tr>').join('');
+    document.getElementById('servers-sub').textContent = 'The '+Math.min(flag.topServers.length, flag.servers)+' busiest of its '+fmt(flag.servers)+' servers in this snapshot, by players online. Each name opens that server\'s page on '+C.armahq.name+'.';
+    document.querySelector('#servers tbody').innerHTML = flag.topServers.map((s,i)=>'<tr class="srv"><td class="rank">'+(i+1)+'</td><td><a href="'+esc((C.armahq.serverPage||'').replace('{id}',s.id||''))+'" target="_blank" rel="noopener">'+esc(s.name)+'</a>'+(s.password?' <span class="chip">locked</span>':'')+(s.official?' <span class="chip">official</span>':'')+'</td><td>'+esc(s.scenario)+'</td><td>'+esc(s.region)+'</td><td class="num">'+fmt(s.players)+'</td><td class="num">'+fmt(s.limit)+'</td><td><span class="chip acc">'+esc(s.version)+'</span></td><td class="id" style="font-family:var(--mono);font-size:12px">'+esc(s.gameVersion)+'</td><td class="num">'+fmt(s.modCount)+'</td></tr>').join('');
   } else {
     document.getElementById('servers-section').innerHTML = '<div class="empty">No server list: the flagship mod was not seen in this snapshot.</div>';
   }

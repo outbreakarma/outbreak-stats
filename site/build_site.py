@@ -154,7 +154,7 @@ def build(config_path: Path, data_dir: Path, out_path: Path, artifact_out: Path 
             else:
                 entry.pop(key, None)
     site = cfg["site"]
-    payload = {"latest": latest, "history": history, "config": {"source": cfg["source"], "site": site}}
+    payload = {"latest": latest, "history": history, "config": {"source": cfg["source"], "armahq": cfg["armahq"], "site": site}}
     data_json = json.dumps(payload, ensure_ascii=False).replace("</", "<\\/")
     template = TEMPLATE_PATH.read_text(encoding="utf-8")
     words = site["title"].split()

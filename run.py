@@ -16,7 +16,7 @@ def main() -> int:
     stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%d-%H%M%S")
     log_path = logs / f"run-{stamp}.log"
     with log_path.open("w", encoding="utf-8") as fh:
-        for step in (["scraper/armahq_scrape.py"], ["site/build_site.py"]):
+        for step in (["scraper/reforgermods_scrape.py"], ["site/build_site.py"]):
             cmd = [sys.executable, str(ROOT / step[0])]
             fh.write(f"== {' '.join(cmd)}\n")
             fh.flush()

@@ -1,15 +1,21 @@
 {
   "source": {
+    "name": "ReforgerMods.net",
+    "url": "https://reforgermods.net",
+    "apiBase": "https://api.reforgermods.net/v2",
+    "modPage": "https://reforgermods.net/mods/{modId}/",
+    "creditLine": "Server counts, player exposure and mod rankings come from the ReforgerMods.net public API (reforgermods.net), an independent, community-run Arma Reforger stats service. Per-mod version and server-list detail for the tracked Project Outbreak add-ons comes from ArmaHQ (armahq.com). ArmaHqStats is not affiliated with ReforgerMods.net, ArmaHQ, or Bohemia Interactive."
+  },
+  "armahq": {
     "name": "ArmaHQ",
     "url": "https://www.armahq.com",
-    "serversPage": "https://www.armahq.com/servers",
     "modPage": "https://www.armahq.com/mods/{modId}",
-    "creditLine": "Data collected from ArmaHQ (armahq.com), the Arma Reforger live server browser and statistics site. ArmaHqStats is not affiliated with ArmaHQ or Bohemia Interactive.",
     "serverPage": "https://www.armahq.com/servers/{id}"
   },
-  "userAgent": "ArmaHqStats/1.0 (hourly Arma Reforger mod statistics; +https://github.com/outbreakarma/outbreak-stats)",
+  "userAgent": "OutbreakStats/1.1 (hourly Arma Reforger mod statistics; +https://github.com/outbreakarma/outbreak-stats)",
   "requestTimeoutSeconds": 90,
   "retries": 3,
+  "requestGapSeconds": 1.1,
   "keywords": [
     "zombie"
   ],
