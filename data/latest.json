@@ -1,5 +1,5 @@
 {
- "generatedUtc": "2026-09-27T12:05:02Z",
+ "generatedUtc": "2026-09-27T12:09:23Z",
  "source": {
   "name": "ReforgerMods.net",
   "url": "https://reforgermods.net",
@@ -448,13 +448,13 @@
    "keywordRank": 2,
    "shareOfKeywordServers": 0.1585,
    "seen": true,
-   "capacity": 5965,
+   "capacity": 5977,
    "serversWithPlayers": 29,
    "topServers": [
     {
      "id": "cd15bcf8-824d-44f4-be51-fef9698d342f",
      "name": "DayZ Veterans |EU2| Zombies| AI Missions| Build/Raid/Trade| Discord.gg/dayzveterans",
-     "players": 18,
+     "players": 17,
      "limit": 50,
      "region": "EU",
      "version": "2.0.1",
@@ -504,22 +504,9 @@
      "modCount": 108
     },
     {
-     "id": "e82be1d9-b248-42f7-b416-bace46f0c459",
-     "name": "|PvE| Everon Apocalypse #1 |Zombies|",
-     "players": 7,
-     "limit": 60,
-     "region": "NA",
-     "version": "2.0.1",
-     "scenario": "Everon Apocalypse 2",
-     "battlEye": true,
-     "password": false,
-     "official": false,
-     "modCount": 120
-    },
-    {
      "id": "d933b296-7ca7-44d4-a01b-13e82aa19d02",
      "name": "[TFD] The Foggy Dew [Foggys Survival Island] [PvE] -test- discord.gg/6Ka4U6RjnA",
-     "players": 6,
+     "players": 7,
      "limit": 60,
      "region": "EU",
      "version": "1.3.3",
@@ -530,9 +517,22 @@
      "modCount": 78
     },
     {
+     "id": "e82be1d9-b248-42f7-b416-bace46f0c459",
+     "name": "|PvE| Everon Apocalypse #1 |Zombies|",
+     "players": 6,
+     "limit": 60,
+     "region": "NA",
+     "version": "2.0.1",
+     "scenario": "Everon Apocalypse 2",
+     "battlEye": true,
+     "password": false,
+     "official": false,
+     "modCount": 120
+    },
+    {
      "id": "34306540-d8fa-4902-b56e-cc9ac12f82d7",
      "name": "The Last Exodus |PVE Zombies|",
-     "players": 5,
+     "players": 4,
      "limit": 50,
      "region": "NA",
      "version": "2.0.1",
@@ -556,6 +556,19 @@
      "modCount": 146
     },
     {
+     "id": "e9451f3f-dab3-453e-8ea9-0ddc848abbd0",
+     "name": "(Official) Last Outpost | Survival | PVE | Admins/Events",
+     "players": 2,
+     "limit": 64,
+     "region": "EU",
+     "version": "2.0.1",
+     "scenario": "Foggys Survival Island",
+     "battlEye": true,
+     "password": false,
+     "official": false,
+     "modCount": 105
+    },
+    {
      "id": "5fa03617-4159-4f31-84a4-41ef3fda8d2c",
      "name": "[EU3] IDZ | RENEGADE PROJECT: DEAD EVERON | PvPvE | DayZ • Trade • Build | dsc.gg/idz-battalion",
      "players": 2,
@@ -567,19 +580,6 @@
      "password": false,
      "official": false,
      "modCount": 132
-    },
-    {
-     "id": "641fa418-a35f-4eb1-9b07-087036d1d1eb",
-     "name": "Klang des Krieges German/Deutsch #6 Outbreak Zombie PVE Discord.gg/klangdeskrieges",
-     "players": 2,
-     "limit": 50,
-     "region": "EU",
-     "version": "1.3.3",
-     "scenario": "KdK Outbreak Zombie PVE",
-     "battlEye": true,
-     "password": false,
-     "official": false,
-     "modCount": 42
     },
     {
      "id": "0e730ca5-be95-4762-8263-fe63bc85842c",
@@ -595,17 +595,17 @@
      "modCount": 70
     },
     {
-     "id": "adf280b6-75c4-4219-baf0-bd6e50e035a8",
-     "name": "DaGeneBeans Server",
+     "id": "d5011e4e-d227-4739-99e4-abbd267f9081",
+     "name": "Coalition Response Group",
      "players": 2,
-     "limit": 10,
+     "limit": 30,
      "region": "NA",
      "version": "2.0.1",
-     "scenario": "#AR-Editor_Mission_GM_Kolguyev_Name",
+     "scenario": "GameMaster Anizay",
      "battlEye": true,
-     "password": true,
+     "password": false,
      "official": false,
-     "modCount": 123
+     "modCount": 151
     }
    ]
   },
@@ -659,7 +659,7 @@
    "servers": 90,
    "players": 39,
    "versions": {
-    "1.2.0": 47,
+    "1.2.0": 48,
     "1.1.0": 33,
     "1.0.8": 3,
     "1.0.2": 2,
@@ -681,7 +681,7 @@
    "servers": 81,
    "players": 40,
    "versions": {
-    "1.3.0": 38,
+    "1.3.0": 39,
     "1.2.1": 37,
     "1.0.1": 2,
     "1.1.1": 1,
