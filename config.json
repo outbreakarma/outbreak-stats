@@ -65,18 +65,41 @@
     },
     {
       "modId": "384E32C2A832444E",
-      "label": "Outbreak Variety",
+      "label": "Project Outbreak Variety",
       "addon": "ProjectOutbreakVariety",
       "channel": "production",
+      "publishedAt": "2026-09-27T04:10:59Z",
       "note": "repo draft ledger says not published; ArmaHQ and ReforgerMods both see it live, so it is published"
     },
     {
       "modId": "297640FBAC0C46C3",
-      "label": "Outbreak Special",
+      "label": "Special Zombies and Creatures",
       "addon": "ProjectOutbreakSpecialZombiesAndCreatures",
-      "channel": "production"
+      "channel": "production",
+      "publishedAt": "2026-09-27T05:02:57Z"
     }
   ],
+  "dependents": {
+    "targetModId": "F1D4B9B5245B36ED",
+    "heading": "Built on Project Outbreak Zombies",
+    "top": 5,
+    "discoveredAt": "2026-09-27",
+    "discoveryMethod": "Every mod matching \"zombie\" or \"outbreak\" in reforgermods.net's Workshop search (~70 mods) was checked against its declared Workshop dependency list for the flagship's mod id. This is a curated list from that one-time sweep, not a live full-Workshop scan, so a new dependent published outside those two search terms would be missed until the list is re-swept by hand.",
+    "candidates": [
+      {"modId": "6A4377316565D311", "name": "CONFLICT HQ OutBreak Z"},
+      {"modId": "6A4AA001DF06B229", "name": "Zombie Turner"},
+      {"modId": "6A6B2BE0558DA3DF", "name": "STW Zombies Spawner"},
+      {"modId": "6A46DA328E97EC0A", "name": "KdK_Outbreak"},
+      {"modId": "6A5659235AEFCCCF", "name": "DEADRON"},
+      {"modId": "D193F7711545CDFD", "name": "BlackReign - Z Audio Fix"},
+      {"modId": "199669812345663A", "name": "WVG Outbreak deadron"},
+      {"modId": "6A3D393B23B1C9F6", "name": "OutbreakZombieSoundFix"},
+      {"modId": "64A91B98E22EDD44", "name": "BlackReign FM-Outbreak"},
+      {"modId": "93236F4E8AD4EC59", "name": "BlackReign - Zombie Truce"},
+      {"modId": "6A63127A2AC71C0B", "name": "DE2 Ronin"},
+      {"modId": "6A7573522B86DBAE", "name": "ITT Zombie Survival"}
+    ]
+  },
   "site": {
     "title": "Outbreak Server Watch",
     "subtitle": "Where Project Outbreak and every other zombie mod are running on Arma Reforger servers, refreshed hourly.",

@@ -1,5 +1,5 @@
 {
- "generatedUtc": "2026-09-27T12:26:20Z",
+ "generatedUtc": "2026-09-27T12:30:38Z",
  "source": {
   "name": "ReforgerMods.net",
   "url": "https://reforgermods.net",
@@ -434,8 +434,8 @@
    "servers": 169,
    "players": 87,
    "versions": {
-    "2.0.1": 76,
-    "1.3.3": 70,
+    "2.0.1": 78,
+    "1.3.3": 69,
     "2.0.0": 8,
     "1.2.3": 4,
     "1.1.6": 2,
@@ -448,13 +448,13 @@
    "keywordRank": 2,
    "shareOfKeywordServers": 0.1597,
    "seen": true,
-   "capacity": 5997,
-   "serversWithPlayers": 30,
+   "capacity": 6017,
+   "serversWithPlayers": 32,
    "topServers": [
     {
      "id": "cd15bcf8-824d-44f4-be51-fef9698d342f",
      "name": "DayZ Veterans |EU2| Zombies| AI Missions| Build/Raid/Trade| Discord.gg/dayzveterans",
-     "players": 15,
+     "players": 17,
      "limit": 50,
      "region": "EU",
      "version": "2.0.1",
@@ -467,7 +467,7 @@
     {
      "id": "4298a260-b5e3-424d-aa4f-a4127bbc2112",
      "name": "[TH][SEA] PMC Zombie Army : SEKA Community | Test | PVE | discord.gg/SEKA",
-     "players": 14,
+     "players": 9,
      "limit": 128,
      "region": "ASIA",
      "version": "1.3.3",
@@ -493,7 +493,7 @@
     {
      "id": "3b511732-0418-4e4b-b1e3-d7a9b1122a28",
      "name": "[ENG] TASK FORCE GAMING | DAYZ PVE | FOGGYS | BASE BUILDING | TRADERS | MISSIONS | ZOMBIES",
-     "players": 7,
+     "players": 6,
      "limit": 64,
      "region": "EU",
      "version": "2.0.1",
@@ -506,7 +506,7 @@
     {
      "id": "0e9f82b5-9db3-4958-9393-4d52c486881a",
      "name": "[EU](OFFICIAL) The Last Light | PvE · AI Missions · Bases | Trader| EVERON Dayz | ACTIVE ADMINS",
-     "players": 7,
+     "players": 6,
      "limit": 64,
      "region": "EU",
      "version": "2.0.1",
@@ -517,22 +517,9 @@
      "modCount": 108
     },
     {
-     "id": "34306540-d8fa-4902-b56e-cc9ac12f82d7",
-     "name": "The Last Exodus |PVE Zombies|",
-     "players": 5,
-     "limit": 50,
-     "region": "NA",
-     "version": "2.0.1",
-     "scenario": "Worthy World Z",
-     "battlEye": true,
-     "password": false,
-     "official": false,
-     "modCount": 136
-    },
-    {
      "id": "e82be1d9-b248-42f7-b416-bace46f0c459",
      "name": "|PvE| Everon Apocalypse #1 |Zombies|",
-     "players": 4,
+     "players": 5,
      "limit": 60,
      "region": "NA",
      "version": "2.0.1",
@@ -541,6 +528,19 @@
      "password": false,
      "official": false,
      "modCount": 120
+    },
+    {
+     "id": "34306540-d8fa-4902-b56e-cc9ac12f82d7",
+     "name": "The Last Exodus |PVE Zombies|",
+     "players": 4,
+     "limit": 50,
+     "region": "NA",
+     "version": "2.0.1",
+     "scenario": "Worthy World Z",
+     "battlEye": true,
+     "password": false,
+     "official": false,
+     "modCount": 136
     },
     {
      "id": "e9451f3f-dab3-453e-8ea9-0ddc848abbd0",
@@ -635,8 +635,8 @@
    "servers": 176,
    "players": 87,
    "versions": {
-    "1.3.0": 89,
-    "1.2.0": 70,
+    "1.3.0": 91,
+    "1.2.0": 69,
     "1.1.3": 5,
     "1.1.5": 3,
     "1.0.4": 2,
@@ -717,9 +717,10 @@
   },
   "384E32C2A832444E": {
    "modId": "384E32C2A832444E",
-   "label": "Outbreak Variety",
+   "label": "Project Outbreak Variety",
    "addon": "ProjectOutbreakVariety",
    "channel": "production",
+   "publishedAt": "2026-09-27T04:10:59Z",
    "note": "repo draft ledger says not published; ArmaHQ and ReforgerMods both see it live, so it is published",
    "name": "Project Outbreak Variety",
    "servers": 8,
@@ -734,9 +735,10 @@
   },
   "297640FBAC0C46C3": {
    "modId": "297640FBAC0C46C3",
-   "label": "Outbreak Special",
+   "label": "Special Zombies and Creatures",
    "addon": "ProjectOutbreakSpecialZombiesAndCreatures",
    "channel": "production",
+   "publishedAt": "2026-09-27T05:02:57Z",
    "name": "Special Zombies and Creatures",
    "servers": 7,
    "players": 0,
@@ -1250,5 +1252,122 @@
    "keywordRank": null,
    "shareOfKeywordServers": 1.1786
   }
- ]
+ ],
+ "dependents": {
+  "targetModId": "F1D4B9B5245B36ED",
+  "heading": "Built on Project Outbreak Zombies",
+  "top": 5,
+  "discoveredAt": "2026-09-27",
+  "discoveryMethod": "Every mod matching \"zombie\" or \"outbreak\" in reforgermods.net's Workshop search (~70 mods) was checked against its declared Workshop dependency list for the flagship's mod id. This is a curated list from that one-time sweep, not a live full-Workshop scan, so a new dependent published outside those two search terms would be missed until the list is re-swept by hand.",
+  "items": [
+   {
+    "modId": "6A4377316565D311",
+    "name": "CONFLICT HQ OutBreak Z",
+    "author": "Purge24",
+    "downloads": 1281,
+    "subscribers": 0,
+    "servers": 5,
+    "players": 10
+   },
+   {
+    "modId": "6A4AA001DF06B229",
+    "name": "Zombie Turner",
+    "author": "Shigbu",
+    "downloads": 672,
+    "subscribers": 0,
+    "servers": 2,
+    "players": 5
+   },
+   {
+    "modId": "6A6B2BE0558DA3DF",
+    "name": "STW Zombies Spawner",
+    "author": "Captain Sprocket",
+    "downloads": 337,
+    "subscribers": 0,
+    "servers": 3,
+    "players": 0
+   },
+   {
+    "modId": "6A46DA328E97EC0A",
+    "name": "KdK_Outbreak",
+    "author": "CaptHero",
+    "downloads": 135,
+    "subscribers": 0,
+    "servers": 2,
+    "players": 1
+   },
+   {
+    "modId": "6A5659235AEFCCCF",
+    "name": "DEADRON",
+    "author": "CRIXUS.WVG",
+    "downloads": 36,
+    "subscribers": 0,
+    "servers": 3,
+    "players": 0
+   },
+   {
+    "modId": "D193F7711545CDFD",
+    "name": "BlackReign - Z Audio Fix",
+    "author": "OgyNeo",
+    "downloads": 33,
+    "subscribers": 0,
+    "servers": 3,
+    "players": 1
+   },
+   {
+    "modId": "199669812345663A",
+    "name": "WVG Outbreak deadron",
+    "author": "CRIXUS.WVG",
+    "downloads": 24,
+    "subscribers": 0,
+    "servers": 1,
+    "players": 0
+   },
+   {
+    "modId": "6A3D393B23B1C9F6",
+    "name": "OutbreakZombieSoundFix",
+    "author": "microplastic9000",
+    "downloads": 18,
+    "subscribers": 0,
+    "servers": 1,
+    "players": 0
+   },
+   {
+    "modId": "64A91B98E22EDD44",
+    "name": "BlackReign FM-Outbreak",
+    "author": "OgyNeo",
+    "downloads": 15,
+    "subscribers": 0,
+    "servers": 1,
+    "players": 1
+   },
+   {
+    "modId": "93236F4E8AD4EC59",
+    "name": "BlackReign - Zombie Truce",
+    "author": "OgyNeo",
+    "downloads": 2,
+    "subscribers": 0,
+    "servers": 1,
+    "players": 1
+   },
+   {
+    "modId": "6A63127A2AC71C0B",
+    "name": "DE2 Ronin",
+    "author": "Rees-27",
+    "downloads": 1,
+    "subscribers": 0,
+    "servers": 0,
+    "players": 0
+   },
+   {
+    "modId": "6A7573522B86DBAE",
+    "name": "ITT Zombie Survival",
+    "author": "daplug909",
+    "downloads": 0,
+    "subscribers": 0,
+    "servers": 1,
+    "players": 0
+   }
+  ]
+ }
 }

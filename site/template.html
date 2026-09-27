@@ -84,9 +84,11 @@ th{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:up
 td.num,th.num{text-align:right;font-family:var(--mono);font-size:14px}
 tr.mine td{background:var(--hazard-soft)}
 tr.mine td:first-child{box-shadow:inset 4px 0 0 var(--hazard)}
-td .bar{height:8px;border-radius:1px;background:var(--radar);min-width:2px;display:inline-block;vertical-align:middle;box-shadow:0 0 8px rgba(111,211,141,.35)}
+.bar{height:8px;border-radius:1px;background:var(--radar);min-width:2px;display:inline-block;vertical-align:middle;box-shadow:0 0 8px rgba(111,211,141,.35)}
 tr.mine td .bar{background:var(--hazard);box-shadow:0 0 8px rgba(242,194,0,.35)}
 td .share{font-family:var(--mono);font-size:12px;color:var(--muted);margin-left:8px}
+.card .rankbadge{font-family:var(--display);font-size:20px;color:var(--muted);margin-right:2px}
+.card.rank1 .rankbadge{color:var(--hazard)}
 .rank{font-family:var(--display);font-size:24px;color:var(--muted);width:48px}
 tr.mine .rank{color:var(--hazard)}
 .chartbox{padding:16px}
@@ -145,6 +147,12 @@ footer .stencil{font-family:var(--display);font-size:22px;letter-spacing:.12em;c
     <div class="cards" id="cards"></div>
   </section>
 
+  <section id="dependents-section">
+    <h2 id="dep-title"></h2>
+    <p class="sub" id="dep-sub"></p>
+    <div class="cards" id="dep-cards"></div>
+  </section>
+
   <section id="servers-section">
     <h2 id="servers-title"></h2>
     <p class="sub" id="servers-sub"></p>
@@ -157,6 +165,7 @@ footer .stencil{font-family:var(--display);font-size:22px;letter-spacing:.12em;c
     <div class="stencil">Data credit</div>
     <p><strong>Credit.</strong> __CREDIT_LINE__ Visit <a href="__SOURCE_URL__" target="_blank" rel="noopener">__SOURCE_URL__</a> or <a href="https://www.armahq.com" target="_blank" rel="noopener">armahq.com</a> for the live browsers this page is built on.</p>
     <p><strong>Method.</strong> Once an hour the collector paginates ReforgerMods.net's public API to get every currently-deployed mod's server count and player exposure, from which it ranks the tracked add-ons, every mod matching the configured keywords, and a global top 50. It then reads ArmaHQ's page for each tracked add-on to get the specific servers, versions and slot capacity behind those numbers. Both stay within each site's published rate limits and page-fetch norms. Player counts are the players on servers running the mod, not subscribers.</p>
+    <p><strong>Built on Project Outbreak Zombies.</strong> This list is a hand-curated sweep, not a live full-Workshop scan: every mod matching &ldquo;zombie&rdquo; or &ldquo;outbreak&rdquo; in ReforgerMods.net's search was checked once against its own declared Workshop dependencies for the flagship's mod id, and only the confirmed matches are kept. Each hourly run re-fetches just those confirmed mods' own download, server and player numbers from ReforgerMods.net; it does not re-run the discovery sweep, so a new dependent published under different search terms would need the list re-swept by hand to appear.</p>
     <p id="foot-stamp"></p>
   </footer>
 </div>
@@ -332,6 +341,26 @@ footer .stencil{font-family:var(--display);font-size:22px;letter-spacing:.12em;c
       '<div class="foot"><span>'+dTxt(d)+'</span><span>'+(t.seen?versionsChips(t.versions,t.flagship):'not on any server')+'</span></div>'+
       '<div class="foot"><a href="'+esc(C.source.modPage.replace('{modId}',t.modId))+'" target="_blank" rel="noopener">servers on '+esc(C.source.name)+'</a><a href="https://reforger.armaplatform.com/workshop/'+esc(t.modId)+'" target="_blank" rel="noopener">Workshop</a></div></div>';
   }).join('');
+
+  // --- dependents: community mods that declare the flagship as a Workshop dependency
+  const dep = L.dependents;
+  if (dep && dep.items && dep.items.length){
+    const depTop = dep.items.slice(0, dep.top||5);
+    const targetName = (flag && flag.modId===dep.targetModId) ? (flag.label||flag.name) : 'Project Outbreak Zombies';
+    document.getElementById('dep-title').textContent = dep.heading || ('Built on '+targetName);
+    document.getElementById('dep-sub').textContent = 'Community mods that declare '+targetName+' as a Workshop dependency, ranked by downloads (of '+dep.items.length+' confirmed dependents found in a keyword sweep of the Workshop - see Method below).';
+    const maxDl = Math.max(1, ...depTop.map(m=>m.downloads));
+    document.getElementById('dep-cards').innerHTML = depTop.map((m,i)=>{
+      const w = Math.max(2, Math.round(220*m.downloads/maxDl));
+      return '<div class="panel card'+(i===0?' rank1':'')+'"><div class="name"><span><span class="rankbadge">#'+(i+1)+'</span>'+esc(m.name)+'</span><span class="tag">by '+esc(m.author||'?')+'</span></div><div class="id">'+esc(m.modId)+'</div>'+
+        '<div class="nums"><div><b>'+fmt(m.downloads)+'</b><span>downloads</span></div><div><b>'+fmt(m.servers)+'</b><span>servers now</span></div><div><b>'+fmt(m.players)+'</b><span>players now</span></div></div>'+
+        '<div style="padding:4px 0"><span class="bar" style="width:'+w+'px"></span></div>'+
+        '<div class="foot"><a href="https://reforger.armaplatform.com/workshop/'+esc(m.modId)+'" target="_blank" rel="noopener">Workshop</a><a href="'+esc(C.source.modPage.replace('{modId}',m.modId))+'" target="_blank" rel="noopener">'+esc(C.source.name)+'</a></div></div>';
+    }).join('');
+  } else {
+    const sec = document.getElementById('dependents-section');
+    if (sec) sec.outerHTML = '';
+  }
 
   // --- servers running the flagship
   if (flag && flag.seen){

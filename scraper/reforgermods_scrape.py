@@ -177,6 +177,14 @@ def fetch_armahq_mod_detail(mod_id: str, armahq_cfg: dict, user_agent: str, time
     raise ValueError(f"modId not found in ArmaHQ flight payload for {url}; page layout changed?")
 
 
+def fetch_mod_detail(mod_id: str, api_base: str, user_agent: str, timeout: int, retries: int) -> dict:
+    """One mod's own metadata from reforgermods.net's per-mod endpoint: downloads,
+    subscribers and its declared dependency list. Used for the small, curated
+    "built on X" dependents list, not for the main per-run crawl."""
+    body = fetch_json(f"{api_base}/mods/{mod_id}", user_agent, timeout, retries)
+    return body["mod"]
+
+
 def run(config_path: Path, data_dir: Path) -> int:
     cfg = load_config(config_path)
     now = dt.datetime.now(dt.timezone.utc).replace(microsecond=0)
@@ -257,6 +265,43 @@ def run(config_path: Path, data_dir: Path) -> int:
                 entry.setdefault("topServers", [])
         time.sleep(request_gap)
 
+    # Small, curated "built on X" list: refresh each candidate's own downloads/servers/
+    # players from reforgermods.net's per-mod endpoint. The candidate set itself comes
+    # from config (a one-time hand-swept discovery, see config.json's "dependents"
+    # comment) - only their current numbers are re-fetched every run.
+    dependents_cfg = cfg.get("dependents")
+    dependents_out = None
+    if dependents_cfg and dependents_cfg.get("candidates"):
+        items = []
+        for cand in dependents_cfg["candidates"]:
+            try:
+                m = fetch_mod_detail(cand["modId"], api_base, ua, timeout, retries)
+                analytics = m.get("analytics") or {}
+                items.append(
+                    {
+                        "modId": m["id"],
+                        "name": m.get("name") or cand["name"],
+                        "author": m.get("author"),
+                        "downloads": int(m.get("downloadCount") or 0),
+                        "subscribers": int(m.get("subscriberCount") or 0),
+                        "servers": int(analytics.get("totalDeployments") or 0),
+                        "players": int(analytics.get("currentPlayerExposure") or 0),
+                    }
+                )
+            except Exception as exc:  # noqa: BLE001 - one bad candidate should not fail the run
+                log(f"dependents: fetch failed for {cand['modId']} ({cand.get('name')}), skipping: {exc!r}")
+            time.sleep(request_gap)
+        items.sort(key=lambda r: -r["downloads"])
+        dependents_out = {
+            "targetModId": dependents_cfg["targetModId"],
+            "heading": dependents_cfg.get("heading"),
+            "top": int(dependents_cfg.get("top", 5)),
+            "discoveredAt": dependents_cfg.get("discoveredAt"),
+            "discoveryMethod": dependents_cfg.get("discoveryMethod"),
+            "items": items,
+        }
+        log(f"dependents: {len(items)}/{len(dependents_cfg['candidates'])} candidates refreshed")
+
     latest = {
         "generatedUtc": now.isoformat().replace("+00:00", "Z"),
         "source": cfg["source"],
@@ -271,6 +316,7 @@ def run(config_path: Path, data_dir: Path) -> int:
         },
         "tracked": tracked_out,
         "globalTop": [describe(m) for m in ranked_ids[:50]],
+        "dependents": dependents_out,
     }
 
     latest_path = data_dir / "latest.json"
