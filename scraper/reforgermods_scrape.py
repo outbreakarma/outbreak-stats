@@ -179,10 +179,20 @@ def fetch_armahq_mod_detail(mod_id: str, armahq_cfg: dict, user_agent: str, time
 
 def fetch_mod_detail(mod_id: str, api_base: str, user_agent: str, timeout: int, retries: int) -> dict:
     """One mod's own metadata from reforgermods.net's per-mod endpoint: downloads,
-    subscribers and its declared dependency list. Used for the small, curated
-    "built on X" dependents list, not for the main per-run crawl."""
+    subscribers and its declared dependency list. Used to refresh each "built on X"
+    dependent's own numbers, not for the main per-run crawl."""
     body = fetch_json(f"{api_base}/mods/{mod_id}", user_agent, timeout, retries)
     return body["mod"]
+
+
+def fetch_armahq_dependents(mod_id: str, armahq_cfg: dict, user_agent: str, timeout: int, retries: int) -> list[dict]:
+    """Every mod ArmaHQ currently sees declaring mod_id as a Workshop dependency,
+    from ArmaHQ's own dependents index (armahq.com/api/workshop/dependents/{id}).
+    This is ArmaHQ's computed reverse-dependency answer, not a keyword search, so it
+    finds a dependent regardless of what its own name happens to say."""
+    url = armahq_cfg["dependentsUrl"].replace("{modId}", mod_id)
+    body = fetch_json(url, user_agent, timeout, retries)
+    return body["dependents"]
 
 
 def run(config_path: Path, data_dir: Path) -> int:
@@ -265,15 +275,25 @@ def run(config_path: Path, data_dir: Path) -> int:
                 entry.setdefault("topServers", [])
         time.sleep(request_gap)
 
-    # Small, curated "built on X" list: refresh each candidate's own downloads/servers/
-    # players from reforgermods.net's per-mod endpoint. The candidate set itself comes
-    # from config (a one-time hand-swept discovery, see config.json's "dependents"
-    # comment) - only their current numbers are re-fetched every run.
+    # "Built on X" list: ArmaHQ's own Workshop dependency index names every mod that
+    # currently declares the flagship as a dependency - a real reverse-dependency
+    # answer, not a keyword guess. First-party Project Outbreak add-ons are dropped
+    # since they already have their own section above; each remaining community
+    # dependent's own downloads/servers/players is then refreshed from reforgermods.net.
     dependents_cfg = cfg.get("dependents")
     dependents_out = None
-    if dependents_cfg and dependents_cfg.get("candidates"):
+    if dependents_cfg and dependents_cfg.get("targetModId"):
+        target_id = dependents_cfg["targetModId"]
+        try:
+            all_dependents = fetch_armahq_dependents(target_id, cfg["armahq"], ua, timeout, retries)
+        except Exception as exc:  # noqa: BLE001 - dependents section is best-effort, never fatal
+            log(f"dependents: ArmaHQ dependents lookup failed for {target_id}, skipping section: {exc!r}")
+            all_dependents = []
+        time.sleep(request_gap)
+        community = [d for d in all_dependents if d["modId"] not in tracked_out]
+
         items = []
-        for cand in dependents_cfg["candidates"]:
+        for cand in community:
             try:
                 m = fetch_mod_detail(cand["modId"], api_base, ua, timeout, retries)
                 analytics = m.get("analytics") or {}
@@ -288,19 +308,23 @@ def run(config_path: Path, data_dir: Path) -> int:
                         "players": int(analytics.get("currentPlayerExposure") or 0),
                     }
                 )
-            except Exception as exc:  # noqa: BLE001 - one bad candidate should not fail the run
+            except Exception as exc:  # noqa: BLE001 - one bad dependent should not fail the run
                 log(f"dependents: fetch failed for {cand['modId']} ({cand.get('name')}), skipping: {exc!r}")
             time.sleep(request_gap)
         items.sort(key=lambda r: -r["downloads"])
         dependents_out = {
-            "targetModId": dependents_cfg["targetModId"],
+            "targetModId": target_id,
             "heading": dependents_cfg.get("heading"),
             "top": int(dependents_cfg.get("top", 5)),
-            "discoveredAt": dependents_cfg.get("discoveredAt"),
             "discoveryMethod": dependents_cfg.get("discoveryMethod"),
+            "totalDependents": len(all_dependents),
+            "communityDependents": len(community),
             "items": items,
         }
-        log(f"dependents: {len(items)}/{len(dependents_cfg['candidates'])} candidates refreshed")
+        log(
+            f"dependents: {len(items)}/{len(community)} community dependents refreshed "
+            f"({len(all_dependents)} total from ArmaHQ, {len(all_dependents) - len(community)} first-party excluded)"
+        )
 
     latest = {
         "generatedUtc": now.isoformat().replace("+00:00", "Z"),
