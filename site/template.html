@@ -1,17 +1,19 @@
 <title>__TITLE__</title>
 <meta name="description" content="__SUBTITLE_ATTR__">
+<meta name="theme-color" content="#080b09">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=Share+Tech+Mono&display=swap">
 <style>
 :root{
   --ground:#080b09; --ground-2:#0d120e; --panel:#111812; --panel-2:#161f18; --ink:#dbe4d3; --muted:#84957c; --line:#233126; --line-2:#2f4233;
-  --hazard:#f2c200; --hazard-ink:#ffe680; --hazard-soft:#2b2405; --radar:#6fd38d; --radar-soft:#10281a; --alert:#e2432f; --alert-soft:#2a0f0c;
+  --hazard:#f2c200; --hazard-ink:#ffe680; --hazard-soft:#2b2405; --radar:#6fd38d; --radar-soft:#10281a; --alert:#e2432f; --alert-soft:#2a0f0c; --amber:#f0a03c;
   --grid:#1a2a1e; --shadow:0 1px 0 rgba(255,255,255,.03) inset,0 10px 30px rgba(0,0,0,.5);
   --mono:'Share Tech Mono',ui-monospace,Consolas,monospace; --display:'Bebas Neue','Arial Narrow',Impact,sans-serif; --body:'Barlow','Segoe UI',system-ui,sans-serif;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
-html{background:var(--ground)}
+html{background:var(--ground);scroll-behavior:smooth;scroll-padding-top:64px}
 body{margin:0;color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;
   background:
     repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 1px, transparent 1px 3px),
@@ -22,85 +24,173 @@ body{margin:0;color:var(--ink);font-family:var(--body);font-size:16px;line-heigh
   background-size:auto, 48px 48px, 48px 48px, auto, auto;}
 a{color:var(--radar);text-decoration:underline;text-decoration-color:rgba(111,211,141,.4);text-underline-offset:3px}
 a:hover{color:var(--hazard-ink);text-decoration-color:var(--hazard)}
-.srv a{color:var(--ink);font-weight:600}
-.srv a:hover{color:var(--hazard-ink)}
-.modlinks{display:flex;gap:10px;font-family:var(--mono);font-size:11px;margin-top:2px}
-.sitelink{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-left:14px}
-.wrap{max-width:1220px;margin:0 auto;padding:26px 22px 70px}
+:focus-visible{outline:2px solid var(--hazard);outline-offset:2px}
+.wrap{max-width:1220px;margin:0 auto;padding:22px 22px 70px}
 .hazard-bar{height:10px;background:repeating-linear-gradient(135deg,var(--hazard) 0 22px,#111 22px 44px);opacity:.85;border-radius:2px}
-header.mast{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px 28px;padding:22px 0 16px;border-bottom:1px solid var(--line-2)}
+header.mast{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:18px 32px;padding:22px 0 18px;border-bottom:1px solid var(--line-2)}
+@media (max-width:860px){header.mast{grid-template-columns:1fr}}
 .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--hazard);display:flex;gap:12px;align-items:center}
 .eyebrow .sym{font-size:20px;line-height:1}
-.brand h1{font-family:var(--display);font-weight:400;font-size:clamp(46px,7vw,92px);line-height:.9;margin:6px 0 0;letter-spacing:.03em;color:#eef3e8;text-shadow:0 0 24px rgba(111,211,141,.18)}
+.brand h1{font-family:var(--display);font-weight:400;font-size:clamp(46px,6vw,80px);line-height:.9;margin:6px 0 0;letter-spacing:.03em;color:#eef3e8;text-shadow:0 0 24px rgba(111,211,141,.18)}
 .brand h1 span{color:var(--hazard)}
 .brand p{margin:10px 0 0;color:var(--muted);max-width:64ch}
-.credit-chip{display:inline-flex;align-items:center;gap:8px;margin-top:10px;padding:6px 12px;border:1px solid var(--line-2);border-radius:3px;background:var(--panel);font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--ink);text-decoration:none;text-transform:uppercase}
+.chips{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin-top:12px}
+.credit-chip{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid var(--line-2);border-radius:3px;background:var(--panel);font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--ink);text-decoration:none;text-transform:uppercase}
 .credit-chip .dot{width:8px;height:8px;border-radius:50%;background:var(--radar);box-shadow:0 0 10px var(--radar)}
-.stamp{font-family:var(--mono);font-size:12.5px;color:var(--muted);text-align:right;line-height:1.8;letter-spacing:.03em}
-.stamp b{color:var(--radar);font-weight:400}
-.stamp .live{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--radar);margin-right:6px;box-shadow:0 0 10px var(--radar);animation:pulse 2s infinite}
+.sitelink{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.status{min-width:300px;padding:14px 16px;font-family:var(--mono);font-size:12.5px;color:var(--muted);line-height:1.7}
+.status .state{display:flex;align-items:center;gap:8px;text-transform:uppercase;letter-spacing:.14em;font-size:12px}
+.status .state i{width:9px;height:9px;border-radius:50%;background:var(--radar);box-shadow:0 0 10px var(--radar);animation:pulse 2s infinite}
+.status .state.late{color:var(--amber)} .status .state.late i{background:var(--amber);box-shadow:0 0 10px var(--amber)}
+.status .state.stale{color:var(--alert)} .status .state.stale i{background:var(--alert);box-shadow:0 0 10px var(--alert)}
+.status .state.ok{color:var(--radar)}
+.status b{color:var(--ink);font-weight:400}
+.status .tot{display:grid;grid-template-columns:repeat(3,auto);gap:4px 16px;margin-top:8px}
+.status .tot span{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase}
+.status .tot strong{display:block;font-family:var(--display);font-weight:400;font-size:26px;line-height:1;color:#eef3e8;letter-spacing:.02em}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-section{margin-top:40px}
+nav.jump{position:sticky;top:0;z-index:20;margin:0 -22px;padding:0 22px;background:rgba(8,11,9,.86);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav.jump ul{display:flex;gap:4px 22px;list-style:none;margin:0;padding:12px 0;overflow-x:auto;scrollbar-width:none;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
+nav.jump a{color:var(--muted);text-decoration:none}
+nav.jump a:hover{color:var(--hazard-ink)}
+section{margin-top:44px}
 h2{font-family:var(--display);font-weight:400;font-size:34px;letter-spacing:.05em;margin:0 0 4px;color:#eef3e8;display:flex;align-items:center;gap:12px}
-h2::before{content:"";width:10px;height:22px;background:var(--hazard);clip-path:polygon(0 0,100% 0,100% 75%,50% 100%,0 75%)}
-.sub{color:var(--muted);margin:0 0 16px;max-width:72ch}
+h2::before{content:"";flex:none;width:10px;height:22px;background:var(--hazard);clip-path:polygon(0 0,100% 0,100% 75%,50% 100%,0 75%)}
+h2 a{color:inherit;text-decoration:none}
+.sub{color:var(--muted);margin:0 0 16px;max-width:76ch}
 .panel{position:relative;background:linear-gradient(180deg,var(--panel-2),var(--panel));border:1px solid var(--line-2);border-radius:4px;box-shadow:var(--shadow)}
-.panel::before,.panel::after{content:"";position:absolute;width:14px;height:14px;border:2px solid var(--hazard);opacity:.7}
+.panel::before,.panel::after{content:"";position:absolute;width:14px;height:14px;border:2px solid var(--hazard);opacity:.7;pointer-events:none}
 .panel::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
 .panel::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
-.timeline{padding:18px 18px 12px;margin-top:22px}
-.timeline .head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;align-items:baseline;margin-bottom:8px}
-.timeline .head .t{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--hazard)}
-.timeline .head .n{font-family:var(--mono);font-size:12px;color:var(--muted)}
-.chartwrap{position:relative;width:100%;height:320px}
-.chartwrap.tall{height:340px}
-.hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:14px}
-.stat{padding:14px 16px;border-radius:4px;background:var(--panel);border:1px solid var(--line)}
+.plot{padding:16px 18px 12px}
+.plot .head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 20px;align-items:center;margin-bottom:10px}
+.plot .head .t{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--hazard)}
+.plot .note{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:8px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center}
+.key{display:inline-flex;align-items:center;gap:6px}
+.key i{display:inline-block;width:18px;height:5px;border-radius:1px}
+.key i.native{background:rgba(242,194,0,.6)} .key i.filled{background:var(--radar)} .key i.none{background:repeating-linear-gradient(135deg,var(--alert) 0 3px,transparent 3px 6px)}
+.chartwrap{position:relative;width:100%;height:330px}
+.chartwrap.short{height:260px}
+.tabs{display:inline-flex;border:1px solid var(--line-2);border-radius:3px;overflow:hidden;background:rgba(0,0,0,.3)}
+.tabs button{all:unset;cursor:pointer;font-family:var(--mono);font-size:12px;letter-spacing:.1em;padding:6px 11px;color:var(--muted);border-left:1px solid var(--line-2)}
+.tabs button:first-child{border-left:0}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-pressed="true"]{background:var(--hazard);color:#111}
+.tabs button:focus-visible{outline:2px solid var(--hazard);outline-offset:-2px}
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.legend button{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:7px;font-size:13px;padding:3px 9px 3px 7px;border:1px solid var(--line-2);border-radius:2px;color:var(--ink);background:rgba(0,0,0,.25)}
+.legend button i{width:14px;height:3px;border-radius:1px}
+.legend button[aria-pressed="false"]{opacity:.42;text-decoration:line-through}
+.legend button:focus-visible{outline:2px solid var(--hazard)}
+.legend.pick button[aria-pressed="false"]{text-decoration:none;opacity:.55}
+.legend.pick button[aria-pressed="true"]{border-color:var(--hazard);background:var(--hazard-soft)}
+.hero-main{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.hero-sub{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:12px}
+@media (max-width:900px){.hero-main{grid-template-columns:1fr}.hero-sub{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.stat{padding:14px 16px;border-radius:4px;background:var(--panel);border:1px solid var(--line);min-width:0}
 .stat .k{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
 .stat .v{font-family:var(--display);font-size:54px;line-height:1;margin-top:6px;color:#f3f7ee;font-variant-numeric:tabular-nums}
 .stat .d{font-family:var(--mono);font-size:12px;margin-top:8px;color:var(--muted)}
-.up{color:var(--radar)} .down{color:var(--alert)}
+.stat svg{display:block;width:100%;height:42px;margin-top:10px}
+.hero-sub .stat .v{font-size:40px}
+.up{color:var(--radar)} .down{color:var(--alert)} .flat{color:var(--muted)}
 .flag{border-color:var(--hazard);background:linear-gradient(180deg,var(--hazard-soft),var(--panel) 75%)}
 .flag .v{color:var(--hazard-ink)}
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
-.card{padding:14px 16px 12px;display:flex;flex-direction:column;gap:8px}
+.dl-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:14px}
+@media (max-width:980px){.dl-grid{grid-template-columns:1fr}}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.card{padding:14px 16px 12px;display:flex;flex-direction:column;gap:8px;min-width:0}
 .card.flagship{border-color:var(--hazard)}
 .card .name{font-weight:600;font-size:17px;display:flex;justify-content:space-between;gap:8px;align-items:baseline;color:#eef3e8}
 .card .id{font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.04em}
 .card .nums{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;font-variant-numeric:tabular-nums}
-.card .nums div{background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:3px;padding:6px 8px}
-.card .nums b{display:block;font-family:var(--display);font-size:30px;font-weight:400;line-height:1;color:#f3f7ee}
-.card .nums span{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.card .nums div{background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:3px;padding:6px 8px;min-width:0}
+.card .nums b{display:block;font-family:var(--display);font-size:28px;font-weight:400;line-height:1;color:#f3f7ee}
+.card .nums .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .card svg{width:100%;height:46px;display:block}
-.card .foot{font-size:12.5px;color:var(--muted);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.card .foot{font-size:12.5px;color:var(--muted);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center}
+.card .rankbadge{font-family:var(--display);font-size:20px;color:var(--muted);margin-right:6px}
+.card.rank1 .rankbadge{color:var(--hazard)}
 .chip{display:inline-block;font-family:var(--mono);font-size:11.5px;padding:1px 7px;border-radius:2px;background:rgba(0,0,0,.35);border:1px solid var(--line-2);margin:0 4px 4px 0;white-space:nowrap;color:var(--ink)}
 .chip.acc{background:var(--hazard-soft);border-color:var(--hazard);color:var(--hazard-ink)}
-.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
 .tag.res{color:var(--alert)}
 .tablewrap{overflow-x:auto}
-table{border-collapse:collapse;width:100%;min-width:800px;font-variant-numeric:tabular-nums}
-th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
-th{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:400;background:rgba(0,0,0,.35);position:sticky;top:0}
-td.num,th.num{text-align:right;font-family:var(--mono);font-size:14px}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+#ranking{min-width:900px} #servers{min-width:820px} #dep-table{min-width:720px}
+th,td{padding:8px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:400;background:rgba(0,0,0,.35);white-space:nowrap}
+td.num,th.num{text-align:right;font-family:var(--mono);font-size:14px;white-space:nowrap}
+tbody tr:hover td{background:rgba(111,211,141,.04)}
 tr.mine td{background:var(--hazard-soft)}
+tr.mine:hover td{background:#342c08}
 tr.mine td:first-child{box-shadow:inset 4px 0 0 var(--hazard)}
+td .modname{font-weight:600}
+td .meta{display:block;font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap;line-height:1.3}
+td .meta a{color:var(--muted)}
+td .meta a:hover{color:var(--hazard-ink)}
 .bar{height:8px;border-radius:1px;background:var(--radar);min-width:2px;display:inline-block;vertical-align:middle;box-shadow:0 0 8px rgba(111,211,141,.35)}
 tr.mine td .bar{background:var(--hazard);box-shadow:0 0 8px rgba(242,194,0,.35)}
 td .share{font-family:var(--mono);font-size:12px;color:var(--muted);margin-left:8px}
-.card .rankbadge{font-family:var(--display);font-size:20px;color:var(--muted);margin-right:2px}
-.card.rank1 .rankbadge{color:var(--hazard)}
-.rank{font-family:var(--display);font-size:24px;color:var(--muted);width:48px}
+.rank{font-family:var(--display);font-size:22px;color:var(--muted);width:44px}
 tr.mine .rank{color:var(--hazard)}
-.chartbox{padding:16px}
-
-.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;margin-bottom:8px;color:var(--ink)}
-.legend i{display:inline-block;width:16px;height:3px;vertical-align:middle;margin-right:6px}
-footer{margin-top:52px;border-top:1px solid var(--line-2);padding-top:18px;color:var(--muted);font-size:14px}
-footer p{margin:6px 0;max-width:84ch}
+.more{display:flex;justify-content:center;padding:12px}
+.btn{all:unset;cursor:pointer;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:8px 16px;border:1px solid var(--hazard);color:var(--hazard-ink);border-radius:3px;background:var(--hazard-soft)}
+.btn:hover{background:var(--hazard);color:#111}
+.btn:focus-visible{outline:2px solid var(--hazard-ink);outline-offset:2px}
+.dltable td,.dltable th{padding:7px 10px}
+.dltable td:first-child{font-weight:600}
+.srv a{color:var(--ink);font-weight:600}
+.srv a:hover{color:var(--hazard-ink)}
+footer{margin-top:56px;border-top:1px solid var(--line-2);padding-top:18px;color:var(--muted);font-size:14px}
+footer p{margin:6px 0;max-width:88ch}
 footer .stencil{font-family:var(--display);font-size:22px;letter-spacing:.12em;color:var(--alert);opacity:.8;border:2px solid var(--alert);display:inline-block;padding:2px 12px;transform:rotate(-2deg);margin-bottom:10px}
 .empty{padding:22px;color:var(--muted);text-align:center;font-family:var(--mono);font-size:13px}
-@media (max-width:640px){.stat .v{font-size:40px}.card .nums b{font-size:24px}.brand h1{font-size:44px}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.chips .sitelink{color:var(--muted);text-decoration:none;border-bottom:1px dotted var(--line-2)}
+.chips .sitelink:hover{color:var(--hazard-ink);border-color:var(--hazard)}
+.insight{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:12px;margin-top:12px}
+@media (max-width:900px){.insight{grid-template-columns:1fr}}
+.split .bars{display:flex;height:16px;border-radius:2px;overflow:hidden;margin:12px 0 10px;background:rgba(0,0,0,.35);border:1px solid var(--line)}
+.split .bars span{display:block;height:100%;transform-origin:left;animation:grow 1.1s cubic-bezier(.2,.8,.2,1) both}
+.split .bars .a{background:var(--hazard)} .split .bars .b{background:repeating-linear-gradient(135deg,var(--radar) 0 6px,#4fae6c 6px 12px)}
+.split .lg{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.split .lg b{font-family:var(--display);font-weight:400;font-size:26px;color:#f3f7ee;margin-right:6px;vertical-align:-3px}
+.split .lg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.group{margin-top:26px}
+.group:first-child{margin-top:6px}
+.group h3{font-family:var(--mono);font-weight:400;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--hazard);margin:0 0 4px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+.group h3 small{font-family:var(--body);letter-spacing:0;text-transform:none;font-size:14px;color:var(--muted)}
+.group h3 .count{margin-left:auto;font-size:11px;color:var(--muted)}
+.group .rule{height:1px;background:linear-gradient(90deg,var(--hazard),transparent 70%);opacity:.5;margin:0 0 12px}
+.cards.n2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cards.n3,.cards.n6{grid-template-columns:repeat(3,minmax(0,1fr))}
+.cards.n4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:1100px){.cards.n4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.cards.n3,.cards.n6{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.cards.n2,.cards.n3,.cards.n4,.cards.n6{grid-template-columns:1fr}}
+.linkgrid .wide-l{grid-column:1/-1}
+.linkgrid .wide-l ul{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px 18px}
+@media (max-width:900px){.linkgrid .wide-l ul{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.linkgrid .wide-l ul{grid-template-columns:1fr}}
+.card .name a{color:inherit;text-decoration:none}
+.card .name a:hover{color:var(--hazard-ink)}
+.card .sum{font-size:13.5px;color:var(--muted);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.8em}
+.card .needs{font-size:12px;color:var(--muted)}
+.card .needs a{color:var(--ink)}
+.card .links{display:flex;flex-wrap:wrap;gap:4px 14px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;padding-top:8px;border-top:1px solid var(--line);margin-top:auto}
+.card .links a{color:var(--muted);text-decoration:none}
+.card .links a:hover{color:var(--hazard-ink)}
+.linkgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.linkgrid .panel{padding:14px 16px}
+.linkgrid h3{font-family:var(--mono);font-weight:400;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--hazard);margin:0 0 8px}
+.linkgrid ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:14.5px}
+.linkgrid li small{display:block;color:var(--muted);font-size:12px;line-height:1.3}
+.linkgrid a{color:var(--ink);text-decoration-color:rgba(219,228,211,.25)}
+.linkgrid a:hover{color:var(--hazard-ink)}
+.rating-n{font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:4px}
+@media (max-width:640px){.wrap{padding:16px 16px 60px}nav.jump{margin:0 -16px;padding:0 16px}.stat .v{font-size:42px}.card .nums b{font-size:24px}.brand h1{font-size:46px}.status{min-width:0}.chartwrap{height:280px}h2{font-size:30px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
 <div class="wrap">
   <div class="hazard-bar"></div>
@@ -109,63 +199,99 @@ footer .stencil{font-family:var(--display);font-size:22px;letter-spacing:.12em;c
       <div class="eyebrow"><span class="sym">&#9763;</span> Arma Reforger · server statistics · updated hourly</div>
       <h1>__TITLE_HTML__</h1>
       <p>__SUBTITLE__</p>
-      <a class="credit-chip" href="__SOURCE_URL__" target="_blank" rel="noopener"><span class="dot"></span>Data: __SOURCE_NAME__, Arma Reforger server &amp; mod statistics</a><a class="sitelink" href="__MAIN_SITE__">Project Outbreak site &rarr;</a>
+      <div class="chips"><a class="credit-chip" href="__SOURCE_URL__" target="_blank" rel="noopener"><span class="dot"></span>Data: __SOURCE_NAME__ &amp; ArmaHQ</a><a class="sitelink" href="__MAIN_SITE__">Project Outbreak site</a><a class="sitelink" href="https://reforger.armaplatform.com/workshop/F1D4B9B5245B36ED" target="_blank" rel="noopener">Workshop</a><a class="sitelink" href="__DISCORD__" target="_blank" rel="noopener">Discord</a><a class="sitelink" href="__GITHUB__" target="_blank" rel="noopener">Source and raw data</a></div>
     </div>
-    <div class="stamp" id="stamp"></div>
+    <div class="panel status" id="status"></div>
   </header>
+  <nav class="jump" aria-label="Sections"><ul><li><a href="#timeline">Timeline</a></li><li><a href="#flagship">Project Outbreak</a></li><li><a href="#downloads">Downloads</a></li><li><a href="#ranking-section">Zombie mods</a></li><li><a href="#over-time">Over time</a></li><li><a href="#addons">All add-ons</a></li><li><a href="#dependents-section">Built on it</a></li><li><a href="#servers-section">Servers</a></li><li><a href="#links">Links</a></li></ul></nav>
 
-  <section id="timeline-section" style="margin-top:22px">
-    <div class="panel timeline">
-      <div class="head"><span class="t" id="tl-title">Timeline</span><span class="n" id="tl-note"></span></div>
-      <div class="chartwrap"><canvas id="timeline"></canvas></div>
+  <section id="timeline" style="margin-top:22px">
+    <div class="panel plot">
+      <div class="head"><span class="t" id="tl-title">Timeline</span><div class="tabs" id="tl-tabs" role="group" aria-label="Time range"></div></div>
+      <div class="chartwrap"><canvas id="tl-chart" aria-label="Servers and players over time"></canvas></div>
+      <div class="note"><span class="key"><i style="background:var(--hazard);height:3px"></i>servers (left axis)</span><span class="key"><i style="background:repeating-linear-gradient(90deg,var(--radar) 0 5px,transparent 5px 9px);height:2px"></i>players (right axis)</span><span class="key"><i class="native"></i>hourly snapshot</span><span class="key"><i class="filled"></i>hour filled from ReforgerMods.net history</span><span class="key"><i class="none"></i>no data</span><span id="tl-note"></span></div>
     </div>
   </section>
 
-  <section id="flagship-section" style="margin-top:26px">
+  <section id="flagship">
     <h2 id="flagship-title"></h2>
     <p class="sub" id="flagship-sub"></p>
-    <div class="hero" id="hero"></div>
+    <div class="hero-main" id="hero-main"></div>
+    <div class="hero-sub" id="hero-sub"></div>
+    <div class="insight" id="insight"></div>
   </section>
 
-  <section>
+  <section id="downloads">
+    <h2>Workshop downloads</h2>
+    <p class="sub" id="dl-sub"></p>
+    <div class="dl-grid">
+      <div class="panel plot">
+        <div class="head"><span class="t">Total downloads</span><span style="display:flex;gap:8px;flex-wrap:wrap"><div class="tabs" id="dl-scale" role="group" aria-label="Scale"></div><div class="tabs" id="dl-tabs" role="group" aria-label="Time range"></div></span></div>
+        <div class="legend" id="dl-legend"></div>
+        <div class="chartwrap"><canvas id="dl-chart" aria-label="Total Workshop downloads over time"></canvas></div>
+      </div>
+      <div class="panel plot">
+        <div class="head"><span class="t">New downloads per Workshop update</span></div>
+        <div class="legend pick" id="dl-pick"></div>
+        <div class="chartwrap"><canvas id="dl-bars" aria-label="New downloads per Workshop update"></canvas></div>
+        <div class="note" id="dl-bars-note"></div>
+      </div>
+    </div>
+    <div class="panel tablewrap" style="margin-top:14px"><table class="dltable" id="dl-table"><thead><tr><th>Add-on</th><th class="num">Downloads</th><th class="num">Last day</th><th class="num">Last 7 days</th><th class="num">Last 30 days</th><th class="num">Rating</th><th>Version</th></tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <section id="ranking-section">
     <h2 id="kw-title"></h2>
     <p class="sub" id="kw-sub"></p>
     <div class="panel tablewrap"><table id="ranking"><thead><tr>
-      <th class="rank">#</th><th>Mod</th><th class="num">Servers</th><th class="num">Players</th><th class="num">Players / server</th><th>Share of __KW_LABEL_LC__ servers</th><th>Versions in use</th><th class="num">Global rank</th>
-    </tr></thead><tbody></tbody></table></div>
+      <th class="rank">#</th><th>Mod</th><th class="num">Servers</th><th class="num" id="kw-delta-h">24 h</th><th class="num">Players</th><th>Share of __KW_LABEL_LC__ servers</th><th class="num">Downloads</th><th class="num" id="kw-dl-h">7 days</th><th class="num">Global rank</th>
+    </tr></thead><tbody></tbody></table><div class="more" id="kw-more"></div></div>
   </section>
 
-  <section>
+  <section id="over-time">
     <h2>Zombie mods over time</h2>
     <p class="sub" id="chart-sub"></p>
-    <div class="panel chartbox"><div class="legend" id="legend"></div><div class="chartwrap tall"><canvas id="chart"></canvas></div></div>
+    <div class="panel plot">
+      <div class="head"><span class="t">Servers running each mod</span><div class="tabs" id="kw-tabs" role="group" aria-label="Time range"></div></div>
+      <div class="legend" id="kw-legend"></div>
+      <div class="chartwrap"><canvas id="kw-chart" aria-label="Servers running each zombie mod over time"></canvas></div>
+    </div>
   </section>
 
-  <section>
-    <h2>Project Outbreak add-ons</h2>
-    <p class="sub">The Project Outbreak add-ons and related Workshop items. Sparklines show servers running each one over the stored history; unpublished items stay at zero until they are released.</p>
-    <div class="cards" id="cards"></div>
+  <section id="addons">
+    <h2>Every add-on by Project Outbreak</h2>
+    <p class="sub" id="addons-sub"></p>
+    <div id="groups"></div>
   </section>
 
   <section id="dependents-section">
     <h2 id="dep-title"></h2>
     <p class="sub" id="dep-sub"></p>
-    <div class="cards" id="dep-cards"></div>
+    <div class="panel tablewrap"><table id="dep-table"><thead><tr><th class="rank">#</th><th>Mod</th><th>Author</th><th class="num">Downloads</th><th></th><th class="num">Servers now</th><th class="num">Players now</th></tr></thead><tbody></tbody></table></div>
   </section>
 
   <section id="servers-section">
     <h2 id="servers-title"></h2>
     <p class="sub" id="servers-sub"></p>
     <div class="panel tablewrap"><table id="servers"><thead><tr>
-      <th class="rank">#</th><th>Server</th><th>Scenario</th><th>Region</th><th class="num">Players</th><th class="num">Slots</th><th>Mod version</th><th>Game</th><th class="num">Mods loaded</th>
+      <th class="rank">#</th><th>Server</th><th>Scenario</th><th>Region</th><th class="num">Players</th><th class="num">Slots</th><th>Mod version</th><th class="num">Mods loaded</th>
     </tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <section id="links">
+    <h2>Links</h2>
+    <p class="sub">Everything this page is built from, and where to go next.</p>
+    <div class="linkgrid" id="linkgrid"></div>
   </section>
 
   <footer>
     <div class="stencil">Data credit</div>
     <p><strong>Credit.</strong> __CREDIT_LINE__ Visit <a href="__SOURCE_URL__" target="_blank" rel="noopener">__SOURCE_URL__</a> or <a href="https://www.armahq.com" target="_blank" rel="noopener">armahq.com</a> for the live browsers this page is built on.</p>
     <p><strong>Method.</strong> Once an hour the collector paginates ReforgerMods.net's public API to get every currently-deployed mod's server count and player exposure, from which it ranks the tracked add-ons, every mod matching the configured keywords, and a global top 50. It then reads ArmaHQ's page for each tracked add-on to get the specific servers, versions and slot capacity behind those numbers. Both stay within each site's published rate limits and page-fetch norms. Player counts are the players on servers running the mod, not subscribers.</p>
-    <p><strong>Built on Project Outbreak Zombies.</strong> This list comes from ArmaHQ's own Workshop dependency index, not a keyword search: every hourly run asks ArmaHQ for every mod it currently sees declaring the flagship as a Workshop dependency, drops the ones that are themselves first-party Project Outbreak add-ons (they already have their own section above), then re-fetches each remaining mod's own download, server and player numbers from ReforgerMods.net. A new dependent appears the run after ArmaHQ's own index picks it up, whatever its own name happens to be.</p>
+    <p><strong>Missed hours.</strong> GitHub's scheduler does not always start the hourly job on time; for days at a time it has run only every four to eight hours. Each run therefore reads ReforgerMods.net's own hourly series for the tracked add-ons and the most-used zombie mods and fills every hour of the last 30 days that has no snapshot. Filled hours are marked in green under the charts, and each reconstructed day is checked against ReforgerMods.net's own daily table before it is kept. An add-on that joins this page later gets its earlier hours from the same series. Hours that neither source covers are hatched red and drawn as breaks, not as zero.</p>
+    <p><strong>Downloads.</strong> Workshop download totals come from the Arma Reforger Workshop listing, read every hour through ReforgerMods.net since 8 October 2026 for every add-on and every zombie mod on this page. The earlier totals, back to 5 September 2026, come from the listing history of the Project Outbreak site and cover its first six add-ons. The Workshop updates its totals about once a day, so the new-downloads bars show one bar per update. A total that falls (the Workshop can reset it when an item is published again) counts as a reset, not as lost downloads.</p>
+    <p><strong>Built on Project Outbreak Zombies.</strong> This list comes from ArmaHQ's own Workshop dependency index, not a keyword search: every hourly run asks ArmaHQ for every mod it currently sees declaring the flagship as a Workshop dependency, drops the add-ons by Project Outbreak itself (they have their own section above), then re-fetches each remaining mod's own download, server and player numbers from ReforgerMods.net.</p>
+    <p><strong>How servers get it.</strong> ReforgerMods.net traces each server's mod list and tells apart a server that loads an add-on directly from one that gets it because another mod needs it. Player-hours add up the players on every server running the add-on, hour by hour, over the last seven days.</p>
     <p id="foot-stamp"></p>
   </footer>
 </div>
@@ -173,203 +299,393 @@ footer .stencil{font-family:var(--display);font-size:22px;letter-spacing:.12em;c
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
 (function(){
+  'use strict';
   const D = JSON.parse(document.getElementById('data').textContent);
-  const L = D.latest, H = D.history, C = D.config;
-  const fmt = n => (n==null?'–':Number(n).toLocaleString('en-US'));
-  const pct = (a,b) => b ? Math.round(100*a/b)+'%' : '–';
-  const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const L = D.latest, H = D.history, C = D.config, DL = D.downloads || {t:[], d:{}};
+  const reduce = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+  const $ = id => document.getElementById(id);
+  const fmt = n => (n==null || isNaN(n)) ? '-' : Number(n).toLocaleString('en-US');
+  const signed = n => n==null ? '-' : (n>0 ? '+'+fmt(n) : n<0 ? '−'+fmt(-n) : '±0');
+  const esc = s => String(s==null?'':s).replace(/\s*\u2014\s*/g, ' - ').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const WS = id => 'https://reforger.armaplatform.com/workshop/'+id;
+  const RM = id => C.source.modPage.replace('{modId}', id);
+  const AH = id => (C.armahq.modPage||'').replace('{modId}', id);
+  const ext = (href, text, cls) => '<a'+(cls?' class="'+cls+'"':'')+' href="'+esc(href)+'" target="_blank" rel="noopener">'+text+'</a>';
   const css = getComputedStyle(document.documentElement);
-  const HAZ = css.getPropertyValue('--hazard').trim(), RAD = css.getPropertyValue('--radar').trim(), MUT = css.getPropertyValue('--muted').trim(), GRID = css.getPropertyValue('--grid').trim();
-  const when = new Date(L.generatedUtc);
-  const ageMin = Math.max(0, Math.round((Date.now()-when.getTime())/60000));
-  const ageTxt = ageMin < 60 ? ageMin+' min ago' : (ageMin/60).toFixed(1)+' h ago';
-  document.getElementById('stamp').innerHTML = '<span class="live"></span>Snapshot <b>'+esc(when.toISOString().replace('T',' ').slice(0,16))+' UTC</b> · '+ageTxt+'<br>'+fmt(L.totals.servers)+' servers online · '+fmt(L.totals.players)+' players · '+fmt(L.totals.uniqueMods)+' mods in use<br>'+H.length+' hourly snapshots stored';
-  document.getElementById('foot-stamp').textContent = 'Generated '+when.toISOString()+' from the snapshot of that hour. Mod ids are Arma Reforger Workshop ids.';
+  const V = k => css.getPropertyValue(k).trim();
+  const HAZ = V('--hazard'), RAD = V('--radar'), MUT = V('--muted'), GRID = V('--grid'), ALERT = V('--alert'), INK = V('--ink');
+  const MONO = 'Share Tech Mono';
+  const HOUR = 3600e3, DAY = 24*HOUR, GAP = 2.5*HOUR;
+  const pad = n => String(n).padStart(2,'0');
+  const md = ms => { const d = new Date(ms); return pad(d.getUTCMonth()+1)+'-'+pad(d.getUTCDate()); };
+  const hm = ms => { const d = new Date(ms); return pad(d.getUTCHours())+':'+pad(d.getUTCMinutes()); };
+  const stamp = ms => new Date(ms).toISOString().slice(0,16).replace('T',' ');
+  const gen = new Date(L.generatedUtc).getTime();
+  const T = H.t.map(s => s*1000);
+  const tEnd = Math.max(gen, T.length ? T[T.length-1] : gen);
+  const tracked = Object.values(L.tracked || {});
+  const flag = tracked.find(t => t.flagship) || tracked[0];
+  const kw = L.keyword;
+  const mine = new Set(tracked.map(t => t.modId));
+  const label = t => t.label || t.name || t.modId;
+  const store = {get(k){ try { return localStorage.getItem('ow:'+k); } catch(e){ return null; } }, set(k,v){ try { localStorage.setItem('ow:'+k, v); } catch(e){} }};
 
-  // --- history helpers
-  const trackedSeries = (id, key) => H.map(r => (r.tracked && r.tracked[id]) ? r.tracked[id][key||'s'] : null);
-  const kwSeries = id => H.map(r => (r.keyword && r.keyword[id]) ? r.keyword[id].s : 0);
-  const labels = H.map(r=>r.t);
-  const tickCb = (v,i)=>{const d=new Date(labels[i]); return H.length>48 ? d.toISOString().slice(5,10) : d.toISOString().slice(11,16);};
-  const tipTitle = items=>new Date(items[0].label).toUTCString().slice(0,22)+' UTC';
-  function delta(series){
-    const valid = series.map((v,i)=>[v,i]).filter(x=>x[0]!=null);
-    if (valid.length < 2) return null;
-    const last = valid[valid.length-1][0];
-    const target = new Date(L.generatedUtc).getTime() - 24*3600*1000;
-    let ref = valid[0];
-    for (const [v,i] of valid){ if (new Date(H[i].t).getTime() <= target) ref=[v,i]; }
-    if (ref[1] === valid[valid.length-1][1]) ref = valid[0];
-    return {diff: last-ref[0], hours: Math.round((new Date(L.generatedUtc)-new Date(H[ref[1]].t))/3600000)};
-  }
-  const dTxt = d => d==null ? 'no history yet' : ((d.diff>0?'<span class="up">▲ +':d.diff<0?'<span class="down">▼ ':'<span>± ')+fmt(d.diff)+'</span> vs '+d.hours+' h ago');
-  function spark(series, color){
-    const vals = series.map(v=>v==null?0:v); const n=vals.length;
-    if(n<2) return '<svg viewBox="0 0 100 40"><text x="2" y="24" font-size="9" fill="'+MUT+'">history builds hourly</text></svg>';
-    const max = Math.max(1,...vals), min = 0;
-    const pts = vals.map((v,i)=>[ (i/(n-1))*100, 38 - ((v-min)/(max-min||1))*34 ]);
-    const path = pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ');
-    const area = path+' L100,40 L0,40 Z';
-    return '<svg viewBox="0 0 100 40" preserveAspectRatio="none"><path d="'+area+'" fill="'+color+'" opacity=".15"/><path d="'+path+'" fill="none" stroke="'+color+'" stroke-width="1.6" vector-effect="non-scaling-stroke"/><circle cx="'+pts[n-1][0].toFixed(1)+'" cy="'+pts[n-1][1].toFixed(1)+'" r="2.2" fill="'+color+'"/></svg>';
-  }
-  const versionsChips = (versions, mine) => Object.entries(versions||{}).slice(0,5).map(([v,c])=>'<span class="chip'+(mine?' acc':'')+'">'+esc(v)+' <span style="opacity:.7">×'+c+'</span></span>').join('');
+  // ---------- status
+  const ageMin = Math.max(0, Math.round((Date.now()-gen)/60000));
+  const ageTxt = ageMin < 60 ? ageMin+' min ago' : ageMin < 2880 ? (ageMin/60).toFixed(1)+' h ago' : Math.round(ageMin/1440)+' days ago';
+  const state = ageMin <= 90 ? ['ok','Live'] : ageMin <= 480 ? ['late','Delayed'] : ['stale','Stale'];
+  $('status').innerHTML = '<div class="state '+state[0]+'"><i></i>'+state[1]+' · snapshot '+ageTxt+'</div>'+
+    '<div><b>'+stamp(gen)+' UTC</b> · '+T.length+' hourly points over '+Math.round((tEnd-(T[0]||tEnd))/DAY)+' days</div>'+
+    '<div class="tot"><div><span>Servers online</span><strong>'+fmt(L.totals.servers)+'</strong></div><div><span>Players</span><strong>'+fmt(L.totals.players)+'</strong></div><div><span>Mods in use</span><strong>'+fmt(L.totals.uniqueMods)+'</strong></div></div>';
+  $('foot-stamp').textContent = 'Generated '+L.generatedUtc+' from the snapshot of that hour. Mod ids are Arma Reforger Workshop ids.';
 
-  // --- gap shading: mark stretches of history that were reconstructed from a
-  // secondary source after an outage, or that are still genuinely missing, so the
-  // charts never imply smooth continuous collection across a period that was down.
-  function idxRanges(idxList){
-    const out = [];
-    for (const i of idxList){
-      if (out.length && out[out.length-1][1] === i-1) out[out.length-1][1] = i;
-      else out.push([i,i]);
+  // ---------- history helpers
+  const S = id => H.s[id] || [];
+  const P = id => H.p[id] || [];
+  function points(vals){
+    const out = []; let prev = null;
+    for (let i = 0; i < vals.length; i++){
+      const v = vals[i]; if (v == null) continue;
+      if (prev != null && T[i]-prev > GAP) out.push({x:(prev+T[i])/2, y:null});
+      out.push({x:T[i], y:v, b:H.b[i]}); prev = T[i];
     }
     return out;
   }
-  const backfillRanges = idxRanges(H.map((r,i)=>r.backfilled?i:null).filter(i=>i!=null));
-  const missingRanges = (() => {
-    const idx = [];
-    for (let i=1;i<H.length;i++){
-      if (H[i].backfilled || H[i-1].backfilled) continue;
-      const hrs = (new Date(H[i].t) - new Date(H[i-1].t)) / 3600000;
-      if (hrs > 2.5) idx.push(i);
-    }
-    return idx;
-  })();
-  function gapBandPlugin(){
-    const n = labels.length;
-    return {
-      id: 'gapBands',
-      beforeDraw(chart){
-        if (n < 2) return;
-        const area = chart.chartArea;
-        if (!area) return;
-        const w = area.right - area.left;
-        const xOf = i => area.left + (Math.min(n-1,Math.max(0,i))/(n-1))*w;
-        const ctx = chart.ctx;
-        ctx.save();
-        ctx.fillStyle = 'rgba(111,211,141,.10)';
-        for (const [a,b] of backfillRanges){
-          const x0 = xOf(a-0.5), x1 = xOf(b+0.5);
-          ctx.fillRect(x0, area.top, Math.max(1,x1-x0), area.bottom-area.top);
-        }
-        ctx.fillStyle = 'rgba(226,67,47,.55)';
-        for (const i of missingRanges){
-          const x0 = xOf(i-0.5);
-          ctx.fillRect(x0-1.5, area.top, 3, area.bottom-area.top);
-        }
-        ctx.restore();
-      }
-    };
+  function valueNear(vals, target, tol){
+    let best = -1, bd = Infinity;
+    for (let i = 0; i < vals.length; i++){ if (vals[i] == null) continue; const d = Math.abs(T[i]-target); if (d < bd){ bd = d; best = i; } }
+    return (best >= 0 && bd <= (tol||3*HOUR)) ? {v:vals[best], t:T[best]} : null;
   }
-  const gapNote = backfillRanges.length ? ' Shaded: reconstructed from ReforgerMods.net\'s own history after an outage in this project\'s collector.' : (missingRanges.length ? ' Red marker: a gap with no data from either source.' : '');
+  function change(vals, now, span){
+    const ref = valueNear(vals, gen-span);
+    return (ref && now != null) ? {diff: now-ref.v, hours: Math.round((gen-ref.t)/HOUR)} : null;
+  }
+  const dTxt = (d, unit) => d == null ? '<span class="flat">no history yet</span>' :
+    '<span class="'+(d.diff>0?'up':d.diff<0?'down':'flat')+'">'+(d.diff>0?'▲ ':d.diff<0?'▼ ':'')+signed(d.diff)+'</span> vs '+(unit || (d.hours+' h ago'));
+  const backfillRuns = (() => { const out = []; for (let i = 0; i < T.length; i++){ if (!H.b[i]) continue; if (out.length && out[out.length-1][2] === i-1){ out[out.length-1][1] = T[i]; out[out.length-1][2] = i; } else out.push([T[i], T[i], i]); } return out.map(r => [r[0]-HOUR/2, r[1]+HOUR/2]); })();
+  const missingRuns = (() => { const out = []; for (let i = 1; i < T.length; i++) if (T[i]-T[i-1] > GAP) out.push([T[i-1], T[i]]); return out; })();
 
-  const tracked = Object.values(L.tracked||{});
-  const flag = tracked.find(t=>t.flagship) || tracked[0];
-  const kw = L.keyword;
-  const mine = new Set(tracked.map(t=>t.modId));
+  function spark(vals, color, stepped){
+    const v = vals.filter(x => x != null); const n = v.length;
+    if (n < 2) return '<svg viewBox="0 0 100 40"><text x="2" y="24" font-size="9" fill="'+MUT+'">history builds hourly</text></svg>';
+    const max = Math.max(1, ...v), min = Math.min(...v), lo = min > max*0.6 ? min*0.97 : 0, rng = (max-lo) || 1;
+    const pts = v.map((y,i) => [(i/(n-1))*100, 38-((y-lo)/rng)*34]);
+    let path = '';
+    pts.forEach((p,i) => { path += i ? (stepped ? 'H'+p[0].toFixed(1)+'V'+p[1].toFixed(1) : 'L'+p[0].toFixed(1)+','+p[1].toFixed(1)) : 'M'+p[0].toFixed(1)+','+p[1].toFixed(1); });
+    return '<svg viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true"><path d="'+path+' L100,40 L0,40 Z" fill="'+color+'" opacity=".14"/><path d="'+path+'" fill="none" stroke="'+color+'" stroke-width="1.6" vector-effect="non-scaling-stroke"/><circle cx="'+pts[n-1][0].toFixed(1)+'" cy="'+pts[n-1][1].toFixed(1)+'" r="2.2" fill="'+color+'"/></svg>';
+  }
+  const lastDays = (vals, days) => vals.filter((v,i) => T[i] >= gen-days*DAY);
+  const versionsChips = (versions, accent) => Object.entries(versions||{}).slice(0,4).map(([v,c]) => '<span class="chip'+(accent?' acc':'')+'">'+esc(v)+' <span style="opacity:.7">×'+c+'</span></span>').join('');
 
-  // --- timeline at the top: the flagship's servers and players across the whole history
-  if (flag){
-    document.getElementById('tl-title').textContent = (flag.label||flag.name)+' · servers and players, hourly';
-    document.getElementById('tl-note').textContent = (H.length ? (H.length+' snapshots · '+new Date(H[0].t).toISOString().slice(0,16).replace('T',' ')+' to '+when.toISOString().slice(0,16).replace('T',' ')+' UTC') : 'first snapshot') + gapNote;
-    if (window.Chart && H.length >= 2){
-      new Chart(document.getElementById('timeline'), {type:'line', plugins:[gapBandPlugin()], data:{labels, datasets:[
-        {label:'servers running it', data:trackedSeries(flag.modId,'s'), borderColor:HAZ, backgroundColor:'rgba(242,194,0,.12)', fill:true, borderWidth:2.5, pointRadius:H.length>48?0:3, tension:.25, yAxisID:'y'},
-        {label:'players on those servers', data:trackedSeries(flag.modId,'p'), borderColor:RAD, borderWidth:1.8, borderDash:[6,4], pointRadius:H.length>48?0:2.5, tension:.25, yAxisID:'y2'}
-      ]}, options:{responsive:true, maintainAspectRatio:false, animation:false, interaction:{mode:'index',intersect:false},
-        plugins:{legend:{labels:{color:MUT, boxWidth:14, font:{family:'Share Tech Mono'}}}, tooltip:{callbacks:{title:tipTitle}}},
-        scales:{x:{ticks:{color:MUT, maxTicksLimit:10, callback:tickCb, font:{family:'Share Tech Mono'}}, grid:{color:GRID}},
-                y:{beginAtZero:true, position:'left', ticks:{color:HAZ, font:{family:'Share Tech Mono'}}, grid:{color:GRID}, title:{display:true,text:'servers',color:HAZ}},
-                y2:{beginAtZero:true, position:'right', ticks:{color:RAD, font:{family:'Share Tech Mono'}}, grid:{drawOnChartArea:false}, title:{display:true,text:'players',color:RAD}}}}});
-    } else {
-      document.getElementById('timeline').outerHTML = '<div class="empty">Timeline draws from the second hourly snapshot onward. Current: '+fmt(flag.servers)+' servers, '+fmt(flag.players)+' players.</div>';
-    }
+  // ---------- count-up numbers
+  const counters = [];
+  function countUp(el){
+    const target = Number(el.getAttribute('data-n')); const pre = el.getAttribute('data-pre')||'', post = el.getAttribute('data-post')||'';
+    if (reduce || !isFinite(target)){ el.textContent = pre+fmt(target)+post; return; }
+    const t0 = performance.now(), dur = 900;
+    (function step(now){ const k = Math.min(1,(now-t0)/dur), e = 1-Math.pow(1-k,3); el.textContent = pre+fmt(Math.round(target*e))+post; if (k < 1) requestAnimationFrame(step); })(t0);
+    setTimeout(() => { el.textContent = pre+fmt(target)+post; }, dur + 400);  // a hidden tab pauses animation frames
+  }
+  const num = (n, pre, post) => n == null ? '-' : '<span class="cnt" data-n="'+n+'" data-pre="'+(pre||'')+'" data-post="'+(post||'')+'">'+(pre||'')+fmt(n)+(post||'')+'</span>';
+  function armCounters(root){
+    const els = root.querySelectorAll('.cnt');
+    if (!('IntersectionObserver' in window)){ els.forEach(countUp); return; }
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ io.unobserve(e.target); countUp(e.target); } }), {threshold:.4});
+    els.forEach(el => { if (!reduce) el.textContent = (el.getAttribute('data-pre')||'')+'0'+(el.getAttribute('data-post')||''); io.observe(el); });
+    // A number never stays at zero, even where the observer does not report.
+    setTimeout(() => els.forEach(el => { if (el.textContent === (el.getAttribute('data-pre')||'')+'0'+(el.getAttribute('data-post')||'') && Number(el.getAttribute('data-n'))){ io.unobserve(el); countUp(el); } }), 4000);
   }
 
-  // --- flagship hero
+  // ---------- range tabs
+  const RANGES = [['48h','48H',2*DAY],['7d','7D',7*DAY],['14d','14D',14*DAY],['30d','30D',30*DAY],['all','ALL',Infinity]];
+  function tabs(el, keys, initial, onPick){
+    const saved = store.get(el.id); let cur = keys.includes(saved) ? saved : initial;
+    el.innerHTML = RANGES.filter(r => keys.includes(r[0])).map(r => '<button type="button" data-r="'+r[0]+'" aria-pressed="'+(r[0]===cur)+'">'+r[1]+'</button>').join('');
+    el.addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; cur = b.getAttribute('data-r'); store.set(el.id, cur); el.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); onPick(RANGES.find(r => r[0]===cur)[2]); });
+    return RANGES.find(r => r[0]===cur)[2];
+  }
+  function stepFor(span){ return span <= 2.5*DAY ? 6*HOUR : span <= 8*DAY ? DAY : span <= 16*DAY ? 2*DAY : span <= 40*DAY ? 4*DAY : 7*DAY; }
+  function xAxis(span, end, start){
+    const lo = span === Infinity ? start : Math.max(start, end-span);
+    const s = Math.min(span, end-lo);
+    return {type:'linear', min:lo, max:end, grid:{color:GRID}, border:{color:GRID},
+      ticks:{color:MUT, stepSize:stepFor(s), maxRotation:0, autoSkipPadding:14, font:{family:MONO},
+        callback: v => s <= 2.5*DAY ? (new Date(v).getUTCHours() === 0 ? md(v) : hm(v)) : md(v)}};
+  }
+  function setRange(chart, span, end, start){ chart.options.scales.x = Object.assign(chart.options.scales.x, xAxis(span, end, start)); chart.update(reduce ? 'none' : undefined); }
+
+  // ---------- provenance strip + no-data hatching
+  let hatch = null;
+  function hatchPattern(ctx){
+    if (hatch) return hatch;
+    const c = document.createElement('canvas'); c.width = c.height = 8; const g = c.getContext('2d');
+    g.strokeStyle = 'rgba(226,67,47,.32)'; g.lineWidth = 2; g.beginPath(); g.moveTo(0,8); g.lineTo(8,0); g.stroke();
+    hatch = ctx.createPattern(c, 'repeat'); return hatch;
+  }
+  const provenance = {id:'provenance', beforeDatasetsDraw(chart){
+    const a = chart.chartArea, x = chart.scales.x; if (!a || !T.length) return;
+    const ctx = chart.ctx, px = v => Math.min(a.right, Math.max(a.left, x.getPixelForValue(v)));
+    ctx.save();
+    ctx.fillStyle = hatchPattern(ctx);
+    for (const [s,e] of missingRuns){ const x0 = px(s), x1 = px(e); if (x1 > x0) ctx.fillRect(x0, a.top, x1-x0, a.bottom-a.top); }
+    const y = a.top-10, h = 5;
+    ctx.fillStyle = 'rgba(242,194,0,.55)';
+    const x0 = px(T[0]), x1 = px(T[T.length-1]); if (x1 > x0) ctx.fillRect(x0, y, x1-x0, h);
+    ctx.fillStyle = RAD;
+    for (const [s,e] of backfillRuns){ const b0 = px(s), b1 = px(e); if (b1 > b0) ctx.fillRect(b0, y, Math.max(1.5, b1-b0), h); }
+    ctx.fillStyle = ALERT;
+    for (const [s,e] of missingRuns){ const m0 = px(s), m1 = px(e); if (m1 > m0) ctx.clearRect(m0, y, m1-m0, h), ctx.fillRect(m0, y+1.5, m1-m0, 2); }
+    ctx.restore();
+  }};
+  const tipTitle = items => items.length ? stamp(items[0].parsed.x)+' UTC'+(items[0].raw && items[0].raw.b ? ' · filled from ReforgerMods.net' : '') : '';
+  const baseOptions = () => ({responsive:true, maintainAspectRatio:false, animation: reduce ? false : {duration:650, easing:'easeOutCubic'}, parsing:true, normalized:true,
+    layout:{padding:{top:14}}, interaction:{mode:'nearest', axis:'x', intersect:false},
+    plugins:{legend:{display:false}, tooltip:{backgroundColor:'rgba(8,11,9,.94)', borderColor:'#2f4233', borderWidth:1, titleFont:{family:MONO}, bodyFont:{family:MONO}, padding:10, callbacks:{title:tipTitle, label: c => ' '+c.dataset.label+': '+fmt(c.parsed.y)}}}});
+  const fillGrad = (rgb, a) => c => { const ar = c.chart.chartArea; if (!ar) return 'rgba('+rgb+','+(a/2)+')'; const g = c.chart.ctx.createLinearGradient(0, ar.top, 0, ar.bottom); g.addColorStop(0, 'rgba('+rgb+','+a+')'); g.addColorStop(1, 'rgba('+rgb+',0)'); return g; };
+  const hasChart = !!window.Chart;
+  if (hasChart){ Chart.defaults.color = MUT; Chart.defaults.font.family = "'Barlow', system-ui, sans-serif"; }
+  const noChart = (id, msg) => { const c = $(id); if (c) c.parentNode.innerHTML = '<div class="empty">'+msg+'</div>'; };
+
+  // ---------- timeline
   if (flag){
-    document.getElementById('flagship-title').innerHTML = '<a href="https://reforger.armaplatform.com/workshop/'+esc(flag.modId)+'" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">'+esc(flag.label || flag.name || flag.modId)+'</a>';
-    document.getElementById('flagship-sub').textContent = flag.seen ? ('Rank '+flag.keywordRank+' of '+kw.modCount+' '+kw.label.toLowerCase()+' by servers right now, rank '+fmt(flag.globalRank)+' of all '+fmt(L.totals.uniqueMods)+' mods in use.') : 'Not seen on any server in this snapshot.';
-    const ds = delta(trackedSeries(flag.modId,'s'));
-    const pl = delta(trackedSeries(flag.modId,'p'));
-    const cap = flag.capacity ? Math.round(100*flag.players/flag.capacity) : 0;
-    const share = flag.shareOfKeywordServers!=null ? Math.round(flag.shareOfKeywordServers*100)+'%' : '–';
-    const cells = [
-      ['Servers running it', fmt(flag.servers), dTxt(ds), true],
-      ['Players on those servers', fmt(flag.players), dTxt(pl), true],
-      ['Capacity used', cap+'%', fmt(flag.players)+' of '+fmt(flag.capacity)+' slots'],
-      [kw.label+' rank', flag.keywordRank ? '#'+flag.keywordRank : '–', share+' of '+kw.label.toLowerCase()+' servers'],
-      ['Versions in use', Object.keys(flag.versions||{}).length, Object.entries(flag.versions||{}).slice(0,3).map(([v,c])=>v+' ×'+c).join(' · ')],
-      ['Servers with players', fmt(flag.serversWithPlayers), pct(flag.serversWithPlayers, flag.servers)+' of its servers']
+    $('tl-title').textContent = label(flag)+' · servers and players, hourly';
+    $('tl-note').textContent = backfillRuns.length ? backfillRuns.length+' filled stretch'+(backfillRuns.length>1?'es':'')+(missingRuns.length ? ' · '+missingRuns.length+' without data' : '') : '';
+    if (hasChart && T.length >= 2){
+      const opt = baseOptions();
+      opt.scales = {x: xAxis(7*DAY, tEnd, T[0]),
+        y:{beginAtZero:true, position:'left', ticks:{color:HAZ, font:{family:MONO}, precision:0}, grid:{color:GRID}, border:{display:false}, title:{display:true, text:'servers', color:HAZ, font:{family:MONO}}},
+        y2:{beginAtZero:true, position:'right', ticks:{color:RAD, font:{family:MONO}, precision:0}, grid:{drawOnChartArea:false}, border:{display:false}, title:{display:true, text:'players', color:RAD, font:{family:MONO}}}};
+      const chart = new Chart($('tl-chart'), {type:'line', plugins:[provenance], options:opt, data:{datasets:[
+        {label:'servers running it', data:points(S(flag.modId)), borderColor:HAZ, backgroundColor:fillGrad('242,194,0',.30), fill:'origin', borderWidth:2.4, pointRadius:0, pointHoverRadius:4, tension:.25, spanGaps:false, yAxisID:'y'},
+        {label:'players on those servers', data:points(P(flag.modId)), borderColor:RAD, borderWidth:1.6, borderDash:[5,4], pointRadius:0, pointHoverRadius:4, tension:.25, spanGaps:false, yAxisID:'y2'}
+      ]}});
+      setRange(chart, tabs($('tl-tabs'), ['48h','7d','14d','30d'], '7d', span => setRange(chart, span, tEnd, T[0])), tEnd, T[0]);
+    } else noChart('tl-chart', 'The timeline draws from the second hourly snapshot onward.');
+  }
+
+  // ---------- downloads helpers
+  const DT = (DL.t||[]).map(s => s*1000);
+  const dlSeries = id => DL.d[id] || [];
+  function dlNow(id){ const w = (L.tracked[id]||{}).workshop; if (w && w.downloads != null) return w.downloads; const a = dlSeries(id); for (let i = a.length-1; i >= 0; i--) if (a[i] != null) return a[i]; return null; }
+  function dlAt(id, t){ const a = dlSeries(id); let v = null; for (let i = 0; i < DT.length && DT[i] <= t; i++) if (a[i] != null) v = a[i]; return v; }
+  // New downloads since gen-span: the sum of every rise, so a Workshop reset (a falling total) is not a loss.
+  function dlGain(id, span){
+    const from = gen-span; let prev = dlAt(id, from); if (prev == null) return null;
+    const a = dlSeries(id); let g = 0;
+    for (let i = 0; i < DT.length; i++){ if (DT[i] <= from || a[i] == null) continue; if (a[i] > prev) g += a[i]-prev; prev = a[i]; }
+    const n = dlNow(id); if (n != null && n > prev) g += n-prev;
+    return g;
+  }
+
+  // ---------- flagship
+  if (flag){
+    $('flagship-title').innerHTML = '<a href="https://reforger.armaplatform.com/workshop/'+esc(flag.modId)+'" target="_blank" rel="noopener">'+esc(label(flag))+'</a>';
+    $('flagship-sub').textContent = flag.seen ? ('Rank '+flag.keywordRank+' of '+kw.modCount+' '+kw.label.toLowerCase()+' by servers right now, rank '+fmt(flag.globalRank)+' of all '+fmt(L.totals.uniqueMods)+' mods in use.') : 'Not seen on any server in this snapshot.';
+    const fs = S(flag.modId), fp = P(flag.modId);
+    const dlN = dlNow(flag.modId), dl7 = dlGain(flag.modId, 7*DAY);
+    const dlVals = DT.map((t,i) => dlSeries(flag.modId)[i]).filter((v,i) => DT[i] >= gen-30*DAY);
+    const cap = flag.capacity ? Math.round(100*flag.players/flag.capacity) : null;
+    const peak = (() => { let best = null; fp.forEach((v,i) => { if (v != null && T[i] >= gen-7*DAY && (!best || v > best.v)) best = {v:v, t:T[i]}; }); return best; })();
+    const share = flag.shareOfKeywordServers != null ? Math.round(flag.shareOfKeywordServers*100)+'%' : '-';
+    const big = [
+      ['Servers running it', num(flag.servers), dTxt(change(fs, flag.servers, DAY)), spark(lastDays(fs,7), HAZ)],
+      ['Players on those servers', num(flag.players), dTxt(change(fp, flag.players, DAY)), spark(lastDays(fp,7), RAD)],
+      ['Workshop downloads', num(dlN), dl7 != null ? '<span class="up">▲ '+signed(dl7)+'</span> in the last 7 days' : 'download history builds daily', spark(dlVals.concat(dlN != null ? [dlN] : []), HAZ, true)]
     ];
-    document.getElementById('hero').innerHTML = cells.map(c=>'<div class="stat'+(c[3]?' flag':'')+'"><div class="k">'+esc(c[0])+'</div><div class="v">'+c[1]+'</div><div class="d">'+c[2]+'</div></div>').join('');
+    $('hero-main').innerHTML = big.map(c => '<div class="stat flag"><div class="k">'+esc(c[0])+'</div><div class="v">'+c[1]+'</div><div class="d">'+c[2]+'</div>'+c[3]+'</div>').join('');
+    const small = [
+      [kw.label+' rank', flag.keywordRank ? num(flag.keywordRank, '#') : '-', share+' of '+kw.label.toLowerCase()+' servers'],
+      peak ? ['Peak players, 7 days', num(peak.v), 'at '+stamp(peak.t)+' UTC'] : ['Capacity used', cap != null ? num(cap, '', '%') : '-', fmt(flag.players)+' of '+fmt(flag.capacity)+' slots'],
+      ['Servers with players', num(flag.serversWithPlayers), (flag.servers ? Math.round(100*flag.serversWithPlayers/flag.servers)+'%' : '-')+' of its servers'],
+      ['Versions in use', num(Object.keys(flag.versions||{}).length), Object.entries(flag.versions||{}).slice(0,3).map(([v,c]) => esc(v)+' ×'+c).join(' · ')]
+    ];
+    $('hero-sub').innerHTML = small.map(c => '<div class="stat"><div class="k">'+esc(c[0])+'</div><div class="v">'+c[1]+'</div><div class="d">'+c[2]+'</div></div>').join('');
+    const fw = flag.workshop || {}, root = fw.rootDeployments, viaDep = fw.dependencyDeployments;
+    const ins = [];
+    if (root != null && viaDep != null && root+viaDep > 0){
+      const pa = Math.round(100*root/(root+viaDep));
+      ins.push('<div class="stat split"><div class="k">How servers get it</div><div class="bars" role="img" aria-label="'+root+' servers load it directly, '+viaDep+' get it through another mod"><span class="a" style="width:'+pa+'%"></span><span class="b" style="width:'+(100-pa)+'%"></span></div>'+
+        '<div class="lg"><span><i style="background:var(--hazard)"></i><b>'+num(root)+'</b>load it directly</span><span><i style="background:var(--radar)"></i><b>'+num(viaDep)+'</b>get it because another mod needs it</span></div>'+
+        '<div class="d">'+(viaDep > root ? 'Most of its servers run a mod built on it. See <a href="#dependents-section">built on it</a> below, or the '+ext(RM(flag.modId), 'full trace on '+esc(C.source.name))+'.' : ext(RM(flag.modId), 'Full trace on '+esc(C.source.name)))+'</div></div>');
+    }
+    if (fw.playerHours7d != null) ins.push('<div class="stat"><div class="k">Player-hours, last 7 days</div><div class="v">'+num(fw.playerHours7d)+'</div><div class="d">about '+fmt(Math.round(fw.playerHours7d/7))+' hours of play a day on servers running it</div></div>');
+    $('insight').innerHTML = ins.join('');
+    armCounters($('flagship'));
   }
 
-  // --- ranking table
-  document.getElementById('kw-title').textContent = kw.label+' on servers right now';
-  document.getElementById('kw-sub').textContent = kw.modCount+' mods whose name contains “'+kw.terms.join('” or “')+'” are loaded on '+fmt(kw.serversTotal)+' server slots with '+fmt(kw.playersTotal)+' players between them. Ranked by servers, then players. Project Outbreak add-ons are highlighted.';
-  const maxS = Math.max(1,...kw.mods.map(m=>m.servers));
-  const rows = kw.mods.slice(0, C.site.rankingRows||60);
-  document.querySelector('#ranking tbody').innerHTML = rows.length ? rows.map(m=>{
-    const isMine = mine.has(m.modId);
-    const w = Math.max(2, Math.round(160*m.servers/maxS));
-    return '<tr'+(isMine?' class="mine"':'')+'><td class="rank">'+m.keywordRank+'</td><td><a href="https://reforger.armaplatform.com/workshop/'+esc(m.modId)+'" target="_blank" rel="noopener" style="font-weight:600">'+esc(m.name)+'</a><div class="modlinks"><a href="'+esc(C.source.modPage.replace('{modId}',m.modId))+'" target="_blank" rel="noopener">servers on '+esc(C.source.name)+'</a><span class="id" style="color:var(--muted)">'+esc(m.modId)+'</span></div></td>'+
-      '<td class="num">'+fmt(m.servers)+'</td><td class="num">'+fmt(m.players)+'</td><td class="num">'+(m.servers?(m.players/m.servers).toFixed(1):'–')+'</td>'+
-      '<td><span class="bar" style="width:'+w+'px"></span><span class="share">'+(m.shareOfKeywordServers!=null?Math.round(m.shareOfKeywordServers*100)+'%':'')+'</span></td>'+
-      '<td>'+versionsChips(m.versions,isMine)+'</td><td class="num">'+fmt(m.globalRank)+'</td></tr>';
-  }).join('') : '<tr><td colspan="8" class="empty">No mods matched in this snapshot.</td></tr>';
+  // ---------- downloads section
+  (function(){
+    const ids = tracked.map(t => t.modId).filter(id => dlNow(id) != null).sort((a,b) => (dlNow(b)||0)-(dlNow(a)||0));
+    const byId = Object.fromEntries(tracked.map(t => [t.modId, t]));
+    const first = DT.find(t => t != null);
+    $('dl-sub').textContent = 'Total Workshop downloads of every add-on by Project Outbreak'+(first ? ', from '+md(first)+' to now' : '')+'. '+
+      (flag && dlGain(flag.modId, 30*DAY) != null ? label(flag)+' gained '+fmt(dlGain(flag.modId, 30*DAY))+' downloads in the last 30 days. ' : '')+
+      'The Workshop updates its totals about once a day.';
+    const palette = [HAZ, RAD, '#e07a3b', '#8fa2ff', '#c9d64f', '#d46ab0', '#4fb3d9', '#b0a054'];
+    const color = {}; ids.forEach((id,i) => { color[id] = byId[id].flagship ? HAZ : palette[(i % (palette.length-1))+1]; });
+    // table
+    $('dl-table').querySelector('tbody').innerHTML = ids.map(id => { const t = byId[id], w = t.workshop || {};
+      const g = s => { const v = dlGain(id, s); return v == null ? '<span class="flat">-</span>' : '<span class="up">'+signed(v)+'</span>'; };
+      return '<tr'+(t.flagship?' class="mine"':'')+'><td><span style="display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:8px;background:'+color[id]+'"></span><a href="'+WS(esc(id))+'" target="_blank" rel="noopener" style="color:inherit">'+esc(label(t))+'</a></td><td class="num">'+fmt(dlNow(id))+'</td><td class="num">'+g(DAY)+'</td><td class="num">'+g(7*DAY)+'</td><td class="num">'+g(30*DAY)+'</td><td class="num">'+(w.rating != null && w.ratingCount ? Math.round(w.rating*100)+'%' : '<span class="flat">-</span>')+(w.ratingCount ? '<span class="rating-n">('+fmt(w.ratingCount)+')</span>' : '')+'</td><td><span class="chip">'+esc(w.version || '-')+'</span></td></tr>'; }).join('') || '<tr><td colspan="7" class="empty">No download data yet.</td></tr>';
+    if (!hasChart || DT.length < 2){ noChart('dl-chart', 'The download chart needs two or more readings.'); noChart('dl-bars', ''); return; }
+    // cumulative chart
+    const hidden = new Set((store.get('dl-hidden')||'').split(',').filter(Boolean));
+    const dsets = ids.map(id => { const a = dlSeries(id); const pts = []; DT.forEach((t,i) => { if (a[i] != null) pts.push({x:t, y:a[i]}); }); const n = dlNow(id); if (n != null) pts.push({x:tEnd, y:n});
+      return {label:label(byId[id]), _id:id, data:pts, stepped:'after', borderColor:color[id], backgroundColor:color[id], borderWidth: byId[id].flagship ? 2.8 : 1.6, pointRadius: pts.length < 3 ? 2.5 : 0, pointHoverRadius:4, hidden:hidden.has(id)}; });
+    const o = baseOptions(); o.layout = {padding:{top:4}};
+    o.plugins.tooltip.callbacks.title = items => items.length ? stamp(items[0].parsed.x)+' UTC' : '';
+    o.scales = {x: xAxis(30*DAY, tEnd, DT[0]), y:{beginAtZero:true, ticks:{color:MUT, font:{family:MONO}, callback: v => v >= 1000 ? (v/1000)+'k' : v}, grid:{color:GRID}, border:{display:false}}};
+    const yLin = o.scales.y, yLog = {type:'logarithmic', min:1, ticks:{color:MUT, font:{family:MONO}, callback: v => [1,10,100,1000,10000,100000,1000000].includes(v) ? (v >= 1000 ? (v/1000)+'k' : v) : ''}, grid:{color:GRID}, border:{display:false}};
+    let scale = store.get('dl-scale') === 'log' ? 'log' : 'lin';
+    o.scales.y = scale === 'log' ? yLog : yLin;
+    const chart = new Chart($('dl-chart'), {type:'line', data:{datasets:dsets}, options:o});
+    setRange(chart, tabs($('dl-tabs'), ['7d','14d','30d','all'], 'all', span => setRange(chart, span, tEnd, DT[0])), tEnd, DT[0]);
+    const sc = $('dl-scale');
+    sc.innerHTML = '<button type="button" data-s="lin" title="Linear scale">LIN</button><button type="button" data-s="log" title="Logarithmic scale: small add-ons stay readable next to the flagship">LOG</button>';
+    const markScale = () => sc.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.getAttribute('data-s') === scale)));
+    markScale();
+    sc.addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; scale = b.getAttribute('data-s'); store.set('dl-scale', scale); markScale(); chart.options.scales.y = scale === 'log' ? yLog : yLin; chart.update(reduce ? 'none' : undefined); });
+    const lg = $('dl-legend');
+    lg.innerHTML = dsets.map((d,i) => '<button type="button" data-i="'+i+'" aria-pressed="'+(!d.hidden)+'"><i style="background:'+d.borderColor+'"></i>'+esc(d.label)+'</button>').join('');
+    lg.addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; const i = +b.getAttribute('data-i'); const vis = chart.isDatasetVisible(i); chart.setDatasetVisibility(i, !vis); b.setAttribute('aria-pressed', String(!vis)); chart.update();
+      store.set('dl-hidden', dsets.filter((d,j) => !chart.isDatasetVisible(j)).map(d => d._id).join(',')); });
+    // per-update bars
+    let pick = store.get('dl-pick'); if (!ids.includes(pick)) pick = flag && ids.includes(flag.modId) ? flag.modId : ids[0];
+    const bo = baseOptions(); bo.layout = {padding:{top:4}}; bo.interaction = {mode:'index', intersect:false};
+    bo.scales = {x:{grid:{display:false}, ticks:{color:MUT, font:{family:MONO}, maxRotation:0, autoSkipPadding:10}}, y:{beginAtZero:true, ticks:{color:MUT, font:{family:MONO}, precision:0}, grid:{color:GRID}, border:{display:false}}};
+    const bars = new Chart($('dl-bars'), {type:'bar', data:{labels:[], datasets:[{label:'new downloads', data:[], borderRadius:2, maxBarThickness:22}]}, options:bo});
+    function drawBars(){
+      const a = dlSeries(pick).slice(); const t = DT.slice(); const n = dlNow(pick); if (n != null){ a.push(n); t.push(tEnd); }
+      const rows = []; let pv = null, pt = null;
+      for (let i = 0; i < a.length; i++){ if (a[i] == null) continue; if (pv != null && a[i] > pv) rows.push({t:t[i], v:a[i]-pv, h:Math.round((t[i]-pt)/HOUR)}); if (pv == null || a[i] !== pv){ pv = a[i]; pt = t[i]; } }
+      const shown = rows.slice(-30);
+      bars.data.labels = shown.map(r => md(r.t));
+      bars.data.datasets[0].data = shown.map(r => r.v);
+      bars.data.datasets[0].backgroundColor = shown.map((r,i) => i === shown.length-1 ? color[pick] : color[pick]+'99');
+      bars.options.plugins.tooltip.callbacks = {title: items => items.length ? 'Workshop update '+stamp(shown[items[0].dataIndex].t)+' UTC' : '', label: c => ' +'+fmt(c.parsed.y)+' downloads over '+shown[c.dataIndex].h+' h'};
+      bars.update();
+      const last7 = rows.filter(r => r.t >= gen-7*DAY), sum7 = last7.reduce((s,r) => s+r.v, 0);
+      $('dl-bars-note').textContent = rows.length ? label(byId[pick])+': '+(last7.length ? fmt(Math.round(sum7/7))+' new downloads a day on average over the last 7 days' : 'no update in the last 7 days')+' · '+shown.length+' updates shown' : 'No change recorded yet for '+label(byId[pick])+'; bars appear after its next Workshop update.';
+      $('dl-pick').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.getAttribute('data-id') === pick)));
+    }
+    $('dl-pick').innerHTML = ids.map(id => '<button type="button" data-id="'+id+'" aria-pressed="false"><i style="background:'+color[id]+'"></i>'+esc(label(byId[id]))+'</button>').join('');
+    $('dl-pick').addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; pick = b.getAttribute('data-id'); store.set('dl-pick', pick); drawBars(); });
+    drawBars();
+  })();
 
-  // --- rivals chart
-  const top = kw.mods.slice(0, C.site.chartSeries||8);
-  const palette = [HAZ, RAD, '#e07a3b', '#8fa2ff', '#c9d64f', '#d46ab0', '#4fb3d9', '#b0a054'];
-  document.getElementById('chart-sub').textContent = 'Servers running each of the top '+top.length+' '+kw.label.toLowerCase()+', one point per hourly snapshot ('+H.length+' stored).'+gapNote;
-  const datasets = top.map((m,i)=>({label:m.name, data:kwSeries(m.modId), borderColor: mine.has(m.modId)?HAZ:palette[(i+1)%palette.length], borderWidth: mine.has(m.modId)?3:1.6, pointRadius: H.length>48?0:2.5, tension:.25, fill:false}));
-  document.getElementById('legend').innerHTML = datasets.map(d=>'<span><i style="background:'+d.borderColor+'"></i>'+esc(d.label)+'</span>').join('');
-  if (window.Chart && H.length >= 2){
-    new Chart(document.getElementById('chart'), {type:'line', plugins:[gapBandPlugin()], data:{labels, datasets}, options:{responsive:true, maintainAspectRatio:false, animation:false, interaction:{mode:'index',intersect:false}, plugins:{legend:{display:false}, tooltip:{callbacks:{title:tipTitle}}}, scales:{x:{ticks:{color:MUT, maxTicksLimit:8, callback:tickCb, font:{family:'Share Tech Mono'}}, grid:{color:GRID}}, y:{beginAtZero:true, ticks:{color:MUT, font:{family:'Share Tech Mono'}}, grid:{color:GRID}, title:{display:true,text:'servers',color:MUT}}}}});
-  } else {
-    document.getElementById('chart').outerHTML = '<div class="empty">The chart appears once two or more hourly snapshots exist.</div>';
-  }
+  // ---------- ranking
+  const KD = D.kwDelta || {d:{}};
+  $('kw-title').textContent = kw.label+' on servers right now';
+  $('kw-sub').textContent = kw.modCount+' mods whose name contains “'+kw.terms.join('” or “')+'” are loaded on '+fmt(kw.serversTotal)+' server slots with '+fmt(kw.playersTotal)+' players between them. Ranked by servers, then players. Project Outbreak add-ons are highlighted. Download totals for every listed mod are recorded hourly since 8 October 2026, so the 7-day column fills in from 15 October.';
+  if (KD.hours) $('kw-delta-h').textContent = 'Δ '+KD.hours+' h';
+  const maxS = Math.max(1, ...kw.mods.map(m => m.servers));
+  const KDL = D.kwDownloads || {};
+  const rowHtml = m => { const isMine = mine.has(m.modId), w = Math.max(2, Math.round(120*m.servers/maxS)), d = KD.d ? KD.d[m.modId] : null, dl = KDL[m.modId];
+    return '<tr'+(isMine?' class="mine"':'')+'><td class="rank">'+m.keywordRank+'</td><td><a class="modname" href="'+WS(esc(m.modId))+'" target="_blank" rel="noopener" title="Workshop page">'+esc(m.name)+'</a><span class="meta"><a href="'+esc(RM(m.modId))+'" target="_blank" rel="noopener" title="Server history on '+esc(C.source.name)+'">'+esc(m.modId)+' ↗</a> · <a href="'+esc(AH(m.modId))+'" target="_blank" rel="noopener" title="Mod page on '+esc(C.armahq.name)+'">'+esc(C.armahq.name)+' ↗</a></span></td>'+
+      '<td class="num">'+fmt(m.servers)+'</td><td class="num">'+(d == null ? '<span class="flat">-</span>' : '<span class="'+(d>0?'up':d<0?'down':'flat')+'">'+signed(d)+'</span>')+'</td><td class="num">'+fmt(m.players)+'</td>'+
+      '<td><span class="bar" style="width:'+w+'px"></span><span class="share">'+(m.shareOfKeywordServers != null ? Math.round(m.shareOfKeywordServers*100)+'%' : '')+'</span></td>'+
+      '<td class="num">'+fmt(dl ? dl.now : m.downloads)+'</td><td class="num">'+(dl && dl.d7 != null ? '<span class="up">'+signed(dl.d7)+'</span>' : '<span class="flat" title="Recorded since 8 October 2026">-</span>')+'</td><td class="num">'+fmt(m.globalRank)+'</td></tr>'; };
+  const allRows = kw.mods.slice(0, C.site.rankingRows || 60), FEW = 15;
+  const tb = document.querySelector('#ranking tbody');
+  function drawRanking(all){ tb.innerHTML = allRows.length ? (all ? allRows : allRows.slice(0, FEW)).map(rowHtml).join('') : '<tr><td colspan="9" class="empty">No mods matched in this snapshot.</td></tr>';
+    $('kw-more').innerHTML = allRows.length > FEW ? '<button type="button" class="btn" aria-expanded="'+all+'">'+(all ? 'Show top '+FEW : 'Show all '+allRows.length+' mods')+'</button>' : ''; }
+  $('kw-more').addEventListener('click', ev => { const b = ev.target.closest('button'); if (b) drawRanking(b.getAttribute('aria-expanded') !== 'true'); });
+  drawRanking(false);
 
-  // --- cards
-  document.getElementById('cards').innerHTML = tracked.slice().sort((a,b)=>(b.servers-a.servers)||(a.label||'').localeCompare(b.label||'')).map(t=>{
-    const s = trackedSeries(t.modId,'s'); const d = delta(s);
-    const tag = t.reserved ? '<span class="tag res">unpublished</span>' : '<span class="tag">'+esc(t.channel||'')+'</span>';
-    return '<div class="panel card'+(t.flagship?' flagship':'')+'"><div class="name"><span>'+esc(t.label||t.name)+'</span>'+tag+'</div><div class="id">'+esc(t.modId)+(t.seen&&t.name&&t.name!==t.label?' · listed as “'+esc(t.name)+'”':'')+'</div>'+
-      '<div class="nums"><div><b>'+fmt(t.servers)+'</b><span>servers</span></div><div><b>'+fmt(t.players)+'</b><span>players</span></div><div><b>'+(t.keywordRank?'#'+t.keywordRank:'–')+'</b><span>'+esc(kw.label.toLowerCase())+' rank</span></div></div>'+
-      spark(s, t.flagship?HAZ:RAD)+
-      '<div class="foot"><span>'+dTxt(d)+'</span><span>'+(t.seen?versionsChips(t.versions,t.flagship):'not on any server')+'</span></div>'+
-      '<div class="foot"><a href="'+esc(C.source.modPage.replace('{modId}',t.modId))+'" target="_blank" rel="noopener">servers on '+esc(C.source.name)+'</a><a href="https://reforger.armaplatform.com/workshop/'+esc(t.modId)+'" target="_blank" rel="noopener">Workshop</a></div></div>';
-  }).join('');
+  // ---------- zombie mods over time
+  (function(){
+    const ids = D.chartIds || [];
+    const names = Object.fromEntries(kw.mods.map(m => [m.modId, m.name]));
+    const palette = ['#8fa2ff', RAD, '#e07a3b', '#c9d64f', '#d46ab0', '#4fb3d9', '#b0a054', '#e5e5e5'];
+    let k = 0;
+    const dsets = ids.map(id => { const m = mine.has(id), col = id === (flag && flag.modId) ? HAZ : m ? '#f5d76e' : palette[(k++) % palette.length];
+      return {label:names[id] || id, data:points(S(id)), borderColor:col, backgroundColor:col, borderWidth: m ? 2.8 : 1.5, pointRadius:0, pointHoverRadius:4, tension:.25, spanGaps:false, borderDash: (m && id !== (flag && flag.modId)) ? [6,3] : undefined}; });
+    $('chart-sub').textContent = 'Servers running each of the top '+ids.length+' '+kw.label.toLowerCase()+' by servers right now, hour by hour. Select a name to hide or show it.';
+    $('kw-legend').innerHTML = dsets.map((d,i) => '<button type="button" data-i="'+i+'" aria-pressed="true"><i style="background:'+d.borderColor+'"></i>'+esc(d.label)+'</button>').join('');
+    if (!hasChart || T.length < 2){ noChart('kw-chart', 'The chart appears once two or more hourly snapshots exist.'); return; }
+    const o = baseOptions(); o.plugins.tooltip.itemSort = (a,b) => b.parsed.y-a.parsed.y;
+    o.scales = {x: xAxis(7*DAY, tEnd, T[0]), y:{beginAtZero:true, ticks:{color:MUT, font:{family:MONO}, precision:0}, grid:{color:GRID}, border:{display:false}, title:{display:true, text:'servers', color:MUT, font:{family:MONO}}}};
+    const chart = new Chart($('kw-chart'), {type:'line', plugins:[provenance], data:{datasets:dsets}, options:o});
+    setRange(chart, tabs($('kw-tabs'), ['48h','7d','14d','30d'], '7d', span => setRange(chart, span, tEnd, T[0])), tEnd, T[0]);
+    $('kw-legend').addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; const i = +b.getAttribute('data-i'); const vis = chart.isDatasetVisible(i); chart.setDatasetVisibility(i, !vis); b.setAttribute('aria-pressed', String(!vis)); chart.update(); });
+  })();
 
-  // --- dependents: community mods that declare the flagship as a Workshop dependency
+  // ---------- every add-on, grouped
+  (function(){
+    const groups = (C.groups && C.groups.length) ? C.groups : [{id:'', label:'', blurb:''}];
+    const inGroup = g => tracked.filter(t => (t.group || '') === g.id || (!g.id));
+    const card = t => {
+      const s = S(t.modId), w = t.workshop || {}, d = change(s, t.servers, DAY), hasHist = s.some(v => v != null);
+      const tag = t.reserved ? '<span class="tag res">unpublished</span>' : '<span class="tag">'+(w.version ? 'v'+esc(w.version) : esc(t.channel||''))+'</span>';
+      const allDeps = (w.dependencies || []).filter(x => x && x.id);
+      const ownDeps = allDeps.filter(x => mine.has(x.id));
+      const deps = allDeps.length <= 3 ? allDeps : (ownDeps.length ? ownDeps : allDeps.slice(0, 2));
+      const moreDeps = allDeps.length - deps.length;
+      return '<div class="panel card'+(t.flagship?' flagship':'')+'"><div class="name">'+ext(WS(t.modId), esc(label(t)))+tag+'</div>'+
+        '<div class="sum">'+esc(w.summary || '')+'</div>'+
+        '<div class="nums"><div><b>'+num(t.servers)+'</b><span class="lbl">servers</span></div><div><b>'+num(t.players)+'</b><span class="lbl">players</span></div><div><b>'+num(dlNow(t.modId))+'</b><span class="lbl">downloads</span></div></div>'+
+        (hasHist ? spark(lastDays(s,7), t.flagship ? HAZ : RAD) : '')+
+        '<div class="foot"><span>'+(hasHist ? dTxt(d) : (t.seen ? 'server history builds hourly' : 'not on a server in this snapshot'))+'</span><span>'+(t.keywordRank ? '#'+t.keywordRank+' '+esc(kw.label.toLowerCase()) : t.globalRank ? '#'+fmt(t.globalRank)+' of all mods' : '')+'</span></div>'+
+        (t.seen && Object.keys(t.versions||{}).length ? '<div class="foot"><span>'+versionsChips(t.versions, t.flagship)+'</span></div>' : '')+
+        (deps.length ? '<div class="needs">Needs '+deps.map(x => ext(WS(x.id), esc(x.name || x.id))).join(', ')+(moreDeps ? ', and '+ext(WS(t.modId), moreDeps+' more') : '')+'</div>' : '')+
+        '<div class="links">'+ext(WS(t.modId), 'Workshop')+ext(RM(t.modId), esc(C.source.name))+ext(AH(t.modId), esc(C.armahq.name))+'</div></div>';
+    };
+    const total = tracked.length, live = tracked.filter(t => t.seen).length;
+    const dlTotal = tracked.reduce((a,t) => a + (dlNow(t.modId) || 0), 0);
+    $('addons-sub').innerHTML = esc(total+' Workshop items, '+live+' of them on servers right now, '+fmt(dlTotal)+' downloads between them. Sparklines show the servers running each one over the last seven days. Every name opens its Workshop page.');
+    $('groups').innerHTML = groups.map(g => { const items = inGroup(g); if (!items.length) return '';
+      return '<div class="group">'+(g.label ? '<h3>'+esc(g.label)+' <small>'+esc(g.blurb||'')+'</small><span class="count">'+items.length+' item'+(items.length>1?'s':'')+'</span></h3><div class="rule"></div>' : '')+'<div class="cards n'+items.length+'">'+items.map(card).join('')+'</div></div>'; }).join('');
+    armCounters($('groups'));
+  })();
+
+  // ---------- dependents
   const dep = L.dependents;
   if (dep && dep.items && dep.items.length){
-    const depTop = dep.items.slice(0, dep.top||5);
-    const targetName = (flag && flag.modId===dep.targetModId) ? (flag.label||flag.name) : 'Project Outbreak Zombies';
-    document.getElementById('dep-title').textContent = dep.heading || ('Built on '+targetName);
-    const depCount = dep.communityDependents!=null ? dep.communityDependents : dep.items.length;
-    document.getElementById('dep-sub').textContent = 'Community mods that declare '+targetName+' as a Workshop dependency, ranked by downloads (of '+depCount+' found via ArmaHQ\'s dependency index - see Method below).';
-    const maxDl = Math.max(1, ...depTop.map(m=>m.downloads));
-    document.getElementById('dep-cards').innerHTML = depTop.map((m,i)=>{
-      const w = Math.max(2, Math.round(220*m.downloads/maxDl));
-      return '<div class="panel card'+(i===0?' rank1':'')+'"><div class="name"><span><span class="rankbadge">#'+(i+1)+'</span>'+esc(m.name)+'</span><span class="tag">by '+esc(m.author||'?')+'</span></div><div class="id">'+esc(m.modId)+'</div>'+
-        '<div class="nums"><div><b>'+fmt(m.downloads)+'</b><span>downloads</span></div><div><b>'+fmt(m.servers)+'</b><span>servers now</span></div><div><b>'+fmt(m.players)+'</b><span>players now</span></div></div>'+
-        '<div style="padding:4px 0"><span class="bar" style="width:'+w+'px"></span></div>'+
-        '<div class="foot"><a href="https://reforger.armaplatform.com/workshop/'+esc(m.modId)+'" target="_blank" rel="noopener">Workshop</a><a href="'+esc(C.source.modPage.replace('{modId}',m.modId))+'" target="_blank" rel="noopener">'+esc(C.source.name)+'</a></div></div>';
-    }).join('');
-  } else {
-    const sec = document.getElementById('dependents-section');
-    if (sec) sec.outerHTML = '';
-  }
+    const depTop = dep.items.slice(0, dep.top || 5);
+    const targetName = (flag && flag.modId === dep.targetModId) ? label(flag) : 'Project Outbreak Zombies';
+    $('dep-title').textContent = dep.heading || ('Built on '+targetName);
+    const depCount = dep.communityDependents != null ? dep.communityDependents : dep.items.length;
+    $('dep-sub').textContent = 'Community mods that declare '+targetName+' as a Workshop dependency, ranked by downloads (top '+depTop.length+' of '+depCount+' found in ArmaHQ’s dependency index).';
+    const maxDl = Math.max(1, ...depTop.map(m => m.downloads));
+    document.querySelector('#dep-table tbody').innerHTML = depTop.map((m,i) => '<tr><td class="rank"'+(i===0?' style="color:var(--hazard)"':'')+'>'+(i+1)+'</td><td><a class="modname" href="'+WS(esc(m.modId))+'" target="_blank" rel="noopener">'+esc(m.name)+'</a><span class="meta"><a href="'+esc(RM(m.modId))+'" target="_blank" rel="noopener">'+esc(m.modId)+' ↗</a> · <a href="'+esc(AH(m.modId))+'" target="_blank" rel="noopener">'+esc(C.armahq.name)+' ↗</a></span></td><td>'+esc(m.author||'?')+'</td>'+
+      '<td class="num">'+num(m.downloads)+'</td><td style="width:22%"><span class="bar" style="width:'+Math.max(2, Math.round(100*m.downloads/maxDl))+'%"></span></td><td class="num">'+fmt(m.servers)+'</td><td class="num">'+fmt(m.players)+'</td></tr>').join('');
+    armCounters($('dep-table'));
+  } else { const sec = $('dependents-section'); if (sec) sec.remove(); }
 
-  // --- servers running the flagship
-  if (flag && flag.seen){
-    document.getElementById('servers-title').textContent = 'Servers running '+(flag.label||flag.name);
-    document.getElementById('servers-sub').textContent = 'The '+Math.min(flag.topServers.length, flag.servers)+' busiest of its '+fmt(flag.servers)+' servers in this snapshot, by players online. Each name opens that server\'s page on '+C.armahq.name+'.';
-    document.querySelector('#servers tbody').innerHTML = flag.topServers.map((s,i)=>'<tr class="srv"><td class="rank">'+(i+1)+'</td><td><a href="'+esc((C.armahq.serverPage||'').replace('{id}',s.id||''))+'" target="_blank" rel="noopener">'+esc(s.name)+'</a>'+(s.password?' <span class="chip">locked</span>':'')+(s.official?' <span class="chip">official</span>':'')+'</td><td>'+esc(s.scenario)+'</td><td>'+esc(s.region)+'</td><td class="num">'+fmt(s.players)+'</td><td class="num">'+fmt(s.limit)+'</td><td><span class="chip acc">'+esc(s.version)+'</span></td><td class="id" style="font-family:var(--mono);font-size:12px">'+esc(s.gameVersion)+'</td><td class="num">'+fmt(s.modCount)+'</td></tr>').join('');
-  } else {
-    document.getElementById('servers-section').innerHTML = '<div class="empty">No server list: the flagship mod was not seen in this snapshot.</div>';
-  }
+  // ---------- links
+  (function(){
+    const site = C.site, gh = site.github || '', pages = location.origin && location.origin.indexOf('github.io') >= 0 ? '' : 'https://outbreakarma.github.io/outbreak-stats/';
+    const li = (href, text, note) => '<li>'+ext(href, esc(text))+(note ? '<small>'+esc(note)+'</small>' : '')+'</li>';
+    const blocks = [
+      ['Project Outbreak', [
+        [site.mainSite, 'Project Outbreak site', 'The infected, Game Master tools, screenshots and change notes'],
+        [WS(flag ? flag.modId : ''), 'Project Outbreak Zombies on the Workshop', 'Subscribe, rate and read the full description'],
+        [site.discord, 'Discord', 'Questions, bug reports and server owners'],
+        ['https://github.com/outbreakarma', 'GitHub', 'Both sites, open source']]],
+      ['Raw data', [
+        [pages+'latest.json', 'latest.json', 'This snapshot, as JSON'],
+        [pages+'trend.json', 'trend.json', 'Last 14 days, hourly, plus download history'],
+        [gh+'/blob/main/data/history.jsonl', 'history.jsonl', 'Every hourly row since the start'],
+        [gh+'/blob/main/data/downloads.jsonl', 'downloads.jsonl', 'Every recorded change in Workshop downloads'],
+        [gh+'/actions', 'Collector runs', 'The hourly GitHub Actions job and its logs'],
+        [gh, 'Source code', 'Collector, backfill and this page']]],
+      ['Sources', [
+        [C.source.url, C.source.name, 'Server counts, players, hourly history and Workshop totals'],
+        [RM(flag ? flag.modId : ''), 'Project Outbreak Zombies on '+C.source.name, 'Its 30-day server and player charts'],
+        ['https://reforgermods.net/arma-reforger-mods-api/v2/', C.source.name+' API', 'The public API this collector reads'],
+        [C.armahq.url, C.armahq.name, 'Server lists, versions in use and dependents'],
+        [AH(flag ? flag.modId : ''), 'Project Outbreak Zombies on '+C.armahq.name, 'Every server running it'],
+        ['https://reforger.armaplatform.com/workshop?search=zombie', 'Zombie mods on the Workshop', 'The full Workshop search behind the ranking']]]
+    ];
+    blocks.push(['Every add-on', tracked.map(t => [WS(t.modId), label(t), (t.workshop && t.workshop.version ? 'v'+t.workshop.version+' · ' : '')+fmt(dlNow(t.modId))+(dlNow(t.modId) === 1 ? ' download' : ' downloads')]), 'wide-l']);
+    $('linkgrid').innerHTML = blocks.map(b => '<div class="panel'+(b[2] ? ' '+b[2] : '')+'"><h3>'+esc(b[0])+'</h3><ul>'+b[1].filter(x => x[0]).map(x => li(x[0], x[1], x[2])).join('')+'</ul></div>').join('');
+  })();
+
+  // ---------- servers running the flagship
+  if (flag && flag.seen && (flag.topServers||[]).length){
+    $('servers-title').textContent = 'Servers running '+label(flag);
+    $('servers-sub').textContent = 'The '+Math.min(flag.topServers.length, flag.servers)+' busiest of its '+fmt(flag.servers)+' servers in this snapshot, by players online. Each name opens that server’s page on '+C.armahq.name+'.';
+    document.querySelector('#servers tbody').innerHTML = flag.topServers.map((s,i) => '<tr class="srv"><td class="rank">'+(i+1)+'</td><td><a href="'+esc((C.armahq.serverPage||'').replace('{id}', s.id||''))+'" target="_blank" rel="noopener">'+esc(s.name)+'</a>'+(s.password?' <span class="chip">locked</span>':'')+(s.official?' <span class="chip">official</span>':'')+'</td><td>'+esc(s.scenario)+'</td><td>'+esc(s.region)+'</td><td class="num">'+fmt(s.players)+'</td><td class="num">'+fmt(s.limit)+'</td><td><span class="chip acc">'+esc(s.version)+'</span></td><td class="num">'+fmt(s.modCount)+'</td></tr>').join('');
+  } else { $('servers-section').innerHTML = '<div class="empty">No server list: the flagship mod was not seen in this snapshot.</div>'; }
 })();
 </script>

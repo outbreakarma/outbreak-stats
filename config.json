@@ -21,48 +21,41 @@
     "zombie"
   ],
   "keywordLabel": "Zombie mods",
-  "historyRowsOnPage": 336,
+  "historyDaysOnPage": 30,
+  "backfill": {
+    "enabled": true,
+    "maxDays": 29,
+    "keywordTop": 10
+  },
   "tracked": [
     {
       "modId": "F1D4B9B5245B36ED",
       "label": "Project Outbreak Zombies",
       "addon": "ProjectOutbreak",
       "channel": "production",
-      "flagship": true
-    },
-    {
-      "modId": "40B5686CC205703A",
-      "label": "AI Rearm",
-      "addon": "AIRearm",
-      "channel": "production"
-    },
-    {
-      "modId": "4FD4A1BD550793F4",
-      "label": "Creature Melee AI",
-      "addon": "CreatureMeleeAI",
-      "channel": "production",
-      "note": "ledger says reserved-not-published; ArmaHQ sees it on servers, so it is published"
+      "flagship": true,
+      "group": "outbreak"
     },
     {
       "modId": "7B763100BAFA1F9A",
-      "label": "Outbreak Infection",
+      "label": "Project Outbreak Infection",
       "addon": "ProjectOutbreakInfection",
       "channel": "production",
-      "note": "ledger says reserved-not-published; ArmaHQ sees it on servers, so it is published"
+      "group": "outbreak"
     },
     {
       "modId": "6209E38AB237098E",
-      "label": "Outbreak Structures",
+      "label": "Project Outbreak Breach",
       "addon": "ProjectOutbreakStructures",
       "channel": "production",
-      "note": "ledger says reserved-not-published; ArmaHQ sees it on servers, so it is published"
+      "group": "outbreak"
     },
     {
       "modId": "6B9BD0DA529C0D1E",
-      "label": "Outbreak Survival Gear",
+      "label": "Project Outbreak Gadgets",
       "addon": "ProjectOutbreakSurvivalGear",
       "channel": "production",
-      "note": "ledger says reserved-not-published; ArmaHQ sees it on servers, so it is published"
+      "group": "outbreak"
     },
     {
       "modId": "384E32C2A832444E",
@@ -70,28 +63,119 @@
       "addon": "ProjectOutbreakVariety",
       "channel": "production",
       "publishedAt": "2026-09-27T04:10:59Z",
-      "note": "repo draft ledger says not published; ArmaHQ and ReforgerMods both see it live, so it is published"
+      "group": "outbreak"
     },
     {
       "modId": "297640FBAC0C46C3",
       "label": "Special Zombies and Creatures",
       "addon": "ProjectOutbreakSpecialZombiesAndCreatures",
       "channel": "production",
-      "publishedAt": "2026-09-27T05:02:57Z"
+      "publishedAt": "2026-09-27T05:02:57Z",
+      "group": "outbreak"
+    },
+    {
+      "modId": "0B4FB11C20129700",
+      "label": "Project Outbreak Deadwood",
+      "addon": "ProjectOutbreakDeadwood",
+      "channel": "production",
+      "group": "scenarios"
+    },
+    {
+      "modId": "0B4FB11C20129701",
+      "label": "Project Outbreak Deadwood Lite",
+      "addon": "ProjectOutbreakDeadwoodLight",
+      "channel": "production",
+      "group": "scenarios"
+    },
+    {
+      "modId": "475357F020261002",
+      "label": "Goblin Swordsman",
+      "addon": "GoblinSwordsman",
+      "channel": "production",
+      "group": "creatures"
+    },
+    {
+      "modId": "9C6F9425B58142E7",
+      "label": "Warbeasts",
+      "channel": "production",
+      "group": "creatures"
+    },
+    {
+      "modId": "E1DCD3CAF138441C",
+      "label": "Eyekin",
+      "addon": "AlienCreature",
+      "channel": "production",
+      "group": "creatures"
+    },
+    {
+      "modId": "135E4CF7BBB94766",
+      "label": "Maulkin",
+      "channel": "production",
+      "group": "creatures"
+    },
+    {
+      "modId": "4FD4A1BD550793F4",
+      "label": "Creature Melee AI",
+      "addon": "CreatureMeleeAI",
+      "channel": "production",
+      "group": "tools"
+    },
+    {
+      "modId": "40B5686CC205703A",
+      "label": "AI Rearm",
+      "addon": "AIRearm",
+      "channel": "production",
+      "group": "tools"
+    },
+    {
+      "modId": "3CBDFAB9713149BE",
+      "label": "Military Crossbow",
+      "channel": "production",
+      "group": "tools"
+    },
+    {
+      "modId": "9E4B2C7A1D5F8036",
+      "label": "Ballista Turret WIP",
+      "channel": "production",
+      "group": "tools"
     }
   ],
   "dependents": {
     "targetModId": "F1D4B9B5245B36ED",
     "heading": "Built on Project Outbreak Zombies",
     "top": 5,
-    "discoveryMethod": "Pulled live every run from ArmaHQ's own Workshop dependency index (armahq.com's per-mod \"Required By\" data, api/workshop/dependents/{modId}) - every mod ArmaHQ currently sees declaring this one as a Workshop dependency, not a keyword search. First-party Project Outbreak add-ons are dropped from this list since they already have their own section above; download, subscriber and server numbers for the rest are refreshed from ReforgerMods.net every run."
+    "discoveryMethod": "Pulled live every run from ArmaHQ's own Workshop dependency index (armahq.com's per-mod \"Required By\" data, api/workshop/dependents/{modId}): every mod ArmaHQ currently sees declaring this one as a Workshop dependency, not a keyword search. First-party Project Outbreak add-ons are dropped from this list since they already have their own section above; download, subscriber and server numbers for the rest are refreshed from ReforgerMods.net every run."
   },
   "site": {
     "title": "Outbreak Server Watch",
-    "subtitle": "Where Project Outbreak and every other zombie mod are running on Arma Reforger servers, refreshed hourly.",
+    "subtitle": "Where Project Outbreak and every other zombie mod run on Arma Reforger servers, and how the Workshop downloads grow. Refreshed hourly.",
     "topServersPerMod": 12,
     "rankingRows": 60,
     "chartSeries": 8,
-    "mainSite": "https://outbreakarma.github.io/"
-  }
+    "mainSite": "https://outbreakarma.github.io/",
+    "discord": "https://discord.gg/JumfhFujRF",
+    "github": "https://github.com/outbreakarma/outbreak-stats"
+  },
+  "groups": [
+    {
+      "id": "outbreak",
+      "label": "Project Outbreak",
+      "blurb": "The zombie sandbox and its optional modules."
+    },
+    {
+      "id": "scenarios",
+      "label": "Scenarios",
+      "blurb": "Ready-to-host Project Outbreak scenarios."
+    },
+    {
+      "id": "creatures",
+      "label": "Creatures",
+      "blurb": "Stand-alone creature add-ons on the Creature Melee AI foundation."
+    },
+    {
+      "id": "tools",
+      "label": "Foundation and tools",
+      "blurb": "The melee AI framework, AI support and weapons."
+    }
+  ]
 }

@@ -2,7 +2,10 @@ name: Hourly snapshot
 
 on:
   schedule:
-    - cron: "7 * * * *"
+    # GitHub drops most scheduled runs under load (since October this job fired every 4-8 h).
+    # Four slots an hour give it more chances; run.py skips a slot when the snapshot is fresh,
+    # and the scraper fills any hour that still slips through from reforgermods.net's history.
+    - cron: "7,22,37,52 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -21,7 +24,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Scrape and build
-        run: python run.py
+        run: python run.py ${{ github.event_name == 'workflow_dispatch' && '--force' || '' }}
       - name: Commit snapshot
         run: |
           git config user.name "armahq-stats bot"
