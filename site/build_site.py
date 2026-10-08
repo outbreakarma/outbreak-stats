@@ -2,7 +2,7 @@
 """Build docs/index.html (GitHub Pages) from data/latest.json, history.jsonl and downloads.jsonl.
 
 Also writes docs/latest.json (the snapshot) and docs/trend.json (the flagship's and tracked
-add-ons' last 14 days plus their download totals), which the Project Outbreak site reads.
+add-ons' last 30 days plus their download totals), which the Project Outbreak site reads.
 
 The page is fully static: the data is embedded as JSON and rendered by a small inline
 script, so it works from GitHub Pages, from a local file, or inside an artifact preview.
@@ -313,7 +313,7 @@ def build(config_path: Path, data_dir: Path, out_path: Path, artifact_out: Path 
     # A copy of the data beside the page, for anyone who wants the numbers rather than the view.
     (out_path.parent / "latest.json").write_text(json.dumps(latest, ensure_ascii=False, indent=1), encoding="utf-8")
     flag = next((i for i, e in latest.get("tracked", {}).items() if e.get("flagship")), tracked_ids[0] if tracked_ids else None)
-    recent = [i for i, t in enumerate(history["t"]) if t >= int((gen - dt.timedelta(days=14)).timestamp())]
+    recent = [i for i, t in enumerate(history["t"]) if t >= int((gen - dt.timedelta(days=30)).timestamp())]
     keyword = latest.get("keyword", {})
     trend = {
         "generatedUtc": latest["generatedUtc"],
