@@ -1,23 +1,29 @@
 #!/usr/bin/env python3
-"""Announce new Project Outbreak submods in Discord: one message per new Workshop mod.
+"""Announce Project Outbreak submods in Discord: one message per Workshop mod, oldest first.
 
 A submod is a Workshop mod that declares one of the tracked Project Outbreak add-ons as a
 Workshop dependency. Each run asks ArmaHQ's dependency index (the same data behind the
-flagship's "Built on" list) for every tracked add-on, drops the add-ons themselves, and
-compares what is left with data/submods.json.
+flagship's "Built on" list) for every tracked add-on and drops the add-ons themselves. It also
+drops mods published by the Project Outbreak account (FIRST_PARTY_AUTHOR_IDS), since those are
+ours rather than community submods.
 
-The first run, or any run without that file, records the current submods as seen and posts
-nothing, so the channel does not fill up with mods that were already there. After that, each
-new submod gets one message in the webhook named by DISCORD_SUBMODS_WEBHOOK, at most MAX_POSTS
-per run. A submod is marked seen only once Discord accepts its message, so a failed post is
-tried again on the next run. With no webhook set, the script does nothing and exits 0.
+data/submods.json keeps one entry per submod, with a status:
+  pending     found and not posted yet; the existing submods start here, so they are backfilled
+  posted      Discord accepted its message
+  first-party published by the Project Outbreak account; never posted
+
+Each run posts at most MAX_POSTS pending submods, ordered by Workshop publish date (oldest
+first), so a backlog drains over several hourly runs. A submod is marked posted only once
+Discord accepts its message, so a failed post is tried again on the next run. The Workshop
+tags go in the message text as well as in the embed, because Discord search reads message text
+but not embed fields. With no webhook set, the script does nothing and exits 0.
 
 Summary, author and image come from ReforgerMods.net when it has them; a missing value just
 leaves that part out. The webhook URL is read from the environment and is never printed or
 written to disk.
 
   python discord/submods.py --dry-run   # print the messages that would go out; no Discord, no writes
-  python discord/submods.py             # post new submods and update data/submods.json
+  python discord/submods.py             # post pending submods and update data/submods.json
 """
 from __future__ import annotations
 
@@ -35,13 +41,20 @@ ROOT = Path(__file__).resolve().parent.parent
 CONFIG_PATH = ROOT / "config.json"
 STATE_PATH = ROOT / "data" / "submods.json"
 WEBHOOK_ENV = "DISCORD_SUBMODS_WEBHOOK"
-HEADLINE = "\U0001f9df **A new submod appears!**"
+HEADLINE = chr(0x1F9DF) + " **A new submod appears!**"
 WORKSHOP_URL = "https://reforger.armaplatform.com/workshop/{modId}"
 EMBED_COLOR = 0x7FB069
-MAX_POSTS = 5  # new submods announced per run; the rest wait for a later run
+# The Project Outbreak Workshop account. Every tracked add-on is published by it, and so are
+# a few untracked mods; the ids are what counts, since display names can change.
+FIRST_PARTY_AUTHOR_IDS = {"1f2e35f0-890d-4818-9fac-3ccd4dfc60bd"}
+MAX_POSTS = 5  # pending submods announced per run; the rest wait for a later run
 MAX_FAILURES = 3  # failed posts tolerated per run before the run stops posting
+MAX_DETAIL_FAILURES = 3  # failed ReforgerMods lookups tolerated per run before the lookups stop
+MAX_TAGS = 8  # Workshop tags shown per message
 MIN_SUMMARY_CHARS = 8  # shorter ReforgerMods summaries are placeholders such as "1"
 RETRY_CAP_SECONDS = 120
+DASHES = {0x2014: "-", 0x2013: "-"}  # em and en dashes become plain hyphens in posted text
+ELLIPSIS = chr(0x2026)
 
 
 def log(msg: str) -> None:
@@ -54,16 +67,21 @@ def utc_now() -> str:
 
 def tidy(text: str, limit: int) -> str:
     """Plain text for Discord: no em or en dashes, single spaces, cut to the limit with an ellipsis."""
-    text = " ".join(text.replace("\u2014", "-").replace("\u2013", "-").split())
+    text = " ".join(text.translate(DASHES).split())
     if len(text) <= limit:
         return text
-    return text[: limit - 1].rsplit(" ", 1)[0] + "\u2026"
+    return text[: limit - 1].rsplit(" ", 1)[0] + ELLIPSIS
 
 
 def escape_md(text: str) -> str:
     for ch in "\\*_~|`":
         text = text.replace(ch, "\\" + ch)
     return text
+
+
+def tag_text(tag: str) -> str:
+    """A Workshop tag as a search-friendly word: SCENARIOS_MP becomes "scenarios mp"."""
+    return escape_md(" ".join(tag.replace("_", " ").lower().split()))
 
 
 def fetch_json(url: str, user_agent: str, timeout: int, retries: int) -> dict:
@@ -104,8 +122,8 @@ def current_submods(cfg: dict) -> tuple[dict[str, str], dict[str, list[str]]]:
     return names, builds_on
 
 
-def fetch_detail(mod_id: str, cfg: dict) -> dict:
-    """Summary, author and image from ReforgerMods.net for one submod. Best effort: {} when unavailable."""
+def fetch_detail(mod_id: str, cfg: dict) -> dict | None:
+    """One submod's ReforgerMods.net record, or None when it cannot be fetched this run."""
     try:
         body = fetch_json(
             f"{cfg['source']['apiBase']}/mods/{mod_id}",
@@ -115,11 +133,54 @@ def fetch_detail(mod_id: str, cfg: dict) -> dict:
         )
         return body.get("mod") or {}
     except RuntimeError as exc:
-        log(f"no ReforgerMods details for {mod_id}; the post leaves them out ({exc})")
-        return {}
+        log(f"no ReforgerMods details for {mod_id} yet; it is retried next run ({exc})")
+        return None
 
 
-def build_message(mod_id: str, name: str, builds_on: list[str], footer: str, detail: dict) -> dict:
+def refresh_details(state: dict, names: dict[str, str], cfg: dict) -> None:
+    """Fill in author, tags, publish date and message text for every submod not yet looked up.
+
+    An entry counts as looked up once it has an authorId, so each submod costs one request
+    ever (the existing submods, once; new ones, as they appear)."""
+    failures = 0
+    for mod_id in names:
+        entry = state.get(mod_id, {})
+        if "authorId" in entry:
+            continue
+        if failures >= MAX_DETAIL_FAILURES:
+            log("ReforgerMods lookups stopped for this run; the rest wait for a later run")
+            return
+        detail = fetch_detail(mod_id, cfg)
+        if detail is None:
+            failures += 1
+            continue
+        author_id = str(detail.get("authorId") or "")
+        if author_id in FIRST_PARTY_AUTHOR_IDS:
+            status = "first-party"
+        else:
+            status = entry.get("status", "pending")
+        state[mod_id] = {
+            "name": names[mod_id],
+            "status": status,
+            "firstSeen": entry.get("firstSeen") or utc_now(),
+            "author": str(detail.get("author") or ""),
+            "authorId": author_id,
+            "tags": [str(t) for t in detail.get("tags") or []],
+            "createdAt": str(detail.get("createdAt") or ""),
+            "summary": str(detail.get("summary") or ""),
+            "imageUrl": str(detail.get("imageUrl") or ""),
+        }
+        if entry.get("postedAt"):
+            state[mod_id]["postedAt"] = entry["postedAt"]
+
+
+def headline_text(tags: list[str]) -> str:
+    shown = [tag_text(t) for t in tags[:MAX_TAGS]]
+    shown = [t for t in shown if t]
+    return HEADLINE + ("\nTags: " + ", ".join(shown) if shown else "")
+
+
+def build_message(mod_id: str, name: str, builds_on: list[str], footer: str, entry: dict) -> dict:
     embed: dict = {
         "title": escape_md(tidy(name, 200)),
         "url": WORKSHOP_URL.format(modId=mod_id),
@@ -127,16 +188,20 @@ def build_message(mod_id: str, name: str, builds_on: list[str], footer: str, det
         "fields": [{"name": "Builds on", "value": escape_md(tidy(", ".join(builds_on), 1000)), "inline": False}],
         "footer": {"text": footer},
     }
-    summary = tidy(str(detail.get("summary") or ""), 280)
+    summary = tidy(entry.get("summary", ""), 280)
     if len(summary) >= MIN_SUMMARY_CHARS:
         embed["description"] = escape_md(summary)
-    author = tidy(str(detail.get("author") or ""), 100)
+    author = tidy(entry.get("author", ""), 100)
     if author:
         embed["fields"].append({"name": "Author", "value": escape_md(author), "inline": True})
-    image = str(detail.get("imageUrl") or "")
+    image = entry.get("imageUrl", "")
     if image.startswith("https://"):
         embed["image"] = {"url": image}
-    return {"content": HEADLINE, "embeds": [embed], "allowed_mentions": {"parse": []}}
+    return {
+        "content": headline_text(entry.get("tags", [])),
+        "embeds": [embed],
+        "allowed_mentions": {"parse": []},
+    }
 
 
 def _retry_after(exc: urllib.error.HTTPError) -> float:
@@ -181,17 +246,20 @@ def webhook_base(raw: str) -> str:
     return raw.split("?", 1)[0].rstrip("/")
 
 
-def load_state() -> dict | None:
-    """The state file, or None when it does not exist yet (the first run)."""
+def load_state() -> dict:
+    """Entries by submod id; empty when the state file does not exist yet."""
     if not STATE_PATH.exists():
-        return None
-    return json.loads(STATE_PATH.read_text(encoding="utf-8"))
+        return {}
+    return json.loads(STATE_PATH.read_text(encoding="utf-8")).get("submods", {})
 
 
-def save_state(state: dict) -> None:
+def save_state(entries: dict) -> None:
     STATE_PATH.parent.mkdir(parents=True, exist_ok=True)
     tmp = STATE_PATH.with_name(STATE_PATH.name + ".tmp")
-    tmp.write_text(json.dumps(state, indent=2, sort_keys=True, ensure_ascii=False) + "\n", encoding="utf-8")
+    tmp.write_text(
+        json.dumps({"submods": entries}, indent=2, sort_keys=True, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
     tmp.replace(STATE_PATH)
 
 
@@ -230,29 +298,27 @@ def main(argv: list[str] | None = None) -> int:
         log(f"{STATE_PATH.relative_to(ROOT)} is not valid JSON; fix or remove it. Nothing posted.")
         return 1
 
-    if state is None:
-        if args.dry_run:
-            log(f"no {STATE_PATH.name} yet: would record {len(names)} submods as seen and post none")
-            return 0
-        state = {
-            "submods": {
-                mod_id: {"name": names[mod_id], "firstSeen": utc_now(), "announced": False} for mod_id in names
-            }
-        }
+    refresh_details(state, names, cfg)
+    if not args.dry_run:
         save_state(state)
-        log(f"first run: recorded {len(names)} existing submods as seen; posted none")
-        return 0
 
-    seen = state.setdefault("submods", {})
-    new = sorted((mod_id for mod_id in names if mod_id not in seen), key=lambda mod_id: names[mod_id].lower())
-    log(f"{len(names)} submods on ArmaHQ, {len(new)} new")
+    pending = sorted(
+        (m for m in names if state.get(m, {}).get("status") == "pending"),
+        key=lambda m: (state[m].get("createdAt") or "9999", names[m].lower()),
+    )
+    first_party = sum(1 for m in names if state.get(m, {}).get("status") == "first-party")
+    waiting = sum(1 for m in names if "authorId" not in state.get(m, {}))
+    log(
+        f"{len(names)} submods on ArmaHQ: {len(pending)} to post, "
+        f"{first_party} first-party skipped, {waiting} waiting on ReforgerMods"
+    )
 
     sent = failures = attempts = 0
-    for mod_id in new:
+    for mod_id in pending:
         if sent >= MAX_POSTS or failures >= MAX_FAILURES:
             break
-        detail = fetch_detail(mod_id, cfg)
-        payload = build_message(mod_id, names[mod_id], builds_on[mod_id], footer, detail)
+        entry = state[mod_id]
+        payload = build_message(mod_id, names[mod_id], builds_on[mod_id], footer, entry)
         if args.dry_run:
             log(json.dumps(payload, indent=2, ensure_ascii=False))
             sent += 1
@@ -264,17 +330,18 @@ def main(argv: list[str] | None = None) -> int:
             message_id = post_message(webhook, payload, cfg)
         except (RuntimeError, ValueError) as exc:
             failures += 1
-            log(f"post failed for {mod_id} ({names[mod_id]}); it stays unseen and is retried next run: {exc}")
+            log(f"post failed for {mod_id} ({names[mod_id]}); it stays pending and is retried next run: {exc}")
             continue
-        seen[mod_id] = {"name": names[mod_id], "firstSeen": utc_now(), "announced": True}
+        entry["status"] = "posted"
+        entry["postedAt"] = utc_now()
         save_state(state)
         sent += 1
         log(f"posted {names[mod_id]} ({mod_id}) as message {message_id}")
 
     if args.dry_run:
-        log(f"dry run: {sent} of {len(new)} new submods shown; nothing posted or recorded")
+        log(f"dry run: showing {sent} of {len(pending)} pending submods; nothing posted or recorded")
         return 0
-    log(f"done: {sent} posted, {failures} failed, {len(new) - sent - failures} waiting for a later run")
+    log(f"done: {sent} posted, {failures} failed, {len(pending) - sent - failures} pending for later runs")
     return 1 if failures else 0
 
 
