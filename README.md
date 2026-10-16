@@ -162,9 +162,10 @@ to `data/history.jsonl` and `data/downloads.jsonl`, then records `"backfilled": 
 on a Project Outbreak add-on, oldest first. It runs hourly in `.github/workflows/submods.yml`.
 
 - Mods published by the Project Outbreak account are never posted.
-- Each message has the mod's summary, author, image and Workshop tags. The tags also go in the
-  message text, so Discord search can find them.
-- At most five messages go out per run, so the existing backlog drains over several hours.
+- Each message has the mod's summary, author, image and Workshop tags, plus its version, size,
+  first publish date, last update, servers, downloads and subscribers, read just before posting.
+  The tags also go in the message text, so Discord search can find them.
+- At most fifteen messages go out per run, so the existing backlog drains over a few hours.
 - `data/submods.json` records each submod as pending, posted or first-party.
 
 Setup:

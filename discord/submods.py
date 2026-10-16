@@ -47,7 +47,7 @@ EMBED_COLOR = 0x7FB069
 # The Project Outbreak Workshop account. Every tracked add-on is published by it, and so are
 # a few untracked mods; the ids are what counts, since display names can change.
 FIRST_PARTY_AUTHOR_IDS = {"1f2e35f0-890d-4818-9fac-3ccd4dfc60bd"}
-MAX_POSTS = 5  # pending submods announced per run; the rest wait for a later run
+MAX_POSTS = 15  # pending submods announced per run; the rest wait for a later run
 MAX_FAILURES = 3  # failed posts tolerated per run before the run stops posting
 MAX_DETAIL_FAILURES = 3  # failed ReforgerMods lookups tolerated per run before the lookups stop
 MAX_TAGS = 8  # Workshop tags shown per message
@@ -133,7 +133,7 @@ def fetch_detail(mod_id: str, cfg: dict) -> dict | None:
         )
         return body.get("mod") or {}
     except RuntimeError as exc:
-        log(f"no ReforgerMods details for {mod_id} yet; it is retried next run ({exc})")
+        log(f"ReforgerMods request failed for {mod_id} ({exc})")
         return None
 
 
@@ -180,20 +180,58 @@ def headline_text(tags: list[str]) -> str:
     return HEADLINE + ("\nTags: " + ", ".join(shown) if shown else "")
 
 
-def build_message(mod_id: str, name: str, builds_on: list[str], footer: str, entry: dict) -> dict:
+def discord_time(iso: str, style: str) -> str:
+    """A Discord timestamp tag, so every reader sees the date in their own time zone."""
+    try:
+        stamp = dt.datetime.fromisoformat(iso.replace("Z", "+00:00"))
+    except ValueError:
+        return ""
+    return f"<t:{int(stamp.timestamp())}:{style}>"
+
+
+def field(name: str, value: str, inline: bool) -> dict:
+    return {"name": name, "value": value, "inline": inline}
+
+
+def build_message(mod_id: str, name: str, builds_on: list[str], footer: str, entry: dict, live: dict) -> dict:
+    """The embed for one submod. live is the Workshop record read just before posting, so the
+    counts and the last update are current; entry holds what does not change."""
     embed: dict = {
         "title": escape_md(tidy(name, 200)),
         "url": WORKSHOP_URL.format(modId=mod_id),
         "color": EMBED_COLOR,
-        "fields": [{"name": "Builds on", "value": escape_md(tidy(", ".join(builds_on), 1000)), "inline": False}],
         "footer": {"text": footer},
     }
     summary = tidy(entry.get("summary", ""), 280)
     if len(summary) >= MIN_SUMMARY_CHARS:
         embed["description"] = escape_md(summary)
+    fields = []
     author = tidy(entry.get("author", ""), 100)
     if author:
-        embed["fields"].append({"name": "Author", "value": escape_md(author), "inline": True})
+        fields.append(field("Author", escape_md(author), True))
+    version = tidy(str(live.get("version") or ""), 40)
+    if version:
+        fields.append(field("Version", escape_md(version), True))
+    size = tidy(str(live.get("sizeFormatted") or ""), 40)
+    if size:
+        fields.append(field("Size", escape_md(size), True))
+    published = discord_time(entry.get("createdAt", ""), "D")
+    if published:
+        fields.append(field("First published", published, True))
+    updated = discord_time(str(live.get("updatedAt") or ""), "R")
+    if updated:
+        fields.append(field("Last updated", updated, True))
+    servers = (live.get("analytics") or {}).get("totalDeployments")
+    if isinstance(servers, int) and servers > 0:
+        fields.append(field("Servers", f"{servers:,}", True))
+    downloads = live.get("downloadCount")
+    if isinstance(downloads, int):
+        fields.append(field("Downloads", f"{downloads:,}", True))
+    subscribers = live.get("subscriberCount")
+    if isinstance(subscribers, int):
+        fields.append(field("Subscribers", f"{subscribers:,}", True))
+    fields.append(field("Builds on", escape_md(tidy(", ".join(builds_on), 1000)), False))
+    embed["fields"] = fields
     image = entry.get("imageUrl", "")
     if image.startswith("https://"):
         embed["image"] = {"url": image}
@@ -318,7 +356,8 @@ def main(argv: list[str] | None = None) -> int:
         if sent >= MAX_POSTS or failures >= MAX_FAILURES:
             break
         entry = state[mod_id]
-        payload = build_message(mod_id, names[mod_id], builds_on[mod_id], footer, entry)
+        live = fetch_detail(mod_id, cfg) or {}
+        payload = build_message(mod_id, names[mod_id], builds_on[mod_id], footer, entry, live)
         if args.dry_run:
             log(json.dumps(payload, indent=2, ensure_ascii=False))
             sent += 1
