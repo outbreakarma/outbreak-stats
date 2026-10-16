@@ -13,6 +13,12 @@ entry starts at the highest threshold it already reached, without posting.
   python discord/milestones.py --check                 # writes due=true|false to $GITHUB_OUTPUT
   python discord/milestones.py                         # announce whatever is new
   python discord/milestones.py --preview downloads 30000 --out card.png   # render only
+  python discord/milestones.py --backfill --dry-run    # list every milestone already reached
+  python discord/milestones.py --backfill              # post a card for each, oldest first, once
+
+A backfill card carries the day the threshold was actually first reached (read from
+data/history.jsonl and data/downloads.jsonl) and the 30 days before it. It runs once:
+data/milestones.json records "backfilled" afterwards, and the normal run never repeats it.
 """
 from __future__ import annotations
 
@@ -22,6 +28,7 @@ import html
 import json
 import os
 import sys
+import time
 from pathlib import Path
 
 from post_card import CONFIG_PATH, LATEST_PATH, ROOT, load_json, send
@@ -30,6 +37,7 @@ STATE_PATH = ROOT / "data" / "milestones.json"
 HISTORY_PATH = ROOT / "data" / "history.jsonl"
 DOWNLOADS_PATH = ROOT / "data" / "downloads.jsonl"
 SPARK_DAYS = 30
+MAX_T = dt.datetime.max.replace(tzinfo=dt.timezone.utc)
 
 METRICS = {
     "downloads": {
@@ -127,21 +135,21 @@ def plan(state: dict, values: dict) -> tuple[dict, dict]:
     return new, baselines
 
 
-def series(metric: str, mod_id: str, since: dt.datetime) -> list[float]:
+def series(metric: str, mod_id: str, since: dt.datetime, until: dt.datetime | None = None) -> list[float]:
     points = []
     if metric == "downloads":
         last = None
         for line in DOWNLOADS_PATH.read_text(encoding="utf-8").splitlines() if DOWNLOADS_PATH.exists() else []:
             row = json.loads(line)
             last = row.get("d", {}).get(mod_id, last)
-            if last is not None and parse_t(row["t"]) >= since:
+            if last is not None and since <= parse_t(row["t"]) <= (until or MAX_T):
                 points.append(last)
     else:
         key = "s" if metric == "servers" else "p"
         for line in HISTORY_PATH.read_text(encoding="utf-8").splitlines() if HISTORY_PATH.exists() else []:
             row = json.loads(line)
             v = row.get("tracked", {}).get(mod_id, {}).get(key)
-            if v is not None and parse_t(row["t"]) >= since:
+            if v is not None and since <= parse_t(row["t"]) <= (until or MAX_T):
                 points.append(v)
     return points
 
@@ -181,7 +189,7 @@ def rank_html(latest: dict) -> str:
 
 def card_html(metric: str, threshold: int, value: float, when: dt.datetime, mod_id: str, latest: dict) -> str:
     m = METRICS[metric]
-    spark = spark_svg(series(metric, mod_id, when - dt.timedelta(days=SPARK_DAYS)), threshold, value)
+    spark = spark_svg(series(metric, mod_id, when - dt.timedelta(days=SPARK_DAYS), when), threshold, value)
     return (CARD_HTML
             .replace("__DATE__", when.strftime("%d %b %Y").lstrip("0"))
             .replace("__NUMBER__", fmt(threshold))
@@ -206,21 +214,23 @@ def render(card: str) -> bytes:
             browser.close()
 
 
-def message_text(metric: str, threshold: int) -> str:
+def message_text(metric: str, threshold: int, reached: dt.datetime | None = None) -> str:
     m = METRICS[metric]
     page_url = load_json(CONFIG_PATH).get("site", {}).get("statsPage", "https://outbreakarma.github.io/outbreak-stats/")
     n = fmt(threshold)
+    since = f"Reached <t:{int(reached.timestamp())}:D> \u00b7 " if reached else ""
     return (
         f"\U0001f389 **{m['headline'].format(n=n)}** {m['text'].format(n=n)} \U0001f9df\n"
-        f"-# [Live stats](<{page_url}>)"
+        f"-# {since}[Live stats](<{page_url}>)"
     )
 
 
-def announce(webhook: str, metric: str, threshold: int, value: float, when: dt.datetime, mod_id: str, latest: dict) -> str:
+def announce(webhook: str, metric: str, threshold: int, value: float, when: dt.datetime, mod_id: str, latest: dict,
+             backfilled: bool = False) -> str:
     png = render(card_html(metric, threshold, value, when, mod_id, latest))
     filename = f"milestone-{metric}-{threshold}.png"
     payload = {
-        "content": message_text(metric, threshold),
+        "content": message_text(metric, threshold, when if backfilled else None),
         "allowed_mentions": {"parse": []},
         "attachments": [{"id": 0, "filename": filename}],
     }
@@ -231,11 +241,76 @@ def announce(webhook: str, metric: str, threshold: int, value: float, when: dt.d
     return msg["id"]
 
 
+def crossings(mod_id: str) -> list[tuple[dt.datetime, str, int, float]]:
+    """(when, metric, threshold, value then) for the first snapshot at or above each threshold."""
+    first: dict[tuple[str, int], tuple[dt.datetime, float]] = {}
+    steps = thresholds()
+    rows = [("downloads", "d", DOWNLOADS_PATH), ("servers", "s", HISTORY_PATH), ("players", "p", HISTORY_PATH)]
+    for metric, key, path in rows:
+        if not path.exists():
+            continue
+        for line in path.read_text(encoding="utf-8").splitlines():
+            row = json.loads(line)
+            v = row.get("d", {}).get(mod_id) if metric == "downloads" else row.get("tracked", {}).get(mod_id, {}).get(key)
+            if v is None:
+                continue
+            for th in steps.get(metric, []):
+                if v >= th and (metric, th) not in first:
+                    first[(metric, th)] = (parse_t(row["t"]), v)
+    return sorted((w, m, th, v) for (m, th), (w, v) in first.items())
+
+
+def backfill(webhook: str, latest: dict, state: dict, mod_id: str, dry_run: bool, out_dir: Path | None) -> int:
+    """Post (or list, or render) a card for every threshold the flagship has already passed."""
+    values = current_values(latest)
+    found = [c for c in crossings(mod_id) if c[2] <= max(values.get(c[1], 0), c[3])]
+    for when, metric, threshold, value in found:
+        print(f"{when:%Y-%m-%d %H:%M} UTC  {METRICS[metric]['label']}: {fmt(threshold)}")
+    if dry_run or out_dir:
+        if out_dir:
+            out_dir.mkdir(parents=True, exist_ok=True)
+            for when, metric, threshold, value in found:
+                (out_dir / f"backfill-{metric}-{threshold}.png").write_bytes(
+                    render(card_html(metric, threshold, value, when, mod_id, {})))
+            print(f"wrote {len(found)} cards to {out_dir}")
+        return 0
+    if state.get("backfilled"):
+        print("the backfill already ran; nothing to do")
+        return 0
+    if not webhook:
+        print("DISCORD_MILESTONE_WEBHOOK is not set; nothing to post")
+        return 0
+    announced, posts = dict(state.get("announced", {})), list(state.get("posts", []))
+    done = {(p["metric"], p["threshold"]) for p in posts}
+    failed = 0
+    for when, metric, threshold, value in found:
+        if (metric, threshold) in done:
+            continue
+        try:
+            message_id = announce(webhook, metric, threshold, value, when, mod_id, {}, backfilled=True)
+        except Exception as exc:  # keep going; a rerun posts only what is still missing
+            print(f"{metric} {threshold}: {exc}")
+            failed += 1
+            continue
+        announced[metric] = max(announced.get(metric, 0), threshold)
+        posts.append({"metric": metric, "threshold": threshold, "value": value,
+                      "snapshotUtc": when.strftime("%Y-%m-%dT%H:%M:%SZ"), "messageId": message_id, "backfilled": True})
+        done.add((metric, threshold))
+        print(f"posted {metric} {fmt(threshold)} (message {message_id})")
+        time.sleep(1.5)
+    STATE_PATH.write_text(json.dumps(dict(state, announced=announced, posts=posts, backfilled=not failed), indent=2) + "\n",
+                          encoding="utf-8")
+    return 1 if failed else 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--check", action="store_true", help="only report whether anything is due")
     ap.add_argument("--preview", nargs=2, metavar=("METRIC", "THRESHOLD"), help="render one card, no Discord")
     ap.add_argument("--out", type=Path, help="where --preview writes the PNG")
+    ap.add_argument("--backfill", action="store_true", help="post a card for every milestone already reached, once")
+    ap.add_argument("--dry-run", action="store_true", help="with --backfill: list them, post nothing")
+    ap.add_argument("--out-dir", type=Path, help="with --backfill: render every card here, post nothing")
     args = ap.parse_args()
 
     latest = load_json(LATEST_PATH)
@@ -245,6 +320,9 @@ def main() -> int:
     webhook = os.environ.get("DISCORD_MILESTONE_WEBHOOK", "")
     state = load_json(STATE_PATH)
     new, baselines = plan(state, values)
+
+    if args.backfill:
+        return backfill(webhook, latest, state, mod_id, args.dry_run, args.out_dir)
 
     if args.preview:
         metric, threshold = args.preview[0], int(args.preview[1])
@@ -282,7 +360,7 @@ def main() -> int:
     for metric, base in baselines.items():
         print(f"recorded {metric} baseline {fmt(base)} without posting")
     if announced != state.get("announced") or posts != state.get("posts", []):
-        STATE_PATH.write_text(json.dumps({"announced": announced, "posts": posts}, indent=2) + "\n", encoding="utf-8")
+        STATE_PATH.write_text(json.dumps(dict(state, announced=announced, posts=posts), indent=2) + "\n", encoding="utf-8")
     return 1 if failed else 0
 
 

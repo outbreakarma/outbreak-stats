@@ -129,6 +129,13 @@ per number; a number missing there starts at the highest threshold it already re
 without posting. Set the secret the same way as for the card. Preview a card without Discord:
 `python discord/milestones.py --preview downloads 30000 --out card.png`.
 
+To post the milestones already reached, once, run the workflow by hand with
+`backfill_milestones` ticked (`gh workflow run scrape.yml -f backfill_milestones=true`). It
+posts one card per milestone, oldest first, each dated to when it was first reached according
+to `data/history.jsonl` and `data/downloads.jsonl`, then records `"backfilled": true` in
+`data/milestones.json` so it cannot repeat. List them first with
+`python discord/milestones.py --backfill --dry-run`.
+
 ## Configuration
 
 - `source.apiBase`: the ReforgerMods.net API base URL used for rankings and totals.
