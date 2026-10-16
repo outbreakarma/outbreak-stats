@@ -1,0 +1,46 @@
+name: Submod posts
+
+on:
+  schedule:
+    # Off the snapshot slots (7, 22, 37, 52) so the two jobs never queue for the same minute.
+    - cron: "45 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: submods
+  cancel-in-progress: false
+
+jobs:
+  submods:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # Announces new submods of the Project Outbreak add-ons. Does nothing until the
+      # DISCORD_SUBMODS_WEBHOOK secret exists; the first run after that only records what is there.
+      - name: Post new submods
+        env:
+          DISCORD_SUBMODS_WEBHOOK: ${{ secrets.DISCORD_SUBMODS_WEBHOOK }}
+        run: python discord/submods.py
+      - name: Commit the submod record
+        run: |
+          if [ ! -f data/submods.json ]; then
+            echo "no submod record yet; nothing to commit"
+            exit 0
+          fi
+          git config user.name "armahq-stats bot"
+          git config user.email "armahq-stats@users.noreply.github.com"
+          git add data/submods.json
+          if git diff --cached --quiet; then
+            echo "nothing changed"
+          else
+            git commit -m "submods $(date -u +'%Y-%m-%d %H:%M') UTC"
+            # The hourly snapshot job may push to main during this run; rebase so neither push is lost.
+            git pull --rebase origin main
+            git push
+          fi

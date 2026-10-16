@@ -137,3 +137,26 @@ card locally without Discord: `python discord/post_card.py --out card.png`
 - `site`: page title and subtitle, chart and ranking sizes, and the main site, Discord
   and GitHub links shown in the header and the links section; `statsPage` is the page
   link in the Discord card.
+
+## Submod posts
+
+`discord/submods.py` posts one message to a Discord channel for each new Workshop mod that
+builds on a Project Outbreak add-on. It runs hourly in `.github/workflows/submods.yml`, and
+posts at most five per run; any others follow on later runs. The first run only records the
+submods that already exist, so nothing old is posted.
+
+Setup:
+
+1. In the new Discord channel, open Edit Channel > Integrations > Webhooks > New Webhook, then Copy URL.
+2. Save the URL as a repository secret:
+
+   ```bash
+   gh secret set DISCORD_SUBMODS_WEBHOOK --repo outbreakarma/outbreak-stats
+   ```
+
+3. Run the workflow once by hand: Actions > Submod posts > Run workflow. It records the submods
+   that already exist without posting them. Until the secret exists, the workflow does nothing.
+
+Never commit the webhook URL, paste it into an issue, a pull request or a log. Anyone with the
+URL can post in the channel. If it leaks, delete the webhook in Discord, create a new one and
+update the secret.
