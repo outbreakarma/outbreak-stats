@@ -7,6 +7,11 @@ on:
     # and the scraper fills any hour that still slips through from reforgermods.net's history.
     - cron: "7,22,37,52 * * * *"
   workflow_dispatch:
+    inputs:
+      backfill_milestones:
+        description: "Also post a card for every milestone already reached (runs once)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -41,7 +46,7 @@ jobs:
           DISCORD_MILESTONE_WEBHOOK: ${{ secrets.DISCORD_MILESTONE_WEBHOOK }}
         run: python discord/milestones.py --check
       - name: Install the card renderer
-        if: steps.card.outputs.due == 'true' || steps.milestones.outputs.due == 'true'
+        if: steps.card.outputs.due == 'true' || steps.milestones.outputs.due == 'true' || (github.event_name == 'workflow_dispatch' && inputs.backfill_milestones)
         run: pip install playwright==1.52.0
       - name: Update the Discord card
         if: steps.card.outputs.due == 'true'
@@ -49,6 +54,13 @@ jobs:
         env:
           DISCORD_STATS_WEBHOOK: ${{ secrets.DISCORD_STATS_WEBHOOK }}
         run: python discord/post_card.py ${{ github.event_name == 'workflow_dispatch' && '--force' || '' }}
+      # Manual runs only: tick "backfill_milestones" once to post the milestones reached so far.
+      - name: Backfill past milestones
+        if: github.event_name == 'workflow_dispatch' && inputs.backfill_milestones
+        continue-on-error: true
+        env:
+          DISCORD_MILESTONE_WEBHOOK: ${{ secrets.DISCORD_MILESTONE_WEBHOOK }}
+        run: python discord/milestones.py --backfill
       - name: Post milestones
         if: steps.milestones.outputs.due == 'true'
         continue-on-error: true
