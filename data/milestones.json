@@ -4,5 +4,47 @@
     "servers": 250,
     "players": 500
   },
-  "posts": []
+  "posts": [
+    {
+      "metric": "players",
+      "threshold": 300,
+      "value": 326,
+      "snapshotUtc": "2026-09-27T20:21:43Z",
+      "messageId": "1560713167565492234",
+      "backfilled": true
+    },
+    {
+      "metric": "players",
+      "threshold": 400,
+      "value": 451,
+      "snapshotUtc": "2026-10-04T20:00:00Z",
+      "messageId": "1560713189715349705",
+      "backfilled": true
+    },
+    {
+      "metric": "servers",
+      "threshold": 250,
+      "value": 252,
+      "snapshotUtc": "2026-10-10T03:00:00Z",
+      "messageId": "1560713209969909884",
+      "backfilled": true
+    },
+    {
+      "metric": "players",
+      "threshold": 500,
+      "value": 503,
+      "snapshotUtc": "2026-10-10T19:00:00Z",
+      "messageId": "1560713231629033568",
+      "backfilled": true
+    },
+    {
+      "metric": "downloads",
+      "threshold": 25000,
+      "value": 25146,
+      "snapshotUtc": "2026-10-11T12:56:00Z",
+      "messageId": "1560713252499886261",
+      "backfilled": true
+    }
+  ],
+  "backfilled": true
 }
