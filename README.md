@@ -118,6 +118,17 @@ Deleting the message or replacing the webhook makes the next run post a fresh on
 card locally without Discord: `python discord/post_card.py --out card.png`
 (`pip install playwright`; it uses the installed Chrome, or set `CARD_BROWSER_CHANNEL`).
 
+## Milestone posts
+
+When the flagship passes a threshold in `config.json` `milestones` (Workshop downloads,
+servers running it, players on those servers at once), the workflow posts one celebration
+card to the channel behind the secret `DISCORD_MILESTONE_WEBHOOK`. Each threshold is
+announced once: passing several in one snapshot posts only the highest, and dipping below and
+rising again never repeats one. `data/milestones.json` keeps the highest threshold announced
+per number; a number missing there starts at the highest threshold it already reached,
+without posting. Set the secret the same way as for the card. Preview a card without Discord:
+`python discord/milestones.py --preview downloads 30000 --out card.png`.
+
 ## Configuration
 
 - `source.apiBase`: the ReforgerMods.net API base URL used for rankings and totals.

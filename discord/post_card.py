@@ -116,20 +116,20 @@ def message_text(snapshot: str | None) -> str:
     )
 
 
-def multipart(payload: dict, png: bytes) -> tuple[bytes, str]:
+def multipart(payload: dict, png: bytes, filename: str) -> tuple[bytes, str]:
     boundary = uuid.uuid4().hex
     parts = [
         f"--{boundary}\r\nContent-Disposition: form-data; name=\"payload_json\"\r\n"
         "Content-Type: application/json\r\n\r\n".encode() + json.dumps(payload).encode() + b"\r\n",
-        f"--{boundary}\r\nContent-Disposition: form-data; name=\"files[0]\"; filename=\"outbreak-stats.png\"\r\n"
+        f"--{boundary}\r\nContent-Disposition: form-data; name=\"files[0]\"; filename=\"{filename}\"\r\n"
         "Content-Type: image/png\r\n\r\n".encode() + png + b"\r\n",
         f"--{boundary}--\r\n".encode(),
     ]
     return b"".join(parts), f"multipart/form-data; boundary={boundary}"
 
 
-def send(method: str, url: str, payload: dict, png: bytes) -> tuple[int, dict]:
-    body, ctype = multipart(payload, png)
+def send(method: str, url: str, payload: dict, png: bytes, filename: str = "outbreak-stats.png") -> tuple[int, dict]:
+    body, ctype = multipart(payload, png, filename)
     for attempt in range(3):
         req = urllib.request.Request(url, data=body, method=method, headers={
             "Content-Type": ctype,

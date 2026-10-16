@@ -29,11 +29,19 @@ jobs:
       # Skipped until the DISCORD_STATS_WEBHOOK secret exists; a Discord failure never costs the snapshot.
       - name: Check the Discord card
         id: card
+        continue-on-error: true
         env:
           DISCORD_STATS_WEBHOOK: ${{ secrets.DISCORD_STATS_WEBHOOK }}
         run: python discord/post_card.py --check ${{ github.event_name == 'workflow_dispatch' && '--force' || '' }}
+      # Milestone cards go to their own channel (DISCORD_MILESTONE_WEBHOOK), once per threshold.
+      - name: Check for milestones
+        id: milestones
+        continue-on-error: true
+        env:
+          DISCORD_MILESTONE_WEBHOOK: ${{ secrets.DISCORD_MILESTONE_WEBHOOK }}
+        run: python discord/milestones.py --check
       - name: Install the card renderer
-        if: steps.card.outputs.due == 'true'
+        if: steps.card.outputs.due == 'true' || steps.milestones.outputs.due == 'true'
         run: pip install playwright==1.52.0
       - name: Update the Discord card
         if: steps.card.outputs.due == 'true'
@@ -41,6 +49,12 @@ jobs:
         env:
           DISCORD_STATS_WEBHOOK: ${{ secrets.DISCORD_STATS_WEBHOOK }}
         run: python discord/post_card.py ${{ github.event_name == 'workflow_dispatch' && '--force' || '' }}
+      - name: Post milestones
+        if: steps.milestones.outputs.due == 'true'
+        continue-on-error: true
+        env:
+          DISCORD_MILESTONE_WEBHOOK: ${{ secrets.DISCORD_MILESTONE_WEBHOOK }}
+        run: python discord/milestones.py
       - name: Commit snapshot
         run: |
           git config user.name "armahq-stats bot"
