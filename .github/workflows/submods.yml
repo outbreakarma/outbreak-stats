@@ -21,7 +21,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      # Announces Project Outbreak submods, oldest first, five per run; the existing ones are
+      # Announces Project Outbreak submods, oldest first, fifteen per run; the existing ones are
       # backfilled this way too. Does nothing until the DISCORD_SUBMODS_WEBHOOK secret exists.
       - name: Post new submods
         env:
