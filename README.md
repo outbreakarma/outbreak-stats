@@ -151,10 +151,14 @@ without posting. Set the secret the same way as for the card. Preview a card wit
 
 ## Submod posts
 
-`discord/submods.py` posts one message to a Discord channel for each new Workshop mod that
-builds on a Project Outbreak add-on. It runs hourly in `.github/workflows/submods.yml`, and
-posts at most five per run; any others follow on later runs. The first run only records the
-submods that already exist, so nothing old is posted.
+`discord/submods.py` posts one message to a Discord channel for each Workshop mod that builds
+on a Project Outbreak add-on, oldest first. It runs hourly in `.github/workflows/submods.yml`.
+
+- Mods published by the Project Outbreak account are never posted.
+- Each message has the mod's summary, author, image and Workshop tags. The tags also go in the
+  message text, so Discord search can find them.
+- At most five messages go out per run, so the existing backlog drains over several hours.
+- `data/submods.json` records each submod as pending, posted or first-party.
 
 Setup:
 
@@ -165,8 +169,8 @@ Setup:
    gh secret set DISCORD_SUBMODS_WEBHOOK --repo outbreakarma/outbreak-stats
    ```
 
-3. Run the workflow once by hand: Actions > Submod posts > Run workflow. It records the submods
-   that already exist without posting them. Until the secret exists, the workflow does nothing.
+3. Optional: run the workflow now instead of waiting for the hour. Actions > Submod posts > Run workflow.
+   Until the secret exists, the workflow does nothing.
 
 Never commit the webhook URL, paste it into an issue, a pull request or a log. Anyone with the
 URL can post in the channel. If it leaks, delete the webhook in Discord, create a new one and
