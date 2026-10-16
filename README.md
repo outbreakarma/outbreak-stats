@@ -69,8 +69,10 @@ list it under `"patched"`.
 | `data/mods-all-latest.json.gz` | every currently-deployed mod in the current snapshot |
 | `docs/` | the GitHub Pages site (`index.html`, `latest.json`, `trend.json`, `.nojekyll`) |
 | `docs/trend.json` | the last 14 days, hourly, per tracked add-on, plus download history; the main site reads it |
+| `discord/post_card.py` | renders the flagship section to a PNG and keeps one Discord message showing it |
+| `data/discord_card.json` | the Discord message the card lives in and the snapshot it shows |
 
-Standard library only; Python 3.9 or newer.
+Standard library only; Python 3.9 or newer. The Discord card also needs Playwright and Chrome.
 
 ## Run it
 
@@ -101,6 +103,21 @@ branch `main`, folder `/docs`. Give the workflow write permission for contents
 (Settings, Actions, General, Workflow permissions). Stop the Windows task once the
 workflow is running, or the two will interleave snapshots.
 
+## Discord card
+
+After each new snapshot the workflow renders the Project Outbreak section of the page and
+edits one Discord message to show it, so the channel holds a single card that is never
+reposted and edits notify nobody. To turn it on:
+
+1. In the Discord channel, Edit Channel, Integrations, Webhooks, New Webhook; copy its URL.
+2. Store it as the repository secret `DISCORD_STATS_WEBHOOK`
+   (`gh secret set DISCORD_STATS_WEBHOOK`). Never commit the URL: anyone holding it can post.
+3. Run the workflow by hand. The first run posts the message; pin it.
+
+Deleting the message or replacing the webhook makes the next run post a fresh one. Render the
+card locally without Discord: `python discord/post_card.py --out card.png`
+(`pip install playwright`; it uses the installed Chrome, or set `CARD_BROWSER_CHANNEL`).
+
 ## Configuration
 
 - `source.apiBase`: the ReforgerMods.net API base URL used for rankings and totals.
@@ -118,4 +135,5 @@ workflow is running, or the two will interleave snapshots.
 - `backfill`: `enabled`, `maxDays` (29, inside the source's 30-day window) and
   `keywordTop` (how many keyword mods to fill besides the tracked add-ons).
 - `site`: page title and subtitle, chart and ranking sizes, and the main site, Discord
-  and GitHub links shown in the header and the links section.
+  and GitHub links shown in the header and the links section; `statsPage` is the page
+  link in the Discord card.
