@@ -1,7 +1,7 @@
 {
   "announced": {
     "downloads": 30000,
-    "servers": 250,
+    "servers": 300,
     "players": 500
   },
   "posts": [
@@ -51,6 +51,13 @@
       "value": 30311,
       "snapshotUtc": "2026-10-17T16:56:19Z",
       "messageId": "1561061924635021322"
+    },
+    {
+      "metric": "servers",
+      "threshold": 300,
+      "value": 301,
+      "snapshotUtc": "2026-10-18T10:46:47Z",
+      "messageId": "1561332205450428486"
     }
   ],
   "backfilled": true
