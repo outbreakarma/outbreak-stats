@@ -1,5 +1,5 @@
 {
- "generatedUtc": "2026-10-23T05:25:31Z",
+ "generatedUtc": "2026-10-23T10:25:50Z",
  "source": {
   "name": "ReforgerMods.net",
   "url": "https://reforgermods.net",
@@ -8,9 +8,9 @@
   "creditLine": "Server counts, player exposure and mod rankings come from the ReforgerMods.net public API (reforgermods.net), an independent, community-run Arma Reforger stats service. Per-mod version and server-list detail for the tracked Project Outbreak add-ons comes from ArmaHQ (armahq.com). ArmaHqStats is not affiliated with ReforgerMods.net, ArmaHQ, or Bohemia Interactive."
  },
  "totals": {
-  "servers": 4823,
-  "players": 6681,
-  "uniqueMods": 17058
+  "servers": 4826,
+  "players": 5444,
+  "uniqueMods": 17109
  },
  "keyword": {
   "terms": [
@@ -19,59 +19,59 @@
   "label": "Zombie mods",
   "modCount": 51,
   "serversTotal": 1273,
-  "playersTotal": 1208,
+  "playersTotal": 686,
   "mods": [
    {
     "modId": "622120A5448725E3",
     "name": "Bacon Zombies",
-    "servers": 491,
-    "players": 590,
+    "servers": 492,
+    "players": 261,
     "versions": {},
     "globalRank": 138,
     "keywordRank": 1,
-    "shareOfKeywordServers": 0.3857,
+    "shareOfKeywordServers": 0.3865,
     "downloads": 77866
    },
    {
     "modId": "F1D4B9B5245B36ED",
     "name": "Project Outbreak Zombies",
-    "servers": 297,
-    "players": 159,
+    "servers": 298,
+    "players": 83,
     "versions": {},
-    "globalRank": 208,
+    "globalRank": 210,
     "keywordRank": 2,
-    "shareOfKeywordServers": 0.2333,
+    "shareOfKeywordServers": 0.2341,
     "downloads": 33233
    },
    {
     "modId": "297640FBAC0C46C3",
     "name": "Special Zombies and Creatures",
-    "servers": 136,
-    "players": 82,
+    "servers": 135,
+    "players": 48,
     "versions": {},
-    "globalRank": 482,
+    "globalRank": 476,
     "keywordRank": 3,
-    "shareOfKeywordServers": 0.1068,
+    "shareOfKeywordServers": 0.106,
     "downloads": 7029
    },
    {
     "modId": "69BD721866937F85",
     "name": "Special Zombies",
-    "servers": 122,
-    "players": 156,
+    "servers": 121,
+    "players": 121,
     "versions": {},
-    "globalRank": 523,
+    "globalRank": 530,
     "keywordRank": 4,
-    "shareOfKeywordServers": 0.0958,
+    "shareOfKeywordServers": 0.0951,
     "downloads": 34767
    },
    {
     "modId": "65F2F0F322747C37",
     "name": "Zombie Hive",
     "servers": 32,
-    "players": 16,
+    "players": 1,
     "versions": {},
-    "globalRank": 1542,
+    "globalRank": 1562,
     "keywordRank": 5,
     "shareOfKeywordServers": 0.0251,
     "downloads": 33674
@@ -80,9 +80,9 @@
     "modId": "66EE4DB436E218F8",
     "name": "Zombie Sounds Remix",
     "servers": 29,
-    "players": 13,
+    "players": 9,
     "versions": {},
-    "globalRank": 1674,
+    "globalRank": 1669,
     "keywordRank": 6,
     "shareOfKeywordServers": 0.0228,
     "downloads": 48587
@@ -90,21 +90,21 @@
    {
     "modId": "669D29B6A22342D0",
     "name": "ToH Zombie",
-    "servers": 23,
-    "players": 47,
+    "servers": 24,
+    "players": 49,
     "versions": {},
-    "globalRank": 1969,
+    "globalRank": 1893,
     "keywordRank": 7,
-    "shareOfKeywordServers": 0.0181,
+    "shareOfKeywordServers": 0.0189,
     "downloads": 111329
    },
    {
     "modId": "66E35BC4A2D60E94",
     "name": "IC_zombie damage nerf",
     "servers": 22,
-    "players": 9,
+    "players": 3,
     "versions": {},
-    "globalRank": 2051,
+    "globalRank": 2057,
     "keywordRank": 8,
     "shareOfKeywordServers": 0.0173,
     "downloads": 26777
@@ -112,21 +112,21 @@
    {
     "modId": "692172F6EADE0B44",
     "name": "Ambient Zombies",
-    "servers": 13,
-    "players": 2,
+    "servers": 14,
+    "players": 6,
     "versions": {},
-    "globalRank": 2978,
+    "globalRank": 2776,
     "keywordRank": 9,
-    "shareOfKeywordServers": 0.0102,
+    "shareOfKeywordServers": 0.011,
     "downloads": 11655
    },
    {
     "modId": "68441B8B35E24673",
     "name": "DoL Special Zombies",
     "servers": 8,
-    "players": 8,
+    "players": 3,
     "versions": {},
-    "globalRank": 3993,
+    "globalRank": 4011,
     "keywordRank": 10,
     "shareOfKeywordServers": 0.0063,
     "downloads": 56995
@@ -137,7 +137,7 @@
     "servers": 8,
     "players": 0,
     "versions": {},
-    "globalRank": 4180,
+    "globalRank": 4159,
     "keywordRank": 11,
     "shareOfKeywordServers": 0.0063,
     "downloads": 3548
@@ -146,9 +146,9 @@
     "modId": "62884D37494FABF5",
     "name": "Zombie PVE",
     "servers": 7,
-    "players": 3,
+    "players": 0,
     "versions": {},
-    "globalRank": 4386,
+    "globalRank": 4596,
     "keywordRank": 12,
     "shareOfKeywordServers": 0.0055,
     "downloads": 10353
@@ -157,9 +157,9 @@
     "modId": "6A256241929FA6BD",
     "name": "BTW Zombies Sounds PLACEABLE",
     "servers": 6,
-    "players": 2,
+    "players": 0,
     "versions": {},
-    "globalRank": 4818,
+    "globalRank": 4933,
     "keywordRank": 13,
     "shareOfKeywordServers": 0.0047,
     "downloads": 261
@@ -168,9 +168,9 @@
     "modId": "669D67EB93BF0F75",
     "name": "ReforgedZ_Zombies",
     "servers": 5,
-    "players": 41,
+    "players": 13,
     "versions": {},
-    "globalRank": 5182,
+    "globalRank": 5194,
     "keywordRank": 14,
     "shareOfKeywordServers": 0.0039,
     "downloads": 85676
@@ -179,45 +179,23 @@
     "modId": "69D64DF56E749CF9",
     "name": "Ambient Zombies Tweak",
     "servers": 5,
-    "players": 2,
+    "players": 5,
     "versions": {},
-    "globalRank": 5353,
+    "globalRank": 5254,
     "keywordRank": 15,
     "shareOfKeywordServers": 0.0039,
     "downloads": 2988
    },
    {
-    "modId": "6A48CA4DE07124C4",
-    "name": "Zombie Ambient Horde",
-    "servers": 5,
-    "players": 1,
-    "versions": {},
-    "globalRank": 5488,
-    "keywordRank": 16,
-    "shareOfKeywordServers": 0.0039,
-    "downloads": 1918
-   },
-   {
     "modId": "6A893C375779438E",
     "name": "The Last Exodus Zombies",
     "servers": 4,
-    "players": 32,
+    "players": 5,
     "versions": {},
-    "globalRank": 5858,
-    "keywordRank": 17,
+    "globalRank": 5992,
+    "keywordRank": 16,
     "shareOfKeywordServers": 0.0031,
     "downloads": 471
-   },
-   {
-    "modId": "692176BA1E98A39A",
-    "name": "Procedural Combat - Zombies",
-    "servers": 4,
-    "players": 1,
-    "versions": {},
-    "globalRank": 6219,
-    "keywordRank": 18,
-    "shareOfKeywordServers": 0.0031,
-    "downloads": 6876
    },
    {
     "modId": "69E6D67BF385A726",
@@ -225,10 +203,10 @@
     "servers": 4,
     "players": 1,
     "versions": {},
-    "globalRank": 6257,
-    "keywordRank": 19,
+    "globalRank": 6231,
+    "keywordRank": 17,
     "shareOfKeywordServers": 0.0031,
-    "downloads": 1541
+    "downloads": 1548
    },
    {
     "modId": "6F8B1A34C9D24011",
@@ -236,10 +214,21 @@
     "servers": 4,
     "players": 0,
     "versions": {},
-    "globalRank": 6518,
-    "keywordRank": 20,
+    "globalRank": 6500,
+    "keywordRank": 18,
     "shareOfKeywordServers": 0.0031,
     "downloads": 2019
+   },
+   {
+    "modId": "6A48CA4DE07124C4",
+    "name": "Zombie Ambient Horde",
+    "servers": 4,
+    "players": 0,
+    "versions": {},
+    "globalRank": 6651,
+    "keywordRank": 19,
+    "shareOfKeywordServers": 0.0031,
+    "downloads": 1918
    },
    {
     "modId": "6A82B47BB557F9AC",
@@ -247,32 +236,43 @@
     "servers": 4,
     "players": 0,
     "versions": {},
-    "globalRank": 6674,
-    "keywordRank": 21,
+    "globalRank": 6652,
+    "keywordRank": 20,
     "shareOfKeywordServers": 0.0031,
     "downloads": 235
-   },
-   {
-    "modId": "6A7C8D4D644D245A",
-    "name": "The Last Exodus Zombie Turning",
-    "servers": 3,
-    "players": 32,
-    "versions": {},
-    "globalRank": 6807,
-    "keywordRank": 22,
-    "shareOfKeywordServers": 0.0024,
-    "downloads": 310
    },
    {
     "modId": "6A16707A27B7B9E3",
     "name": "ambient zombies tweak tweaked",
     "servers": 3,
-    "players": 2,
+    "players": 5,
     "versions": {},
-    "globalRank": 7054,
-    "keywordRank": 23,
+    "globalRank": 6887,
+    "keywordRank": 21,
     "shareOfKeywordServers": 0.0024,
     "downloads": 997
+   },
+   {
+    "modId": "6A7C8D4D644D245A",
+    "name": "The Last Exodus Zombie Turning",
+    "servers": 3,
+    "players": 5,
+    "versions": {},
+    "globalRank": 6916,
+    "keywordRank": 22,
+    "shareOfKeywordServers": 0.0024,
+    "downloads": 310
+   },
+   {
+    "modId": "686F198A25247A94",
+    "name": "Zombie Sound",
+    "servers": 3,
+    "players": 1,
+    "versions": {},
+    "globalRank": 7251,
+    "keywordRank": 23,
+    "shareOfKeywordServers": 0.0024,
+    "downloads": 23614
    },
    {
     "modId": "68D0CE9153A0479C",
@@ -280,7 +280,7 @@
     "servers": 3,
     "players": 0,
     "versions": {},
-    "globalRank": 7778,
+    "globalRank": 7732,
     "keywordRank": 24,
     "shareOfKeywordServers": 0.0024,
     "downloads": 3270
@@ -291,29 +291,29 @@
     "servers": 3,
     "players": 0,
     "versions": {},
-    "globalRank": 7820,
+    "globalRank": 7778,
     "keywordRank": 25,
     "shareOfKeywordServers": 0.0024,
-    "downloads": 433
+    "downloads": 437
    },
    {
-    "modId": "686F198A25247A94",
-    "name": "Zombie Sound",
+    "modId": "692176BA1E98A39A",
+    "name": "Procedural Combat - Zombies",
     "servers": 3,
     "players": 0,
     "versions": {},
-    "globalRank": 8037,
+    "globalRank": 7805,
     "keywordRank": 26,
     "shareOfKeywordServers": 0.0024,
-    "downloads": 23614
+    "downloads": 6876
    },
    {
     "modId": "6A8498641E2363BE",
     "name": "RL_Zombie",
     "servers": 2,
-    "players": 0,
+    "players": 31,
     "versions": {},
-    "globalRank": 10250,
+    "globalRank": 8148,
     "keywordRank": 27,
     "shareOfKeywordServers": 0.0016,
     "downloads": 359
@@ -322,9 +322,9 @@
     "modId": "6A6B2BE0558DA3DF",
     "name": "STW Zombies Spawner",
     "servers": 2,
-    "players": 0,
+    "players": 1,
     "versions": {},
-    "globalRank": 10399,
+    "globalRank": 8963,
     "keywordRank": 28,
     "shareOfKeywordServers": 0.0016,
     "downloads": 116
@@ -335,7 +335,7 @@
     "servers": 2,
     "players": 0,
     "versions": {},
-    "globalRank": 10688,
+    "globalRank": 10671,
     "keywordRank": 29,
     "shareOfKeywordServers": 0.0016,
     "downloads": 5841
@@ -346,30 +346,19 @@
     "servers": 2,
     "players": 0,
     "versions": {},
-    "globalRank": 10689,
+    "globalRank": 10672,
     "keywordRank": 30,
     "shareOfKeywordServers": 0.0016,
     "downloads": 778
    },
    {
-    "modId": "66B23513508F908F",
-    "name": "Zombies Friendly Faction USSR",
-    "servers": 1,
-    "players": 6,
-    "versions": {},
-    "globalRank": 11253,
-    "keywordRank": 31,
-    "shareOfKeywordServers": 0.0008,
-    "downloads": 2994
-   },
-   {
     "modId": "66B8FE144D461B8F",
     "name": "Shadow Elite Zombies",
     "servers": 1,
-    "players": 2,
+    "players": 34,
     "versions": {},
-    "globalRank": 11564,
-    "keywordRank": 32,
+    "globalRank": 10706,
+    "keywordRank": 31,
     "shareOfKeywordServers": 0.0008,
     "downloads": 1676
    },
@@ -379,8 +368,8 @@
     "servers": 1,
     "players": 1,
     "versions": {},
-    "globalRank": 11934,
-    "keywordRank": 33,
+    "globalRank": 11790,
+    "keywordRank": 32,
     "shareOfKeywordServers": 0.0008,
     "downloads": 464
    },
@@ -390,8 +379,8 @@
     "servers": 1,
     "players": 0,
     "versions": {},
-    "globalRank": 12372,
-    "keywordRank": 34,
+    "globalRank": 12243,
+    "keywordRank": 33,
     "shareOfKeywordServers": 0.0008,
     "downloads": 2389
    },
@@ -401,8 +390,8 @@
     "servers": 1,
     "players": 0,
     "versions": {},
-    "globalRank": 12787,
-    "keywordRank": 35,
+    "globalRank": 12621,
+    "keywordRank": 34,
     "shareOfKeywordServers": 0.0008,
     "downloads": 6
    },
@@ -412,21 +401,10 @@
     "servers": 1,
     "players": 0,
     "versions": {},
-    "globalRank": 15112,
-    "keywordRank": 36,
+    "globalRank": 15058,
+    "keywordRank": 35,
     "shareOfKeywordServers": 0.0008,
     "downloads": 42
-   },
-   {
-    "modId": "6AAAD19E00D7B561",
-    "name": "NWG ZOMBIES LOOT 2.0",
-    "servers": 1,
-    "players": 0,
-    "versions": {},
-    "globalRank": 15113,
-    "keywordRank": 37,
-    "shareOfKeywordServers": 0.0008,
-    "downloads": 4
    },
    {
     "modId": "6A3C7485A6D25023",
@@ -434,10 +412,10 @@
     "servers": 1,
     "players": 0,
     "versions": {},
-    "globalRank": 15390,
-    "keywordRank": 38,
+    "globalRank": 15348,
+    "keywordRank": 36,
     "shareOfKeywordServers": 0.0008,
-    "downloads": 96
+    "downloads": 97
    },
    {
     "modId": "6A308EE5EDD11B4E",
@@ -445,8 +423,8 @@
     "servers": 1,
     "players": 0,
     "versions": {},
-    "globalRank": 15510,
-    "keywordRank": 39,
+    "globalRank": 15481,
+    "keywordRank": 37,
     "shareOfKeywordServers": 0.0008,
     "downloads": 62
    },
@@ -456,8 +434,8 @@
     "servers": 1,
     "players": 0,
     "versions": {},
-    "globalRank": 15640,
-    "keywordRank": 40,
+    "globalRank": 15610,
+    "keywordRank": 38,
     "shareOfKeywordServers": 0.0008,
     "downloads": 13
    },
@@ -467,8 +445,8 @@
     "servers": 1,
     "players": 0,
     "versions": {},
-    "globalRank": 16076,
-    "keywordRank": 41,
+    "globalRank": 16055,
+    "keywordRank": 39,
     "shareOfKeywordServers": 0.0008,
     "downloads": 1
    },
@@ -478,10 +456,21 @@
     "servers": 1,
     "players": 0,
     "versions": {},
-    "globalRank": 16133,
-    "keywordRank": 42,
+    "globalRank": 16115,
+    "keywordRank": 40,
     "shareOfKeywordServers": 0.0008,
     "downloads": 49
+   },
+   {
+    "modId": "68F4B95EDF6C47C8",
+    "name": "TGE-BaseZombie",
+    "servers": 1,
+    "players": 0,
+    "versions": {},
+    "globalRank": 16477,
+    "keywordRank": 41,
+    "shareOfKeywordServers": 0.0008,
+    "downloads": null
    },
    {
     "modId": "6A6F72877D2D8E06",
@@ -489,8 +478,8 @@
     "servers": 1,
     "players": 0,
     "versions": {},
-    "globalRank": 16799,
-    "keywordRank": 43,
+    "globalRank": 16842,
+    "keywordRank": 42,
     "shareOfKeywordServers": 0.0008,
     "downloads": 57
    },
@@ -500,8 +489,8 @@
     "servers": 1,
     "players": 0,
     "versions": {},
-    "globalRank": 16800,
-    "keywordRank": 44,
+    "globalRank": 16843,
+    "keywordRank": 43,
     "shareOfKeywordServers": 0.0008,
     "downloads": 404
    },
@@ -511,8 +500,8 @@
     "servers": 1,
     "players": 0,
     "versions": {},
-    "globalRank": 16890,
-    "keywordRank": 45,
+    "globalRank": 16934,
+    "keywordRank": 44,
     "shareOfKeywordServers": 0.0008,
     "downloads": 14522
    },
@@ -522,8 +511,8 @@
     "servers": 1,
     "players": 0,
     "versions": {},
-    "globalRank": 16925,
-    "keywordRank": 46,
+    "globalRank": 16972,
+    "keywordRank": 45,
     "shareOfKeywordServers": 0.0008,
     "downloads": 213
    },
@@ -533,8 +522,8 @@
     "servers": 1,
     "players": 0,
     "versions": {},
-    "globalRank": 17049,
-    "keywordRank": 47,
+    "globalRank": 17099,
+    "keywordRank": 46,
     "shareOfKeywordServers": 0.0008,
     "downloads": 181
    },
@@ -544,8 +533,8 @@
     "servers": 1,
     "players": 0,
     "versions": {},
-    "globalRank": 17050,
-    "keywordRank": 48,
+    "globalRank": 17100,
+    "keywordRank": 47,
     "shareOfKeywordServers": 0.0008,
     "downloads": 2235
    },
@@ -555,8 +544,8 @@
     "servers": 1,
     "players": 0,
     "versions": {},
-    "globalRank": 17051,
-    "keywordRank": 49,
+    "globalRank": 17101,
+    "keywordRank": 48,
     "shareOfKeywordServers": 0.0008,
     "downloads": 871
    },
@@ -566,10 +555,21 @@
     "servers": 1,
     "players": 0,
     "versions": {},
-    "globalRank": 17052,
-    "keywordRank": 50,
+    "globalRank": 17102,
+    "keywordRank": 49,
     "shareOfKeywordServers": 0.0008,
     "downloads": 2
+   },
+   {
+    "modId": "66B23513508F908F",
+    "name": "Zombies Friendly Faction USSR",
+    "servers": 1,
+    "players": 0,
+    "versions": {},
+    "globalRank": 17103,
+    "keywordRank": 50,
+    "shareOfKeywordServers": 0.0008,
+    "downloads": 2994
    },
    {
     "modId": "657C1E353331BF4F",
@@ -577,7 +577,7 @@
     "servers": 1,
     "players": 0,
     "versions": {},
-    "globalRank": 17053,
+    "globalRank": 17104,
     "keywordRank": 51,
     "shareOfKeywordServers": 0.0008,
     "downloads": 927
@@ -593,14 +593,14 @@
    "flagship": true,
    "group": "outbreak",
    "name": "Project Outbreak Zombies",
-   "servers": 297,
-   "players": 159,
+   "servers": 298,
+   "players": 83,
    "versions": {
-    "2.4.7": 115,
-    "2.3.4": 91,
-    "2.4.8": 52,
+    "2.4.8": 88,
+    "2.4.7": 88,
+    "2.3.4": 87,
     "2.3.1": 18,
-    "2.3.0": 9,
+    "2.3.0": 8,
     "2.2.0": 6,
     "2.3.3": 2,
     "1.3.3": 2,
@@ -608,30 +608,17 @@
     "2.3.2": 1,
     "1.3.2": 1
    },
-   "globalRank": 208,
+   "globalRank": 210,
    "keywordRank": 2,
-   "shareOfKeywordServers": 0.2333,
+   "shareOfKeywordServers": 0.2341,
    "seen": true,
-   "capacity": 12772,
-   "serversWithPlayers": 48,
+   "capacity": 12908,
+   "serversWithPlayers": 42,
    "topServers": [
-    {
-     "id": "58b6e548-8717-4df3-8d70-0f8d0e19d56d",
-     "name": "[AU/NZ] (ARGC) | Apocalypse Riders | PvE Conflict | Hardcore Ai | Console Friendly |",
-     "players": 23,
-     "limit": 80,
-     "region": "OCE",
-     "version": "2.3.4",
-     "scenario": "ARGC Everon PVE",
-     "battlEye": true,
-     "password": false,
-     "official": false,
-     "modCount": 158
-    },
     {
      "id": "9012b080-6d76-4e2a-89d5-59f492d185a4",
      "name": "UNSC Battlegroup Athens | Halo | Public Operations | gg/BGA",
-     "players": 11,
+     "players": 15,
      "limit": 100,
      "region": "NA",
      "version": "2.4.8",
@@ -642,35 +629,22 @@
      "modCount": 113
     },
     {
-     "id": "85ee5cdb-77fe-4558-8bbd-f94619f771c6",
-     "name": "M.R.E MAYHEM | PVP/PVE | {USA}",
-     "players": 8,
-     "limit": 30,
-     "region": "NA",
-     "version": "2.3.4",
-     "scenario": "GameMaster Anizay",
-     "battlEye": false,
-     "password": true,
-     "official": false,
-     "modCount": 144
-    },
-    {
-     "id": "2d880ce0-1503-436a-8230-c4244fdab266",
-     "name": "STONER COMPANY",
-     "players": 8,
-     "limit": 30,
-     "region": "NA",
-     "version": "2.4.7",
-     "scenario": "Game Master - Faircroft Islands",
+     "id": "58b6e548-8717-4df3-8d70-0f8d0e19d56d",
+     "name": "[AU/NZ] (ARGC) | Apocalypse Riders | PvE Conflict | Hardcore Ai | Ranks Wipe Weekly |",
+     "players": 9,
+     "limit": 80,
+     "region": "OCE",
+     "version": "2.4.8",
+     "scenario": "ARGC Ruha PVE",
      "battlEye": true,
      "password": false,
      "official": false,
-     "modCount": 206
+     "modCount": 159
     },
     {
      "id": "d02a588d-1c44-40b8-a3ae-6a8a776a7c8d",
      "name": "[RU|EN] BlackFox | DayZ | Stalker | Missions | Building | XP/Rep | PVE",
-     "players": 7,
+     "players": 6,
      "limit": 64,
      "region": "EU",
      "version": "2.4.7",
@@ -681,69 +655,43 @@
      "modCount": 95
     },
     {
-     "id": "cba2b1bc-ff47-40fe-91b7-44750469ea86",
-     "name": "BigDs Combat Ops",
-     "players": 7,
-     "limit": 20,
-     "region": "NA",
-     "version": "2.4.7",
-     "scenario": "Game Master - Merak Island",
-     "battlEye": false,
-     "password": true,
-     "official": false,
-     "modCount": 155
-    },
-    {
-     "id": "82e70e50-babd-4ed2-bf15-137b7b339af8",
-     "name": "[BGA] Reach Reservists | UNSC Army Reserves",
+     "id": "802d38fc-6e75-411d-a09d-08fb53a074c0",
+     "name": "DaiZ Germanien",
      "players": 6,
-     "limit": 60,
-     "region": "NA",
-     "version": "2.4.7",
-     "scenario": "Game Master - Faircroft Islands",
-     "battlEye": true,
-     "password": true,
-     "official": false,
-     "modCount": 121
-    },
-    {
-     "id": "1a0e0c53-0a40-4cac-8616-f99943f9c1e0",
-     "name": "Operation Rhystic Study",
-     "players": 5,
-     "limit": 32,
-     "region": "NA",
-     "version": "2.4.7",
-     "scenario": "Dead Everon 2",
-     "battlEye": false,
-     "password": true,
-     "official": false,
-     "modCount": 156
-    },
-    {
-     "id": "4298a260-b5e3-424d-aa4f-a4127bbc2112",
-     "name": "[TH][SEA] PMC Zombie Army : SEKA Community | PvE | discord.gg/SEKA",
-     "players": 4,
-     "limit": 128,
-     "region": "ASIA",
-     "version": "2.3.1",
-     "scenario": "PMC vs FIA PvPvE",
+     "limit": 42,
+     "region": "EU",
+     "version": "2.3.4",
+     "scenario": "Stunde Null",
      "battlEye": true,
      "password": false,
      "official": false,
-     "modCount": 163
+     "modCount": 102
     },
     {
-     "id": "d933b296-7ca7-44d4-a01b-13e82aa19d02",
-     "name": "[TFD1] The Foggy Dew [Foggys Survival - PvE] bandits/radiation/Zombies [discord.gg/6Ka4U6RjnA]",
-     "players": 4,
-     "limit": 60,
+     "id": "1af78d96-bc4a-4205-ae7e-7cc4d5991509",
+     "name": "[TGP] The German Platoon / discord.gg/thegermanplatoon #1",
+     "players": 5,
+     "limit": 32,
      "region": "EU",
      "version": "2.4.7",
+     "scenario": "TGP | Halloween Season: Glenwood ist gefallen",
+     "battlEye": false,
+     "password": false,
+     "official": false,
+     "modCount": 169
+    },
+    {
+     "id": "0e9f82b5-9db3-4958-9393-4d52c486881a",
+     "name": "[EU](OFFICIAL) The Last Light | PvE · AI Missions · Bases | Trader| EVERON Dayz | ACTIVE ADMINS",
+     "players": 4,
+     "limit": 64,
+     "region": "EU",
+     "version": "2.4.8",
      "scenario": "Foggys Survival Island",
      "battlEye": true,
      "password": false,
      "official": false,
-     "modCount": 103
+     "modCount": 126
     },
     {
      "id": "e379c760-0a8c-4764-aff2-f163800a59bf",
@@ -759,17 +707,69 @@
      "modCount": 116
     },
     {
-     "id": "b45b4586-6c76-4471-ab5f-b42b2b0ee82d",
-     "name": "JSOC | PVE Realism",
-     "players": 4,
-     "limit": 40,
-     "region": "NA",
-     "version": "2.3.4",
-     "scenario": "Novka Game Master",
+     "id": "4298a260-b5e3-424d-aa4f-a4127bbc2112",
+     "name": "[TH][SEA] PMC Zombie Army : SEKA Community | PvE | discord.gg/SEKA",
+     "players": 3,
+     "limit": 128,
+     "region": "ASIA",
+     "version": "2.3.1",
+     "scenario": "PMC vs FIA PvPvE",
      "battlEye": true,
      "password": false,
      "official": false,
-     "modCount": 204
+     "modCount": 163
+    },
+    {
+     "id": "fc61c2f0-a024-43ba-be0b-343baec903ce",
+     "name": "F.A.F.O",
+     "players": 3,
+     "limit": 40,
+     "region": "OCE",
+     "version": "2.4.8",
+     "scenario": "FAFO Everon PvE",
+     "battlEye": true,
+     "password": false,
+     "official": false,
+     "modCount": 186
+    },
+    {
+     "id": "46de72f1-5347-43c5-a415-94e293d247a1",
+     "name": "[TH/EN] Heroic Combat x Taskforce 86 Thailand PVE",
+     "players": 3,
+     "limit": 40,
+     "region": "ASIA",
+     "version": "2.4.7",
+     "scenario": "BellauWood PVE",
+     "battlEye": true,
+     "password": false,
+     "official": false,
+     "modCount": 170
+    },
+    {
+     "id": "562dbeea-a0c0-4d63-9b87-7024cf31d7a6",
+     "name": "Halcyon Dynasty warhammer 40K/MILSIM discord.gg/halcyondynasty",
+     "players": 2,
+     "limit": 128,
+     "region": "NA",
+     "version": "2.4.8",
+     "scenario": "Our Lives for Halcyon!",
+     "battlEye": false,
+     "password": false,
+     "official": false,
+     "modCount": 137
+    },
+    {
+     "id": "446fda73-b799-476b-be83-9800206c1550",
+     "name": "[EU]#9 HSC.gg | SEIZE & SECURE: COLD WAR VANILLA+ | Discord: www.HSC.gg",
+     "players": 2,
+     "limit": 80,
+     "region": "EU",
+     "version": "2.4.7",
+     "scenario": "Central Everon Vertical RAAS - L",
+     "battlEye": true,
+     "password": false,
+     "official": false,
+     "modCount": 49
     }
    ],
    "workshop": {
@@ -788,9 +788,9 @@
       "name": "Creature Melee AI"
      }
     ],
-    "rootDeployments": 28,
-    "dependencyDeployments": 267,
-    "playerHours7d": 45261
+    "rootDeployments": 30,
+    "dependencyDeployments": 265,
+    "playerHours7d": 45248
    }
   },
   "7B763100BAFA1F9A": {
@@ -800,21 +800,21 @@
    "channel": "production",
    "group": "outbreak",
    "name": "Project Outbreak Infection",
-   "servers": 135,
-   "players": 78,
+   "servers": 131,
+   "players": 21,
    "versions": {
-    "1.3.1": 49,
-    "1.3.5": 42,
-    "1.4.0": 35,
-    "1.3.0": 4,
+    "1.4.0": 48,
+    "1.3.1": 46,
+    "1.3.5": 31,
     "1.2.2": 3,
+    "1.3.0": 3,
     "1.2.1": 1,
     "1.1.0": 1,
     "1.0.8": 1
    },
-   "globalRank": 485,
+   "globalRank": 496,
    "keywordRank": null,
-   "shareOfKeywordServers": 0.106,
+   "shareOfKeywordServers": 0.1029,
    "seen": true,
    "workshop": {
     "downloads": 15492,
@@ -837,8 +837,8 @@
      }
     ],
     "rootDeployments": 94,
-    "dependencyDeployments": 41,
-    "playerHours7d": 19849
+    "dependencyDeployments": 38,
+    "playerHours7d": 19820
    }
   },
   "6209E38AB237098E": {
@@ -848,17 +848,17 @@
    "channel": "production",
    "group": "outbreak",
    "name": "Project Outbreak Breach",
-   "servers": 120,
-   "players": 70,
+   "servers": 118,
+   "players": 23,
    "versions": {
-    "1.3.3": 67,
-    "1.3.2": 51,
+    "1.3.3": 69,
+    "1.3.2": 49,
     "1.2.1": 2,
     "1.3.1": 1
    },
-   "globalRank": 535,
+   "globalRank": 538,
    "keywordRank": null,
-   "shareOfKeywordServers": 0.0943,
+   "shareOfKeywordServers": 0.0927,
    "seen": true,
    "workshop": {
     "downloads": 11842,
@@ -880,9 +880,9 @@
       "name": "Project Outbreak Zombies"
      }
     ],
-    "rootDeployments": 81,
-    "dependencyDeployments": 38,
-    "playerHours7d": 17466
+    "rootDeployments": 82,
+    "dependencyDeployments": 36,
+    "playerHours7d": 17393
    }
   },
   "6B9BD0DA529C0D1E": {
@@ -892,15 +892,15 @@
    "channel": "production",
    "group": "outbreak",
    "name": "Project Outbreak Gadgets",
-   "servers": 62,
-   "players": 28,
+   "servers": 61,
+   "players": 12,
    "versions": {
     "1.2.3": 33,
-    "1.2.2": 30
+    "1.2.2": 29
    },
-   "globalRank": 902,
+   "globalRank": 925,
    "keywordRank": null,
-   "shareOfKeywordServers": 0.0487,
+   "shareOfKeywordServers": 0.0479,
    "seen": true,
    "workshop": {
     "downloads": 6566,
@@ -922,9 +922,9 @@
       "name": "Project Outbreak Zombies"
      }
     ],
-    "rootDeployments": 37,
-    "dependencyDeployments": 25,
-    "playerHours7d": 6035
+    "rootDeployments": 38,
+    "dependencyDeployments": 23,
+    "playerHours7d": 5945
    }
   },
   "384E32C2A832444E": {
@@ -936,10 +936,10 @@
    "group": "outbreak",
    "name": "Project Outbreak Variety",
    "servers": 109,
-   "players": 46,
+   "players": 17,
    "versions": {
-    "1.2.1": 65,
-    "1.1.0": 41,
+    "1.2.1": 67,
+    "1.1.0": 39,
     "1.0.1": 4
    },
    "globalRank": 578,
@@ -966,9 +966,9 @@
       "name": "Project Outbreak Zombies"
      }
     ],
-    "rootDeployments": 80,
-    "dependencyDeployments": 28,
-    "playerHours7d": 13409
+    "rootDeployments": 81,
+    "dependencyDeployments": 27,
+    "playerHours7d": 13378
    }
   },
   "297640FBAC0C46C3": {
@@ -979,16 +979,16 @@
    "publishedAt": "2026-09-27T05:02:57Z",
    "group": "outbreak",
    "name": "Special Zombies and Creatures",
-   "servers": 136,
-   "players": 82,
+   "servers": 135,
+   "players": 48,
    "versions": {
-    "1.1.5": 76,
-    "1.1.3": 56,
+    "1.1.5": 78,
+    "1.1.3": 54,
     "1.1.2": 4
    },
-   "globalRank": 482,
+   "globalRank": 476,
    "keywordRank": 3,
-   "shareOfKeywordServers": 0.1068,
+   "shareOfKeywordServers": 0.106,
    "seen": true,
    "workshop": {
     "downloads": 7029,
@@ -1010,9 +1010,9 @@
       "name": "Project Outbreak Zombies"
      }
     ],
-    "rootDeployments": 99,
-    "dependencyDeployments": 36,
-    "playerHours7d": 21218
+    "rootDeployments": 97,
+    "dependencyDeployments": 35,
+    "playerHours7d": 21203
    }
   },
   "0B4FB11C20129700": {
@@ -1329,12 +1329,12 @@
    "group": "scenarios",
    "name": "Project Outbreak Deadwood Lite",
    "servers": 2,
-   "players": 2,
+   "players": 0,
    "versions": {
     "0.1.5": 1,
     "0.1.12": 1
    },
-   "globalRank": 8750,
+   "globalRank": 10155,
    "keywordRank": null,
    "shareOfKeywordServers": 0.0016,
    "seen": true,
@@ -1376,7 +1376,7 @@
     ],
     "rootDeployments": 1,
     "dependencyDeployments": 1,
-    "playerHours7d": 250
+    "playerHours7d": 248
    }
   },
   "475357F020261002": {
@@ -1386,18 +1386,18 @@
    "channel": "production",
    "group": "creatures",
    "name": "Goblin Swordsman",
-   "servers": 10,
-   "players": 4,
+   "servers": 8,
+   "players": 0,
    "versions": {
     "0.1.0": 6,
-    "0.1.1": 4
+    "0.1.1": 3
    },
-   "globalRank": 3526,
+   "globalRank": 4154,
    "keywordRank": null,
-   "shareOfKeywordServers": 0.0079,
+   "shareOfKeywordServers": 0.0063,
    "seen": true,
    "workshop": {
-    "downloads": 348,
+    "downloads": 377,
     "subscribers": 0,
     "rating": 1,
     "ratingCount": 3,
@@ -1412,9 +1412,9 @@
       "name": "Creature Melee AI"
      }
     ],
-    "rootDeployments": 8,
-    "dependencyDeployments": 2,
-    "playerHours7d": 967
+    "rootDeployments": 7,
+    "dependencyDeployments": 1,
+    "playerHours7d": 958
    }
   },
   "9C6F9425B58142E7": {
@@ -1424,18 +1424,18 @@
    "group": "creatures",
    "name": "Warbeasts",
    "servers": 23,
-   "players": 40,
+   "players": 13,
    "versions": {
     "1.0.4": 14,
     "1.0.3": 8,
     "1.0.2": 1
    },
-   "globalRank": 1972,
+   "globalRank": 1974,
    "keywordRank": null,
    "shareOfKeywordServers": 0.0181,
    "seen": true,
    "workshop": {
-    "downloads": 983,
+    "downloads": 1119,
     "subscribers": 0,
     "rating": 1,
     "ratingCount": 11,
@@ -1450,9 +1450,9 @@
       "name": "Creature Melee AI"
      }
     ],
-    "rootDeployments": 14,
-    "dependencyDeployments": 9,
-    "playerHours7d": 3063
+    "rootDeployments": 15,
+    "dependencyDeployments": 8,
+    "playerHours7d": 3129
    }
   },
   "E1DCD3CAF138441C": {
@@ -1462,17 +1462,17 @@
    "channel": "production",
    "group": "creatures",
    "name": "Eyekin",
-   "servers": 23,
-   "players": 10,
+   "servers": 22,
+   "players": 3,
    "versions": {
-    "1.2.5": 18,
+    "1.2.5": 17,
     "1.2.4": 3,
     "1.2.2": 1,
     "1.1.0": 1
    },
-   "globalRank": 1984,
+   "globalRank": 2055,
    "keywordRank": null,
-   "shareOfKeywordServers": 0.0181,
+   "shareOfKeywordServers": 0.0173,
    "seen": true,
    "workshop": {
     "downloads": 1152,
@@ -1491,8 +1491,8 @@
      }
     ],
     "rootDeployments": 20,
-    "dependencyDeployments": 3,
-    "playerHours7d": 4509
+    "dependencyDeployments": 2,
+    "playerHours7d": 4452
    }
   },
   "135E4CF7BBB94766": {
@@ -1502,11 +1502,11 @@
    "group": "creatures",
    "name": "Maulkin",
    "servers": 25,
-   "players": 3,
+   "players": 4,
    "versions": {
     "0.1.0": 25
    },
-   "globalRank": 1892,
+   "globalRank": 1862,
    "keywordRank": null,
    "shareOfKeywordServers": 0.0196,
    "seen": true,
@@ -1528,7 +1528,7 @@
     ],
     "rootDeployments": 23,
     "dependencyDeployments": 2,
-    "playerHours7d": 5230
+    "playerHours7d": 5169
    }
   },
   "0751D781B4F6F9BB": {
@@ -1539,16 +1539,16 @@
    "publishedAt": "2026-10-09T13:22:19.000Z",
    "group": "creatures",
    "name": "Mushroom Rift",
-   "servers": 29,
-   "players": 10,
+   "servers": 27,
+   "players": 2,
    "versions": {
-    "0.1.2": 21,
+    "0.1.2": 18,
     "0.1.1": 7,
     "0.1.0": 2
    },
-   "globalRank": 1677,
+   "globalRank": 1764,
    "keywordRank": null,
-   "shareOfKeywordServers": 0.0228,
+   "shareOfKeywordServers": 0.0212,
    "seen": true,
    "workshop": {
     "downloads": 982,
@@ -1566,9 +1566,9 @@
       "name": "Creature Melee AI"
      }
     ],
-    "rootDeployments": 27,
-    "dependencyDeployments": 2,
-    "playerHours7d": 4233
+    "rootDeployments": 25,
+    "dependencyDeployments": 1,
+    "playerHours7d": 4181
    }
   },
   "E3617517555C481D": {
@@ -1579,14 +1579,14 @@
    "publishedAt": "2026-10-15T10:13:41.000Z",
    "group": "creatures",
    "name": "Lumenkin",
-   "servers": 25,
-   "players": 11,
+   "servers": 24,
+   "players": 5,
    "versions": {
-    "0.1.2": 25
+    "0.1.2": 24
    },
-   "globalRank": 1872,
+   "globalRank": 1926,
    "keywordRank": null,
-   "shareOfKeywordServers": 0.0196,
+   "shareOfKeywordServers": 0.0189,
    "seen": true,
    "workshop": {
     "downloads": 430,
@@ -1604,9 +1604,9 @@
       "name": "Creature Melee AI"
      }
     ],
-    "rootDeployments": 24,
+    "rootDeployments": 23,
     "dependencyDeployments": 1,
-    "playerHours7d": 2580
+    "playerHours7d": 2602
    }
   },
   "6443DC7DCCE347B6": {
@@ -1618,17 +1618,17 @@
    "group": "creatures",
    "name": "Teuthisan",
    "servers": 14,
-   "players": 10,
+   "players": 2,
    "versions": {
     "0.1.2": 13,
     "0.1.1": 1
    },
-   "globalRank": 2780,
+   "globalRank": 2818,
    "keywordRank": null,
    "shareOfKeywordServers": 0.011,
    "seen": true,
    "workshop": {
-    "downloads": 306,
+    "downloads": 330,
     "subscribers": 0,
     "rating": 1,
     "ratingCount": 1,
@@ -1645,7 +1645,7 @@
     ],
     "rootDeployments": 12,
     "dependencyDeployments": 2,
-    "playerHours7d": 1588
+    "playerHours7d": 1598
    }
   },
   "0C5BC5D358A14BF6": {
@@ -1657,12 +1657,12 @@
    "group": "creatures",
    "name": "Werewolf",
    "servers": 19,
-   "players": 12,
+   "players": 7,
    "versions": {
     "0.1.2": 10,
     "0.1.1": 9
    },
-   "globalRank": 2260,
+   "globalRank": 2261,
    "keywordRank": null,
    "shareOfKeywordServers": 0.0149,
    "seen": true,
@@ -1684,7 +1684,7 @@
     ],
     "rootDeployments": 18,
     "dependencyDeployments": 1,
-    "playerHours7d": 1744
+    "playerHours7d": 1773
    }
   },
   "FD246F60963E46D8": {
@@ -1695,15 +1695,15 @@
    "publishedAt": "2026-10-16T11:10:30.000Z",
    "group": "creatures",
    "name": "Bigfoot",
-   "servers": 13,
+   "servers": 14,
    "players": 1,
    "versions": {
-    "0.1.1": 12,
+    "0.1.1": 13,
     "0.1.0": 1
    },
-   "globalRank": 2990,
+   "globalRank": 2821,
    "keywordRank": null,
-   "shareOfKeywordServers": 0.0102,
+   "shareOfKeywordServers": 0.011,
    "seen": true,
    "workshop": {
     "downloads": 394,
@@ -1723,7 +1723,7 @@
     ],
     "rootDeployments": 12,
     "dependencyDeployments": 1,
-    "playerHours7d": 1377
+    "playerHours7d": 1381
    }
   },
   "A129104B9AA1D58B": {
@@ -1770,11 +1770,11 @@
    "group": "creatures",
    "name": "Grimdark Horde",
    "servers": 7,
-   "players": 39,
+   "players": 10,
    "versions": {
     "0.1.1": 7
    },
-   "globalRank": 4275,
+   "globalRank": 4286,
    "keywordRank": null,
    "shareOfKeywordServers": 0.0055,
    "seen": true,
@@ -1800,7 +1800,7 @@
     ],
     "rootDeployments": 7,
     "dependencyDeployments": 0,
-    "playerHours7d": 487
+    "playerHours7d": 576
    }
   },
   "4FD4A1BD550793F4": {
@@ -1810,16 +1810,16 @@
    "channel": "production",
    "group": "tools",
    "name": "Creature Melee AI",
-   "servers": 339,
-   "players": 226,
+   "servers": 338,
+   "players": 106,
    "versions": {
-    "1.8.7": 134,
-    "1.8.6": 71,
-    "1.8.8": 62,
+    "1.8.7": 103,
+    "1.8.8": 101,
+    "1.8.6": 66,
     "1.8.5": 22,
     "1.8.1": 21,
-    "1.7.0": 9,
     "1.8.0": 9,
+    "1.7.0": 8,
     "1.5.0": 6,
     "1.8.4": 3,
     "1.2.0": 1,
@@ -1829,7 +1829,7 @@
    },
    "globalRank": 193,
    "keywordRank": null,
-   "shareOfKeywordServers": 0.2663,
+   "shareOfKeywordServers": 0.2655,
    "seen": true,
    "workshop": {
     "downloads": 37349,
@@ -1843,8 +1843,8 @@
     "sizeBytes": 12218581,
     "dependencies": [],
     "rootDeployments": 8,
-    "dependencyDeployments": 331,
-    "playerHours7d": 58256
+    "dependencyDeployments": 328,
+    "playerHours7d": 58320
    }
   },
   "40B5686CC205703A": {
@@ -1855,16 +1855,16 @@
    "group": "tools",
    "name": "AI Rearm",
    "servers": 25,
-   "players": 1,
+   "players": 2,
    "versions": {
     "1.0.1": 25
    },
-   "globalRank": 1894,
+   "globalRank": 1868,
    "keywordRank": null,
    "shareOfKeywordServers": 0.0196,
    "seen": true,
    "workshop": {
-    "downloads": 4191,
+    "downloads": 4214,
     "subscribers": 0,
     "rating": 1,
     "ratingCount": 22,
@@ -1876,7 +1876,7 @@
     "dependencies": [],
     "rootDeployments": 22,
     "dependencyDeployments": 2,
-    "playerHours7d": 784
+    "playerHours7d": 778
    }
   },
   "3CBDFAB9713149BE": {
@@ -1886,11 +1886,11 @@
    "group": "tools",
    "name": "Military Crossbow",
    "servers": 67,
-   "players": 34,
+   "players": 68,
    "versions": {
-    "0.2.1": 68
+    "0.2.1": 67
    },
-   "globalRank": 847,
+   "globalRank": 838,
    "keywordRank": null,
    "shareOfKeywordServers": 0.0526,
    "seen": true,
@@ -1906,8 +1906,8 @@
     "sizeBytes": 108988308,
     "dependencies": [],
     "rootDeployments": 58,
-    "dependencyDeployments": 9,
-    "playerHours7d": 13255
+    "dependencyDeployments": 8,
+    "playerHours7d": 13401
    }
   },
   "9E4B2C7A1D5F8036": {
@@ -1921,7 +1921,7 @@
    "versions": {
     "0.1.2": 6
    },
-   "globalRank": 4963,
+   "globalRank": 4926,
    "keywordRank": null,
    "shareOfKeywordServers": 0.0047,
    "seen": true,
@@ -1938,7 +1938,7 @@
     "dependencies": [],
     "rootDeployments": 5,
     "dependencyDeployments": 1,
-    "playerHours7d": 292
+    "playerHours7d": 277
    }
   }
  },
@@ -1946,18 +1946,18 @@
   {
    "modId": "629B2BA37EFFD577",
    "name": "WCS_Armaments",
-   "servers": 3084,
-   "players": 4657,
+   "servers": 3085,
+   "players": 4144,
    "versions": {},
    "globalRank": 1,
    "keywordRank": null,
-   "shareOfKeywordServers": 2.4226
+   "shareOfKeywordServers": 2.4234
   },
   {
    "modId": "5E389BB9F58B79A6",
    "name": "WCS_SpaceCore",
    "servers": 2472,
-   "players": 3860,
+   "players": 3849,
    "versions": {},
    "globalRank": 2,
    "keywordRank": null,
@@ -1966,358 +1966,358 @@
   {
    "modId": "606B100247F5C709",
    "name": "Bacon Loadout Editor",
-   "servers": 2400,
-   "players": 3170,
+   "servers": 2397,
+   "players": 2011,
    "versions": {},
    "globalRank": 3,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.8853
+   "shareOfKeywordServers": 1.883
   },
   {
    "modId": "5D0551624969C92E",
    "name": "Zeliks Character",
-   "servers": 2376,
-   "players": 3766,
+   "servers": 2377,
+   "players": 2615,
    "versions": {},
    "globalRank": 4,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.8665
+   "shareOfKeywordServers": 1.8672
   },
   {
    "modId": "62CCD69DD17E4F2F",
    "name": "AKI_Core",
-   "servers": 2162,
-   "players": 3475,
+   "servers": 2160,
+   "players": 3533,
    "versions": {},
    "globalRank": 5,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.6984
+   "shareOfKeywordServers": 1.6968
   },
   {
    "modId": "687CD82F6E41D627",
    "name": "Attachment Framework-Core",
-   "servers": 2158,
-   "players": 3393,
+   "servers": 2151,
+   "players": 2510,
    "versions": {},
    "globalRank": 6,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.6952
-  },
-  {
-   "modId": "5ABD0CB57F7E9EB1",
-   "name": "RIS Laser Attachments",
-   "servers": 2154,
-   "players": 2996,
-   "versions": {},
-   "globalRank": 7,
-   "keywordRank": null,
-   "shareOfKeywordServers": 1.6921
+   "shareOfKeywordServers": 1.6897
   },
   {
    "modId": "645F08FA9E7CDEDE",
    "name": "Attachment Framework",
-   "servers": 2147,
-   "players": 3390,
-   "versions": {},
-   "globalRank": 8,
-   "keywordRank": null,
-   "shareOfKeywordServers": 1.6866
-  },
-  {
-   "modId": "65AD7D0D9941A380",
-   "name": "ACE Core Dev",
    "servers": 2140,
-   "players": 4126,
+   "players": 2498,
    "versions": {},
-   "globalRank": 9,
+   "globalRank": 7,
    "keywordRank": null,
    "shareOfKeywordServers": 1.6811
   },
   {
+   "modId": "5ABD0CB57F7E9EB1",
+   "name": "RIS Laser Attachments",
+   "servers": 2137,
+   "players": 2152,
+   "versions": {},
+   "globalRank": 8,
+   "keywordRank": null,
+   "shareOfKeywordServers": 1.6787
+  },
+  {
+   "modId": "65AD7D0D9941A380",
+   "name": "ACE Core Dev",
+   "servers": 2130,
+   "players": 3529,
+   "versions": {},
+   "globalRank": 9,
+   "keywordRank": null,
+   "shareOfKeywordServers": 1.6732
+  },
+  {
    "modId": "BADC0DEDABBEDA5E",
    "name": "RHS - Content Pack 02",
-   "servers": 1933,
-   "players": 2948,
+   "servers": 1941,
+   "players": 3036,
    "versions": {},
    "globalRank": 10,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.5185
+   "shareOfKeywordServers": 1.5247
   },
   {
    "modId": "1337C0DE5DABBEEF",
    "name": "RHS - Content Pack 01",
-   "servers": 1931,
-   "players": 2947,
+   "servers": 1940,
+   "players": 3036,
    "versions": {},
    "globalRank": 11,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.5169
+   "shareOfKeywordServers": 1.524
   },
   {
    "modId": "595F2BF2F44836FB",
    "name": "RHS - Status Quo",
-   "servers": 1931,
-   "players": 2947,
+   "servers": 1940,
+   "players": 3036,
    "versions": {},
    "globalRank": 12,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.5169
+   "shareOfKeywordServers": 1.524
   },
   {
    "modId": "612F512CD4CB21D5",
    "name": "WCS_Earplugs",
-   "servers": 1916,
-   "players": 3631,
+   "servers": 1905,
+   "players": 2928,
    "versions": {},
    "globalRank": 13,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.5051
-  },
-  {
-   "modId": "5AB301290317994A",
-   "name": "Bacon Suppressors",
-   "servers": 1894,
-   "players": 2838,
-   "versions": {},
-   "globalRank": 14,
-   "keywordRank": null,
-   "shareOfKeywordServers": 1.4878
+   "shareOfKeywordServers": 1.4965
   },
   {
    "modId": "5994AD5A9F33BE57",
    "name": "Game Master FX",
-   "servers": 1894,
-   "players": 1281,
+   "servers": 1889,
+   "players": 1015,
+   "versions": {},
+   "globalRank": 14,
+   "keywordRank": null,
+   "shareOfKeywordServers": 1.4839
+  },
+  {
+   "modId": "5AB301290317994A",
+   "name": "Bacon Suppressors",
+   "servers": 1877,
+   "players": 2039,
    "versions": {},
    "globalRank": 15,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.4878
+   "shareOfKeywordServers": 1.4745
   },
   {
    "modId": "65AD7C379CBD394D",
    "name": "ACE Carrying Dev",
-   "servers": 1844,
-   "players": 3435,
+   "servers": 1834,
+   "players": 3192,
    "versions": {},
    "globalRank": 16,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.4485
+   "shareOfKeywordServers": 1.4407
   },
   {
    "modId": "64EE818E08AFCF94",
    "name": "MFD Framework",
-   "servers": 1751,
-   "players": 2133,
+   "servers": 1754,
+   "players": 1606,
    "versions": {},
    "globalRank": 17,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.3755
+   "shareOfKeywordServers": 1.3778
   },
   {
    "modId": "6586079789278413",
    "name": "ACE Medical Core Dev",
-   "servers": 1680,
-   "players": 3102,
+   "servers": 1671,
+   "players": 2687,
    "versions": {},
    "globalRank": 18,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.3197
+   "shareOfKeywordServers": 1.3126
   },
   {
    "modId": "64722DADC53CB75E",
    "name": "NV-System",
-   "servers": 1640,
-   "players": 2559,
+   "servers": 1634,
+   "players": 1970,
    "versions": {},
    "globalRank": 19,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.2883
+   "shareOfKeywordServers": 1.2836
   },
   {
    "modId": "5AAAC70D754245DD",
    "name": "Server Admin Tools",
-   "servers": 1620,
-   "players": 2751,
+   "servers": 1616,
+   "players": 2308,
    "versions": {},
    "globalRank": 20,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.2726
-  },
-  {
-   "modId": "62F364B35E9B51B0",
-   "name": "Wirecutters 2",
-   "servers": 1589,
-   "players": 2833,
-   "versions": {},
-   "globalRank": 21,
-   "keywordRank": null,
-   "shareOfKeywordServers": 1.2482
+   "shareOfKeywordServers": 1.2694
   },
   {
    "modId": "5965550F24A0C152",
    "name": "Where Am I",
-   "servers": 1582,
-   "players": 2852,
+   "servers": 1591,
+   "players": 2012,
+   "versions": {},
+   "globalRank": 21,
+   "keywordRank": null,
+   "shareOfKeywordServers": 1.2498
+  },
+  {
+   "modId": "62F364B35E9B51B0",
+   "name": "Wirecutters 2",
+   "servers": 1590,
+   "players": 3020,
    "versions": {},
    "globalRank": 22,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.2427
+   "shareOfKeywordServers": 1.249
   },
   {
    "modId": "6273146ADFE8241D",
    "name": "WCS_AH-6M",
-   "servers": 1567,
-   "players": 2860,
+   "servers": 1571,
+   "players": 2683,
    "versions": {},
    "globalRank": 23,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.231
+   "shareOfKeywordServers": 1.2341
   },
   {
    "modId": "5B0D1E4380971EBD",
    "name": "COALITION Squad Interface",
-   "servers": 1514,
-   "players": 1813,
+   "servers": 1496,
+   "players": 1789,
    "versions": {},
    "globalRank": 24,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.1893
+   "shareOfKeywordServers": 1.1752
   },
   {
    "modId": "61ECB5EFAA346151",
    "name": "TacticalAnimationOverhaul TEST",
-   "servers": 1455,
-   "players": 3511,
+   "servers": 1452,
+   "players": 3365,
    "versions": {},
    "globalRank": 25,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.143
+   "shareOfKeywordServers": 1.1406
   },
   {
    "modId": "6632F94B46173164",
    "name": "Rayzi Utils",
-   "servers": 1449,
-   "players": 2102,
+   "servers": 1441,
+   "players": 1489,
    "versions": {},
    "globalRank": 26,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.1383
+   "shareOfKeywordServers": 1.132
   },
   {
    "modId": "65DACC64CE785B6C",
    "name": "GRS - Dev Framework",
-   "servers": 1447,
-   "players": 1833,
+   "servers": 1433,
+   "players": 647,
    "versions": {},
    "globalRank": 27,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.1367
+   "shareOfKeywordServers": 1.1257
   },
   {
    "modId": "65AD7D4F994EA327",
    "name": "ACE Medical Circulation Dev",
-   "servers": 1438,
-   "players": 2052,
+   "servers": 1426,
+   "players": 1930,
    "versions": {},
    "globalRank": 28,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.1296
+   "shareOfKeywordServers": 1.1202
   },
   {
    "modId": "6738DB574AAA1CB4",
    "name": "Advanced Zeroing System",
-   "servers": 1427,
-   "players": 2308,
+   "servers": 1420,
+   "players": 1479,
    "versions": {},
    "globalRank": 29,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.121
+   "shareOfKeywordServers": 1.1155
   },
   {
    "modId": "657B064AE0E231DF",
    "name": "GRS - Patches",
-   "servers": 1404,
-   "players": 1826,
+   "servers": 1391,
+   "players": 645,
    "versions": {},
    "globalRank": 30,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.1029
-  },
-  {
-   "modId": "65AD7C249E4ECDFB",
-   "name": "ACE Captives Dev",
-   "servers": 1356,
-   "players": 2177,
-   "versions": {},
-   "globalRank": 31,
-   "keywordRank": null,
-   "shareOfKeywordServers": 1.0652
+   "shareOfKeywordServers": 1.0927
   },
   {
    "modId": "5C9758250C8C56F1",
    "name": "Bon Action Animations",
-   "servers": 1354,
-   "players": 1948,
+   "servers": 1351,
+   "players": 1414,
    "versions": {},
-   "globalRank": 32,
+   "globalRank": 31,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.0636
+   "shareOfKeywordServers": 1.0613
   },
   {
-   "modId": "6A3CCEC67529CE12",
-   "name": "Nested Attachments - Core",
+   "modId": "65AD7C249E4ECDFB",
+   "name": "ACE Captives Dev",
    "servers": 1349,
-   "players": 2068,
+   "players": 1755,
    "versions": {},
-   "globalRank": 33,
+   "globalRank": 32,
    "keywordRank": null,
    "shareOfKeywordServers": 1.0597
   },
   {
-   "modId": "628F720BC527C143",
-   "name": "Rayzis Optics",
+   "modId": "6A3CCEC67529CE12",
+   "name": "Nested Attachments - Core",
    "servers": 1343,
-   "players": 2060,
+   "players": 1394,
    "versions": {},
-   "globalRank": 34,
+   "globalRank": 33,
    "keywordRank": null,
    "shareOfKeywordServers": 1.055
   },
   {
-   "modId": "6A46D7D65A7A5C9A",
-   "name": "Nested Attachments - Content",
-   "servers": 1342,
-   "players": 2067,
+   "modId": "628F720BC527C143",
+   "name": "Rayzis Optics",
+   "servers": 1337,
+   "players": 1391,
    "versions": {},
-   "globalRank": 35,
+   "globalRank": 34,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.0542
+   "shareOfKeywordServers": 1.0503
   },
   {
    "modId": "5F268647F8A1A1F4",
    "name": "CRX Enfusion A.I.",
-   "servers": 1342,
-   "players": 711,
+   "servers": 1337,
+   "players": 378,
+   "versions": {},
+   "globalRank": 35,
+   "keywordRank": null,
+   "shareOfKeywordServers": 1.0503
+  },
+  {
+   "modId": "6A46D7D65A7A5C9A",
+   "name": "Nested Attachments - Content",
+   "servers": 1336,
+   "players": 1389,
    "versions": {},
    "globalRank": 36,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.0542
+   "shareOfKeywordServers": 1.0495
   },
   {
    "modId": "65B343F799FB521B",
    "name": "ACE Medical Hitzones Dev",
-   "servers": 1316,
-   "players": 2218,
+   "servers": 1310,
+   "players": 2283,
    "versions": {},
    "globalRank": 37,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.0338
+   "shareOfKeywordServers": 1.0291
   },
   {
    "modId": "6276E6E3CC97A22B",
    "name": "AUS_CORE",
    "servers": 1306,
-   "players": 1263,
+   "players": 988,
    "versions": {},
    "globalRank": 38,
    "keywordRank": null,
@@ -2326,122 +2326,122 @@
   {
    "modId": "5964E0B3BB7410CE",
    "name": "Game Master Enhanced",
-   "servers": 1297,
-   "players": 851,
+   "servers": 1285,
+   "players": 473,
    "versions": {},
    "globalRank": 39,
-   "keywordRank": null,
-   "shareOfKeywordServers": 1.0189
-  },
-  {
-   "modId": "65AD7BCC9F6B3B4E",
-   "name": "ACE Chopping Dev",
-   "servers": 1285,
-   "players": 3144,
-   "versions": {},
-   "globalRank": 40,
    "keywordRank": null,
    "shareOfKeywordServers": 1.0094
   },
   {
+   "modId": "65AD7BCC9F6B3B4E",
+   "name": "ACE Chopping Dev",
+   "servers": 1271,
+   "players": 2963,
+   "versions": {},
+   "globalRank": 40,
+   "keywordRank": null,
+   "shareOfKeywordServers": 0.9984
+  },
+  {
    "modId": "6515672F96701110",
    "name": "GRS - Essentials",
-   "servers": 1284,
-   "players": 1774,
+   "servers": 1269,
+   "players": 630,
    "versions": {},
    "globalRank": 41,
    "keywordRank": null,
-   "shareOfKeywordServers": 1.0086
+   "shareOfKeywordServers": 0.9969
   },
   {
    "modId": "68F006D910E7546F",
    "name": "WCS_Weapon_Scripts",
-   "servers": 1259,
-   "players": 2559,
+   "servers": 1253,
+   "players": 3073,
    "versions": {},
    "globalRank": 42,
    "keywordRank": null,
-   "shareOfKeywordServers": 0.989
-  },
-  {
-   "modId": "651834C8D77BF86B",
-   "name": "GRS - Modular Vests & Rigs",
-   "servers": 1234,
-   "players": 1758,
-   "versions": {},
-   "globalRank": 43,
-   "keywordRank": null,
-   "shareOfKeywordServers": 0.9694
+   "shareOfKeywordServers": 0.9843
   },
   {
    "modId": "631C3C1AEE9C90BC",
    "name": "WCS_Sounds",
-   "servers": 1223,
-   "players": 2574,
+   "servers": 1220,
+   "players": 3050,
+   "versions": {},
+   "globalRank": 43,
+   "keywordRank": null,
+   "shareOfKeywordServers": 0.9584
+  },
+  {
+   "modId": "651834C8D77BF86B",
+   "name": "GRS - Modular Vests & Rigs",
+   "servers": 1219,
+   "players": 622,
    "versions": {},
    "globalRank": 44,
    "keywordRank": null,
-   "shareOfKeywordServers": 0.9607
+   "shareOfKeywordServers": 0.9576
   },
   {
    "modId": "62FCEB51DF8527B6",
    "name": "Improved Blood Effect",
-   "servers": 1223,
-   "players": 1617,
+   "servers": 1216,
+   "players": 1433,
    "versions": {},
    "globalRank": 45,
    "keywordRank": null,
-   "shareOfKeywordServers": 0.9607
-  },
-  {
-   "modId": "65AD7CE59E8DB349",
-   "name": "ACE Trenches Dev",
-   "servers": 1219,
-   "players": 2061,
-   "versions": {},
-   "globalRank": 46,
-   "keywordRank": null,
-   "shareOfKeywordServers": 0.9576
-  },
-  {
-   "modId": "65183608D6DA5728",
-   "name": "GRS - Belts & Bags & Droplegs",
-   "servers": 1219,
-   "players": 1760,
-   "versions": {},
-   "globalRank": 47,
-   "keywordRank": null,
-   "shareOfKeywordServers": 0.9576
-  },
-  {
-   "modId": "62A668F513428630",
-   "name": "WCS_Scopes",
-   "servers": 1213,
-   "players": 2518,
-   "versions": {},
-   "globalRank": 48,
-   "keywordRank": null,
-   "shareOfKeywordServers": 0.9529
-  },
-  {
-   "modId": "65157D09F042428A",
-   "name": "GRS - Apparel",
-   "servers": 1213,
-   "players": 1736,
-   "versions": {},
-   "globalRank": 49,
-   "keywordRank": null,
-   "shareOfKeywordServers": 0.9529
+   "shareOfKeywordServers": 0.9552
   },
   {
    "modId": "5C721177A220B42F",
    "name": "WCS_JLTV",
-   "servers": 1208,
-   "players": 2726,
+   "servers": 1212,
+   "players": 2836,
+   "versions": {},
+   "globalRank": 46,
+   "keywordRank": null,
+   "shareOfKeywordServers": 0.9521
+  },
+  {
+   "modId": "65AD7CE59E8DB349",
+   "name": "ACE Trenches Dev",
+   "servers": 1209,
+   "players": 2287,
+   "versions": {},
+   "globalRank": 47,
+   "keywordRank": null,
+   "shareOfKeywordServers": 0.9497
+  },
+  {
+   "modId": "62A668F513428630",
+   "name": "WCS_Scopes",
+   "servers": 1207,
+   "players": 3054,
+   "versions": {},
+   "globalRank": 48,
+   "keywordRank": null,
+   "shareOfKeywordServers": 0.9482
+  },
+  {
+   "modId": "65183608D6DA5728",
+   "name": "GRS - Belts & Bags & Droplegs",
+   "servers": 1204,
+   "players": 622,
+   "versions": {},
+   "globalRank": 49,
+   "keywordRank": null,
+   "shareOfKeywordServers": 0.9458
+  },
+  {
+   "modId": "65157D09F042428A",
+   "name": "GRS - Apparel",
+   "servers": 1201,
+   "players": 605,
    "versions": {},
    "globalRank": 50,
    "keywordRank": null,
-   "shareOfKeywordServers": 0.9489
+   "shareOfKeywordServers": 0.9434
   }
  ],
  "dependents": {
@@ -2450,7 +2450,7 @@
   "top": 5,
   "discoveryMethod": "Pulled live every run from ArmaHQ's own Workshop dependency index (armahq.com's per-mod \"Required By\" data, api/workshop/dependents/{modId}): every mod ArmaHQ currently sees declaring this one as a Workshop dependency, not a keyword search. First-party Project Outbreak add-ons are dropped from this list since they already have their own section above; download, subscriber and server numbers for the rest are refreshed from ReforgerMods.net every run.",
   "totalDependents": 89,
-  "communityDependents": 83,
+  "communityDependents": 82,
   "items": [
    {
     "modId": "68441B8B35E24673",
@@ -2459,7 +2459,7 @@
     "downloads": 56995,
     "subscribers": 0,
     "servers": 8,
-    "players": 8
+    "players": 3
    },
    {
     "modId": "65597D9373FD35B6",
@@ -2468,7 +2468,7 @@
     "downloads": 4998,
     "subscribers": 0,
     "servers": 8,
-    "players": 5
+    "players": 3
    },
    {
     "modId": "69F40C1DEE4F1A84",
@@ -2476,8 +2476,8 @@
     "author": "Lyle Stanfield",
     "downloads": 2532,
     "subscribers": 0,
-    "servers": 8,
-    "players": 3
+    "servers": 9,
+    "players": 4
    },
    {
     "modId": "6A54E99EB2047C56",
@@ -2485,8 +2485,8 @@
     "author": "TND1",
     "downloads": 2403,
     "subscribers": 0,
-    "servers": 14,
-    "players": 10
+    "servers": 13,
+    "players": 8
    },
    {
     "modId": "6A75401F21641816",
@@ -2495,7 +2495,7 @@
     "downloads": 2313,
     "subscribers": 0,
     "servers": 3,
-    "players": 0
+    "players": 1
    },
    {
     "modId": "6A7764B95E5712DD",
@@ -2504,7 +2504,7 @@
     "downloads": 2225,
     "subscribers": 0,
     "servers": 4,
-    "players": 0
+    "players": 1
    },
    {
     "modId": "6A1215A3E0B64EF3",
@@ -2512,8 +2512,8 @@
     "author": "Lyle Stanfield",
     "downloads": 2105,
     "subscribers": 0,
-    "servers": 8,
-    "players": 3
+    "servers": 9,
+    "players": 4
    },
    {
     "modId": "6A321B862BAC2DB1",
@@ -2521,8 +2521,8 @@
     "author": "FriendlyModder",
     "downloads": 1873,
     "subscribers": 0,
-    "servers": 23,
-    "players": 11
+    "servers": 22,
+    "players": 8
    },
    {
     "modId": "6A4377316565D311",
@@ -2531,7 +2531,7 @@
     "downloads": 1841,
     "subscribers": 0,
     "servers": 3,
-    "players": 0
+    "players": 1
    },
    {
     "modId": "6A643EF541E3B13F",
@@ -2557,8 +2557,8 @@
     "author": "Lyle Stanfield",
     "downloads": 1007,
     "subscribers": 0,
-    "servers": 8,
-    "players": 3
+    "servers": 9,
+    "players": 4
    },
    {
     "modId": "671B3E074D6F0CC7",
@@ -2567,7 +2567,7 @@
     "downloads": 698,
     "subscribers": 0,
     "servers": 2,
-    "players": 5
+    "players": 3
    },
    {
     "modId": "6A2503691B5DBFC4",
@@ -2576,7 +2576,7 @@
     "downloads": 693,
     "subscribers": 1,
     "servers": 3,
-    "players": 0
+    "players": 1
    },
    {
     "modId": "697E35D1B48801C8",
@@ -2584,8 +2584,8 @@
     "author": "bogan15",
     "downloads": 679,
     "subscribers": 0,
-    "servers": 2,
-    "players": 0
+    "servers": 1,
+    "players": 3
    },
    {
     "modId": "69F213E7C8E76C0B",
@@ -2593,14 +2593,14 @@
     "author": "Trout62",
     "downloads": 541,
     "subscribers": 0,
-    "servers": 2,
-    "players": 0
+    "servers": 1,
+    "players": 3
    },
    {
     "modId": "69BD726452A10405",
     "name": "WARFARE - NIGHTMARE EDITION",
     "author": "RebornSaga",
-    "downloads": 523,
+    "downloads": 524,
     "subscribers": 0,
     "servers": 2,
     "players": 0
@@ -2609,10 +2609,10 @@
     "modId": "6A7B44B5FD584A1E",
     "name": "MorkWW2Zomboiys",
     "author": "MorkMasher1",
-    "downloads": 446,
+    "downloads": 472,
     "subscribers": 0,
     "servers": 4,
-    "players": 5
+    "players": 3
    },
    {
     "modId": "6A8F32293DFE4BE6",
@@ -2630,7 +2630,7 @@
     "downloads": 345,
     "subscribers": 0,
     "servers": 3,
-    "players": 1
+    "players": 0
    },
    {
     "modId": "6A12FA0B274F6D41",
@@ -2639,16 +2639,16 @@
     "downloads": 339,
     "subscribers": 0,
     "servers": 3,
-    "players": 7
+    "players": 8
    },
    {
     "modId": "36748FEF193B4CF2",
     "name": "Codys Totally Friendly Cat",
     "author": "bobanator",
-    "downloads": 320,
+    "downloads": 329,
     "subscribers": 0,
     "servers": 2,
-    "players": 5
+    "players": 3
    },
    {
     "modId": "69DC96E6F768BB96",
@@ -2657,7 +2657,7 @@
     "downloads": 297,
     "subscribers": 0,
     "servers": 1,
-    "players": 4
+    "players": 3
    },
    {
     "modId": "6A82B47BB557F9AC",
@@ -2674,26 +2674,8 @@
     "author": "bogan15",
     "downloads": 209,
     "subscribers": 0,
-    "servers": 2,
-    "players": 0
-   },
-   {
-    "modId": "6A594E315F51AC3E",
-    "name": "AD WARFARE - NE",
-    "author": "Donrock",
-    "downloads": 205,
-    "subscribers": 0,
     "servers": 1,
-    "players": 0
-   },
-   {
-    "modId": "EEAFC9248FF74F1A",
-    "name": "Armadayz Bank Addon",
-    "author": "Quixy",
-    "downloads": 197,
-    "subscribers": 0,
-    "servers": 1,
-    "players": 0
+    "players": 3
    },
    {
     "modId": "6A5659235AEFCCCF",
@@ -2705,30 +2687,21 @@
     "players": 0
    },
    {
-    "modId": "6A24D7E9C1B358F2",
-    "name": "BTW Glenwood Invade & Annex",
-    "author": "White Crusader",
-    "downloads": 133,
-    "subscribers": 0,
-    "servers": 3,
-    "players": 0
-   },
-   {
     "modId": "6A6B2BE0558DA3DF",
     "name": "STW Zombies Spawner",
     "author": "Captain Sprocket",
     "downloads": 116,
     "subscribers": 0,
     "servers": 2,
-    "players": 0
+    "players": 1
    },
    {
-    "modId": "6936165DB6BFC17E",
-    "name": "NAK IA Rework",
-    "author": "boxdogman",
-    "downloads": 111,
+    "modId": "6A9733786FB65493",
+    "name": "MistLizes",
+    "author": ".Mastaw.",
+    "downloads": 114,
     "subscribers": 0,
-    "servers": 1,
+    "servers": 2,
     "players": 0
    },
    {
@@ -2750,12 +2723,12 @@
     "players": 0
    },
    {
-    "modId": "6A9733786FB65493",
-    "name": "MistLizes",
-    "author": ".Mastaw.",
-    "downloads": 109,
+    "modId": "6936165DB6BFC17E",
+    "name": "NAK IA Rework",
+    "author": "boxdogman",
+    "downloads": 102,
     "subscribers": 0,
-    "servers": 2,
+    "servers": 1,
     "players": 0
    },
    {
@@ -2765,16 +2738,7 @@
     "downloads": 100,
     "subscribers": 0,
     "servers": 2,
-    "players": 0
-   },
-   {
-    "modId": "6A84B8D21D1B4BBB",
-    "name": "DevOps-DayZ",
-    "author": "tw34k3d",
-    "downloads": 98,
-    "subscribers": 0,
-    "servers": 1,
-    "players": 0
+    "players": 6
    },
    {
     "modId": "6A2B03EBDE0DC83A",
@@ -2791,8 +2755,8 @@
     "author": "OgyNeo",
     "downloads": 82,
     "subscribers": 0,
-    "servers": 6,
-    "players": 1
+    "servers": 5,
+    "players": 0
    },
    {
     "modId": "66E4C94C94200F7A",
@@ -2801,15 +2765,6 @@
     "downloads": 71,
     "subscribers": 0,
     "servers": 1,
-    "players": 0
-   },
-   {
-    "modId": "36DD8BC3405A6CAD",
-    "name": "ARGC PO Survival - Night",
-    "author": "Silence_AUS",
-    "downloads": 70,
-    "subscribers": 0,
-    "servers": 2,
     "players": 0
    },
    {
@@ -2846,7 +2801,7 @@
     "downloads": 39,
     "subscribers": 0,
     "servers": 3,
-    "players": 1
+    "players": 0
    },
    {
     "modId": "6A92123175078BDE",
@@ -2864,7 +2819,7 @@
     "downloads": 36,
     "subscribers": 0,
     "servers": 3,
-    "players": 3
+    "players": 0
    },
    {
     "modId": "64A91B98E22EDD44",
@@ -2882,31 +2837,13 @@
     "downloads": 31,
     "subscribers": 0,
     "servers": 3,
-    "players": 1
+    "players": 0
    },
    {
     "modId": "685729C05C6A7B4F",
     "name": "WolfPack Operations",
     "author": "MrDuuckyy",
     "downloads": 29,
-    "subscribers": 0,
-    "servers": 1,
-    "players": 0
-   },
-   {
-    "modId": "6A471307ECFA17EC",
-    "name": "PROJECT SURVIVAL NWG",
-    "author": "bibelfish",
-    "downloads": 27,
-    "subscribers": 0,
-    "servers": 1,
-    "players": 0
-   },
-   {
-    "modId": "6A5F35B8743E6510",
-    "name": "4311 -VIETNAM",
-    "author": "MoustacheMedic",
-    "downloads": 25,
     "subscribers": 0,
     "servers": 1,
     "players": 0
@@ -2927,16 +2864,7 @@
     "downloads": 21,
     "subscribers": 0,
     "servers": 1,
-    "players": 0
-   },
-   {
-    "modId": "6A5170C6FEDECC4B",
-    "name": "The Relentless",
-    "author": "MoustacheMedic",
-    "downloads": 21,
-    "subscribers": 0,
-    "servers": 1,
-    "players": 0
+    "players": 1
    },
    {
     "modId": "D8B8090900003000",
@@ -2954,7 +2882,7 @@
     "downloads": 17,
     "subscribers": 0,
     "servers": 1,
-    "players": 2
+    "players": 1
    },
    {
     "modId": "375ED2390F651853",
@@ -2972,7 +2900,7 @@
     "downloads": 16,
     "subscribers": 0,
     "servers": 1,
-    "players": 2
+    "players": 1
    },
    {
     "modId": "6A9A019978E9B49D",
@@ -2981,16 +2909,7 @@
     "downloads": 13,
     "subscribers": 0,
     "servers": 2,
-    "players": 0
-   },
-   {
-    "modId": "6A6D2BA3EA4F7382",
-    "name": "Operation Kingslayer Modset",
-    "author": "Commander hitman2b",
-    "downloads": 11,
-    "subscribers": 0,
-    "servers": 1,
-    "players": 0
+    "players": 6
    },
    {
     "modId": "B2C0A7B520260925",
@@ -3074,15 +2993,6 @@
     "players": 0
    },
    {
-    "modId": "6AA6B887ABABB80F",
-    "name": "WORTHY ISLANDS SURVIVAL NWG",
-    "author": "bibelfish",
-    "downloads": 4,
-    "subscribers": 0,
-    "servers": 1,
-    "players": 0
-   },
-   {
     "modId": "6AAB1CA42AB5B47D",
     "name": "fix GM Project outbreak",
     "author": "ChuckyDUECE22",
@@ -3096,6 +3006,15 @@
     "name": "TDA WorthIslands",
     "author": "n1nj4d34th",
     "downloads": 3,
+    "subscribers": 0,
+    "servers": 1,
+    "players": 0
+   },
+   {
+    "modId": "9EA38448D14F409A",
+    "name": "Deadwood Plus DEV",
+    "author": "StormyStorm-00",
+    "downloads": 2,
     "subscribers": 0,
     "servers": 1,
     "players": 0
@@ -3128,15 +3047,6 @@
     "players": 0
    },
    {
-    "modId": "9EA38448D14F409A",
-    "name": "Deadwood Plus DEV",
-    "author": "StormyStorm-00",
-    "downloads": 1,
-    "subscribers": 0,
-    "servers": 1,
-    "players": 1
-   },
-   {
     "modId": "6A5B1A758CFC1BBF",
     "name": "DerniersFeux_Core",
     "author": "NeeolaaFR",
@@ -3161,6 +3071,42 @@
     "downloads": 1,
     "subscribers": 0,
     "servers": 2,
+    "players": 5
+   },
+   {
+    "modId": "6A5F35B8743E6510",
+    "name": "4311 -VIETNAM",
+    "author": "MoustacheMedic",
+    "downloads": 0,
+    "subscribers": 0,
+    "servers": 0,
+    "players": 0
+   },
+   {
+    "modId": "6A594E315F51AC3E",
+    "name": "AD WARFARE - NE",
+    "author": "Donrock",
+    "downloads": 0,
+    "subscribers": 0,
+    "servers": 0,
+    "players": 0
+   },
+   {
+    "modId": "36DD8BC3405A6CAD",
+    "name": "ARGC PO Survival - Night",
+    "author": "Silence_AUS",
+    "downloads": 0,
+    "subscribers": 0,
+    "servers": 0,
+    "players": 0
+   },
+   {
+    "modId": "6A24D7E9C1B358F2",
+    "name": "BTW Glenwood Invade & Annex",
+    "author": "White Crusader",
+    "downloads": 0,
+    "subscribers": 0,
+    "servers": 0,
     "players": 0
    },
    {
@@ -3178,13 +3124,49 @@
     "author": "Linehan093",
     "downloads": 0,
     "subscribers": 0,
-    "servers": 1,
-    "players": 1
+    "servers": 0,
+    "players": 0
    },
    {
     "modId": "6A9F7385535B2AF7",
     "name": "Dead_Armenhof_Creatures pack",
     "author": "Linehan093",
+    "downloads": 0,
+    "subscribers": 0,
+    "servers": 1,
+    "players": 0
+   },
+   {
+    "modId": "6A6D2BA3EA4F7382",
+    "name": "Operation Kingslayer Modset",
+    "author": "Commander hitman2b",
+    "downloads": 0,
+    "subscribers": 0,
+    "servers": 0,
+    "players": 0
+   },
+   {
+    "modId": "6A471307ECFA17EC",
+    "name": "PROJECT SURVIVAL NWG",
+    "author": "bibelfish",
+    "downloads": 0,
+    "subscribers": 0,
+    "servers": 0,
+    "players": 0
+   },
+   {
+    "modId": "68F4B95EDF6C47C8",
+    "name": "TGE-BaseZombie",
+    "author": "Dondegn",
+    "downloads": 0,
+    "subscribers": 0,
+    "servers": 0,
+    "players": 0
+   },
+   {
+    "modId": "66A0A55FF68B3046",
+    "name": "TGE-Events",
+    "author": "Dondegn",
     "downloads": 0,
     "subscribers": 0,
     "servers": 0,
@@ -3197,6 +3179,15 @@
     "downloads": 0,
     "subscribers": 0,
     "servers": 2,
+    "players": 5
+   },
+   {
+    "modId": "6A5170C6FEDECC4B",
+    "name": "The Relentless",
+    "author": "MoustacheMedic",
+    "downloads": 0,
+    "subscribers": 0,
+    "servers": 0,
     "players": 0
    }
   ]
