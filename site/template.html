@@ -654,7 +654,7 @@ footer .stencil{font-family:var(--display);font-size:22px;letter-spacing:.12em;c
 
   // ---------- links
   (function(){
-    const site = C.site, gh = site.github || '', pages = location.origin && location.origin.indexOf('github.io') >= 0 ? '' : 'https://outbreakarma.github.io/outbreak-stats/';
+    const site = C.site, gh = site.github || '', pages = site.statsPage || '';
     const li = (href, text, note) => '<li>'+ext(href, esc(text))+(note ? '<small>'+esc(note)+'</small>' : '')+'</li>';
     const blocks = [
       ['Project Outbreak', [

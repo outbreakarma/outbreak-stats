@@ -2,7 +2,7 @@
 
 Hourly statistics on where every Project Outbreak add-on and every other Arma Reforger mod
 with "zombie" in its name are running, and how their Workshop downloads grow, rendered as a
-static page for GitHub Pages: https://outbreakarma.github.io/outbreak-stats/
+static page, published from `docs/` by GitHub Pages and served at https://projectoutbreak.cc/stats/
 
 **Credit.** Server counts, player exposure and mod rankings come from the
 [ReforgerMods.net](https://reforgermods.net) public API, an independent, community-run

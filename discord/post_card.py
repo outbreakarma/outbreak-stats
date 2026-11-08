@@ -106,7 +106,7 @@ def render_card() -> bytes:
 
 def message_text(snapshot: str | None) -> str:
     site = load_json(CONFIG_PATH).get("site", {})
-    page_url = site.get("statsPage", "https://outbreakarma.github.io/outbreak-stats/")
+    page_url = site.get("statsPage", "https://projectoutbreak.cc/stats/")
     taken = dt.datetime.fromisoformat(snapshot.replace("Z", "+00:00")) if snapshot else dt.datetime.now(dt.timezone.utc)
     # <t:...:R> renders in each reader's client as "5 minutes ago" and keeps counting.
     return (

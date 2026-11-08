@@ -216,7 +216,7 @@ def render(card: str) -> bytes:
 
 def message_text(metric: str, threshold: int, reached: dt.datetime | None = None) -> str:
     m = METRICS[metric]
-    page_url = load_json(CONFIG_PATH).get("site", {}).get("statsPage", "https://outbreakarma.github.io/outbreak-stats/")
+    page_url = load_json(CONFIG_PATH).get("site", {}).get("statsPage", "https://projectoutbreak.cc/stats/")
     n = fmt(threshold)
     since = f"Reached <t:{int(reached.timestamp())}:D> \u00b7 " if reached else ""
     return (
