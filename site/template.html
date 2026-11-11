@@ -199,7 +199,7 @@ footer .stencil{font-family:var(--display);font-size:22px;letter-spacing:.12em;c
       <div class="eyebrow"><span class="sym">&#9763;</span> Arma Reforger · server statistics · updated hourly</div>
       <h1>__TITLE_HTML__</h1>
       <p>__SUBTITLE__</p>
-      <div class="chips"><a class="credit-chip" href="__SOURCE_URL__" target="_blank" rel="noopener"><span class="dot"></span>Data: __SOURCE_NAME__ &amp; ArmaHQ</a><a class="sitelink" href="__MAIN_SITE__">Project Outbreak site</a><a class="sitelink" href="https://reforger.armaplatform.com/workshop/F1D4B9B5245B36ED" target="_blank" rel="noopener">Workshop</a><a class="sitelink" href="__DISCORD__" target="_blank" rel="noopener">Discord</a><a class="sitelink" href="__GITHUB__" target="_blank" rel="noopener">Source and raw data</a></div>
+      <div class="chips"><a class="credit-chip" href="__SOURCE_URL__" target="_blank" rel="noopener"><span class="dot"></span>Data: __SOURCE_NAME__ &amp; ArmaHQ</a><a class="sitelink" href="__MAIN_SITE__">Project Outbreak site</a><a class="sitelink" href="__SERVER_POST__">Official server live</a><a class="sitelink" href="https://reforger.armaplatform.com/workshop/F1D4B9B5245B36ED" target="_blank" rel="noopener">Workshop</a><a class="sitelink" href="__DISCORD__" target="_blank" rel="noopener">Discord</a><a class="sitelink" href="__GITHUB__" target="_blank" rel="noopener">Source and raw data</a></div>
     </div>
     <div class="panel status" id="status"></div>
   </header>
@@ -659,6 +659,8 @@ footer .stencil{font-family:var(--display);font-size:22px;letter-spacing:.12em;c
     const blocks = [
       ['Project Outbreak', [
         [site.mainSite, 'Project Outbreak site', 'The infected, Game Master tools, screenshots and change notes'],
+        [site.serverPost || 'https://projectoutbreak.cc/server/', 'Outbreak Command Post', 'Live players, tick FPS, 30-day seismograph and Glenwood map plans on the official server'],
+        ['https://projectoutbreak.cc/live/', 'Live map', 'Zombies, hordes, fights and players on the server in real time'],
         [WS(flag ? flag.modId : ''), 'Project Outbreak Zombies on the Workshop', 'Subscribe, rate and read the full description'],
         [site.discord, 'Discord', 'Questions, bug reports and server owners'],
         ['https://github.com/outbreakarma', 'GitHub', 'Both sites, open source']]],

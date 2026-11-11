@@ -293,6 +293,7 @@ def build(config_path: Path, data_dir: Path, out_path: Path, artifact_out: Path 
         .replace("__CREDIT_LINE__", html.escape(cfg["source"]["creditLine"]))
         .replace("__KW_LABEL_LC__", html.escape(cfg.get("keywordLabel", "keyword mods").lower()))
         .replace("__MAIN_SITE__", html.escape(site.get("mainSite", "https://projectoutbreak.cc/"), quote=True))
+        .replace("__SERVER_POST__", html.escape(site.get("serverPost", "https://projectoutbreak.cc/server/"), quote=True))
         .replace("__DISCORD__", html.escape(site.get("discord", ""), quote=True))
         .replace("__GITHUB__", html.escape(site.get("github", ""), quote=True))
         .replace("__DATA_JSON__", data_json)
